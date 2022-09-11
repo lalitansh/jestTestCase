@@ -131,7 +131,7 @@ const Products: React.FC<PropType> = (props) => {
     />
   );
   return (
-    <TouchableOpacity
+    <View
       style={[CommonStyles.mainContainer, CommonStyles.backWhite]}
     >
       <CommonHeader logo search />
@@ -144,7 +144,7 @@ const Products: React.FC<PropType> = (props) => {
       >
         <FlatList
           testID='FlatList1'
-          contentContainerStyle={{width: '100%'}}
+          contentContainerStyle={{width: '100%', alignSelf:'center'}}
           extraData={productsData}
           data={productsData}
           keyExtractor={(item, i) => i.toString()}
@@ -187,7 +187,7 @@ const Products: React.FC<PropType> = (props) => {
       />
         {/* <Text style={{fontSize: 40, fontWeight: '400'}}>+</Text> */}
       </TouchableOpacity>
-    </TouchableOpacity>
+    </View>
   );
 };
 

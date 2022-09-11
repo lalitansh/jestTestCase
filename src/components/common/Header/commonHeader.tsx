@@ -16,13 +16,19 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
     <>
       <StatusBar translucent={true} backgroundColor={color.white} />
       <View style={styles.mainView}>
-        {logo && <Image source={image.iconUpayment} style={styles.img1Style} />}
+        {logo && 
+        <View style= {styles.view1}>
+        <Image source={image.iconUpayment} style={styles.img1Style} />
+        </View>
+        }
         {search && (
+          <View style= {styles.view2}>
           <Image
             resizeMode="contain"
             source={image.iconSearch}
             style={styles.img2Style}
           />
+          </View>
         )}
       </View>
     </>
@@ -41,8 +47,17 @@ const styles = StyleSheet.create({
     marginTop: getStatusBarHeight(),
     justifyContent: 'space-between',
   },
+  view1: {
+    flex: 0.7,
+    paddingLeft: 10,
+    alignItems:'flex-start',
+  },
+  view2: {
+    flex: 0.3,
+    alignItems: 'flex-end',
+  },
   img1Style: {
-    width: '60%',
+    width: '100%',
     height: 40,
     marginLeft: -10,
   },
