@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly across screens 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "padding": 1.5,
+        "width": "100%",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 48,
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#cecece",
+          "borderRadius": 10,
+          "height": "100%",
+          "justifyContent": "center",
+          "opacity": 1,
+          "padding": 10,
+          "width": "90%",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#7A7A7A",
+              "fontWeight": "500",
+            },
+            null,
+            undefined,
+          ]
+        }
+      >
+        Add Product
+      </Text>
+    </View>
+  </View>
+</View>
+`;
