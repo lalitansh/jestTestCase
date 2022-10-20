@@ -34,10 +34,11 @@ const App: React.FC = () => {
   return (
     <>
     {/* <MyStatusBar backgroundColor={color.white} barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
-    
+    <SafeAreaView edges={['top']} style={{backgroundColor: color.primary}} />
+
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} translucent={true} backgroundColor={color.primary}/>
       
-      <View style={{flex: 1, backgroundColor: color.defaultBackGrey}}>
+      <View style={{flex: 1, backgroundColor: color.primary}}>
           <Container />
       </View>
       <SafeAreaView edges={['bottom']} style={{backgroundColor: color.defaultBackGrey}} />

@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 20,
     backgroundColor: color.primary,
-    marginTop: getStatusBarHeight(),
+    // marginTop: getStatusBarHeight(),
     // justifyContent: 'space-between',
     alignItems: 'center',
     height: 65

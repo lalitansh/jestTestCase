@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Products from './products/products';
-import ProductDetails from './products/productDetails';
+import Posts from './posts/post';
+import PostDetail from './posts/postDetail';
 import Login from './auth/login';
 import Signup from './auth/signup';
 import auth from '@react-native-firebase/auth';
@@ -10,7 +10,7 @@ import auth from '@react-native-firebase/auth';
 const Stack = createStackNavigator();
 export const navigationRef = React.createRef();
 
-function Container() {
+const Container: React.FC<PropType> = (props) => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState(null);
@@ -31,12 +31,14 @@ function Container() {
   if (initializing) return null;
 
   return (
-    <NavigationContainer ref={navigationRef} initialRouteName={(user && user !== null) ? 'Products': 'Login'}>
+    <NavigationContainer ref={navigationRef} >
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Products" component={Products} />
-        <Stack.Screen name="Login" component={Login} />
+        {!user ?
+          < Stack.Screen name="Login" component={Login} />:
+        <Stack.Screen name="Posts" component={Posts} />
+        }
         <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="ProductDetails" component={ProductDetails} />
+        <Stack.Screen name="PostDetail" component={PostDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );

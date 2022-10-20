@@ -1,42 +1,42 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Image, Dimensions } from 'react-native';
+import { Text, View, StyleSheet, Image, Dimensions, Platform } from 'react-native';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import { CommonStyles } from '../../components/common/styles/commonStyles';
-import { url, accessToken } from '../../constants/apiConstant';
+import { url } from '../../constants/apiConstant';
 import { callGetApi } from '../../network/api';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ProgressBarView from '../../components/ProgressBarView';
 import { color } from '../../constants/theme/Color';
+import { image } from '../../constants/theme/Image';
 const { height } = Dimensions.get('window');
 
 type PropTypes = {};
 
-export type productDataType = {
-  avatar: string;
-  name: string;
-  price: number;
-  description: string;
+export type PostDetailType = {
+  id: number;
+  title: string;
+  body: string;
 }
 
-const Products: React.FC<PropTypes> = (props: any) => {
+const PostDetail: React.FC<PropTypes> = (props: any) => {
   const [isProgress, setIsProgress] = useState(false);
-  const [productsData, setProductsData] = useState({});
+  const [postData, setPostData] = useState({});
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    getProduct();
+    getPost();
   }, []);
 
-  const getProduct = () => {
+  const getPost = () => {
     const { item } = props.route.params || {};
-    const { _id } = item || {};
+    const { id } = item || {};
     setIsProgress(true);
-    callGetApi(`${url.products}/${_id}`, accessToken)
+    callGetApi(`${url.postDetails}/${id}`)
       .then(response => {
-        console.log('res-------', response);
+        console.log('res------- 123', response);
         if (response.valid) {
-          setProductsData(response.value.product);
+          setPostData(response.value);
         } else {
           if (response.value.errors) {
             setErrors(response.value.errors);
@@ -50,8 +50,8 @@ const Products: React.FC<PropTypes> = (props: any) => {
       });
   };
 
-  const { avatar = '', name = '', price = 0, description = '' } =
-    productsData || {};
+  const { id = 0, title = '', body = '' } =
+    postData || {};
   return (
     <View style={[CommonStyles.mainContainer, CommonStyles.backWhite]}>
       <CommonHeader
@@ -65,60 +65,63 @@ const Products: React.FC<PropTypes> = (props: any) => {
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.container}
       >
-        <View style={{ justifyContent: 'space-between', flex: 1 }}>
+        <View style={{ flex: 1 }}>
           <View
             style={{
-              height: height / 2.5,
+              height: height / 3,
               width: '100%',
               backgroundColor: color.defaultBackGrey,
               alignItems: 'center',
+              justifyContent:'center'
             }}
           >
             <Image
-              source={{ uri: avatar }}
-              style={{ height: '50%', width: '70%' }}
+            resizeMode='contain'
+              source={image.userImg}
+              style={{ height: '100%', width: '100%' }}
             />
           </View>
 
           <View
             style={{
               flex: 1,
-              marginTop: 30,
-              backgroundColor: color.defaultBackGrey,
+              backgroundColor: color.white,
             }}
           >
+            
             <View
               style={{
                 backgroundColor: 'black',
                 flex: 1,
                 paddingHorizontal: 20,
-                borderTopLeftRadius: 20,
-                borderTopRightRadius: 20,
               }}
             >
               <View
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
-                  marginTop: 20,
+                  marginTop: 35,
                 }}
               >
+                
                 <Text
-                  style={{ color: 'white', fontWeight: 'bold', fontSize: 30 }}
+                  style={styles.text1}
                 >
-                  {name}
-                </Text>
-                <Text
-                  style={{ color: 'white', fontWeight: 'bold', fontSize: 15 }}
-                >
-                  ${price}
+                  {title}
                 </Text>
               </View>
 
-              <Text style={{ color: 'white', marginTop: 35 }}>
-                ${description}
+              <Text style={styles.text2}>
+                {body}
               </Text>
             </View>
+            <View style={styles.subRightView}>
+            <Text
+                  style={{ color: 'white', fontWeight: 'bold', fontSize: 30 }}
+                >
+                  {id}
+                </Text>
+                </View>
           </View>
         </View>
       </KeyboardAwareScrollView>
@@ -130,7 +133,36 @@ const Products: React.FC<PropTypes> = (props: any) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    // backgroundColor: color.defaultBackGrey
+    backgroundColor: color.white
+  },
+  alignRight: {
+    alignItems:'flex-end',
+    backgroundColor:color.black,
+    paddingRight: 30,
+  },
+  text1: {
+    color: 'white', 
+    fontWeight: Platform.OS === 'ios' ? '500' : 'bold', 
+    fontSize: 30
+  },
+  text2: {
+    color: 'white', 
+    marginTop: 35,
+    fontSize: 20,
+    // fontFamily: 'Poppins-Regular'
+  },
+  subRightView: {
+    height: 70,
+    width: 70,
+    backgroundColor: color.primary,
+    justifyContent: 'center',
+    alignItems:'center',
+    borderBottomRightRadius: 20,
+    borderTopLeftRadius: 20,
+    position: 'absolute',
+    right: 20,
+    bottom: height/2.2,
+    zIndex: 20
   },
   mainCard: {
     height: height / 3.5,
@@ -214,4 +246,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Products;
+export default PostDetail;

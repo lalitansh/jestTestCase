@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { productDataType } from './productDetails';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import { CommonStyles } from '../../components/common/styles/commonStyles';
-import { url, accessToken } from '../../constants/apiConstant';
+import { url } from '../../constants/apiConstant';
 import { callGetApi } from '../../network/api';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ProgressBarView from '../../components/ProgressBarView';
@@ -30,26 +30,22 @@ export type PropType = {
   navigation?: any;
 };
 
-export type CategoryType = {
-  name: string
-};
 
-
-const Products: React.FC<PropType> = (props) => {
+const Posts: React.FC<PropType> = (props) => {
   const { navigation } = props || {};
   const [isProgress, setIsProgress] = useState(false);
-  const [productsData, setProductsData] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [selectedCat, setSelectedCat] = useState({});
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    getAllCategories();
+    getAllPosts();
   }, []);
 
-  const getAllCategories = () => {
+  const getAllPosts = () => {
+    setIsProgress(true);
     callGetApi(`${url.posts}`)
       .then(response => {
+        setIsProgress(false);
         console.log('response in screen--', response)
         if (response.valid) {
           setPosts(response.value);
@@ -59,17 +55,13 @@ const Products: React.FC<PropType> = (props) => {
           }
         }
       })
-      .catch(() => { });
+      .catch(() => { setIsProgress(false)});
   };
 
 
   const onPressProduct = (item: productDataType) => {
     const { navigation } = props || {};
-    navigation.navigate('ProductDetails', { item: item });
-  };
-
-  const onSelectCategory = (item: CategoryType) => {
-    setSelectedCat(item);
+    navigation.navigate('PostDetail', { item: item });
   };
 
 
@@ -88,9 +80,11 @@ const Products: React.FC<PropType> = (props) => {
   }
 
   const onLogout = () => {
+    setIsProgress(true);
     auth()
       .signOut()
       .then(() => {
+        setIsProgress(false);
         console.log('logout success!')
         navigation.dispatch(
           CommonActions.reset({
@@ -100,7 +94,8 @@ const Products: React.FC<PropType> = (props) => {
             ]
           })
         )
-      });
+      })
+      .catch(() => { setIsProgress(false);});
   }
 
   return (
@@ -124,6 +119,7 @@ const Products: React.FC<PropType> = (props) => {
           contentContainerStyle={{ width: '100%', alignSelf: 'center' }}
           extraData={posts}
           data={posts}
+          initialNumToRender={15}
           keyExtractor={(item, i) => i.toString()}
           renderItem={({ item }) => {
             const { id, body, title, avatar = 'https://dummyimage.com/300' } = item || {}
@@ -273,4 +269,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Products;
+export default Posts;

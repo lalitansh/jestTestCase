@@ -9,6 +9,7 @@ import unset from 'lodash/unset';
 import { color } from '../../constants/theme/Color';
 import auth from '@react-native-firebase/auth';
 import { CommonActions } from '@react-navigation/native';
+import ProgressBarView from '../../components/ProgressBarView';
 
 export type PropType = {
   navigation?: any;
@@ -17,6 +18,7 @@ export type PropType = {
 const Login: React.FC<PropType> = (props) => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
+  const [isProgress, setIsProgress] = useState(false);
 
   useEffect(() => { }, []);
 
@@ -48,9 +50,11 @@ const Login: React.FC<PropType> = (props) => {
     let errors = validate();
     console.log('errors', errors);
     if (!isEmpty(errors)) return setErrors(errors);
+    setIsProgress(true)
     auth()
       .signInWithEmailAndPassword(form.email, form.password)
       .then(() => {
+        setIsProgress(false)
         props.navigation.dispatch(
           CommonActions.reset({
             index: 0,
@@ -62,6 +66,7 @@ const Login: React.FC<PropType> = (props) => {
         console.log('User account created & signed in!');
       })
       .catch(error => {
+        setIsProgress(false)
         if (error.code === 'auth/email-already-in-use') {
           console.log('That email address is already in use!');
         }
@@ -73,7 +78,6 @@ const Login: React.FC<PropType> = (props) => {
         console.error(error);
       });
   };
-  const navigation: any = useNavigation();
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.mrVer50} />
@@ -104,14 +108,16 @@ const Login: React.FC<PropType> = (props) => {
         />
 
         <View style={styles.customButton}>
-          <CustomeButton 
-          isGreenBack
-          title={'Login'} onPress={() => onSave()} />
-          <Text style={{ alignItems: 'center', width: '100%', marginTop: 10, textAlign: 'center' }}>Don't have account?
-            <Text style={{ color: 'red' }} onPress={() => props.navigation.navigate('Signup')}> Signup</Text>
+          <CustomeButton
+            isGreenBack
+            isWhiteText
+            title={'Login'} onPress={() => onSave()} />
+          <Text style={styles.text1}>Don't have account?
+            <Text style={styles.text2} onPress={() => props.navigation.navigate('Signup')}> Signup</Text>
           </Text>
         </View>
       </View>
+      <ProgressBarView visible={isProgress} />
     </ScrollView>
   );
 };
@@ -120,6 +126,16 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingBottom: 30,
+  },
+  text1: {
+    alignItems: 'center',
+    width: '100%',
+    marginTop: 10,
+    textAlign: 'center'
+  },
+  text2: {
+    color: color.primary,
+    fontWeight: 'bold',
   },
   mrVer50: {
     marginVertical: 50,
