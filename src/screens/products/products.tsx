@@ -1,14 +1,17 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState, useEffect} from 'react';
-import {productDataType} from './productDetails';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { productDataType } from './productDetails';
 import CommonHeader from '../../components/common/Header/commonHeader';
-import {CommonStyles} from '../../components/common/styles/commonStyles';
-import {url, accessToken} from '../../constants/apiConstant';
-import {callGetApi} from '../../network/api';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { CommonStyles } from '../../components/common/styles/commonStyles';
+import { url, accessToken } from '../../constants/apiConstant';
+import { callGetApi } from '../../network/api';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ProgressBarView from '../../components/ProgressBarView';
-import {color} from '../../constants/theme/Color';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { color } from '../../constants/theme/Color';
+import Feather from 'react-native-vector-icons/Feather';
+import auth from '@react-native-firebase/auth';
+import { CommonActions } from '@react-navigation/native';
+
 import {
   Text,
   View,
@@ -17,8 +20,11 @@ import {
   FlatList,
   Image,
   Dimensions,
+  Alert
 } from 'react-native';
-const {height} = Dimensions.get('window');
+import { image } from '../../constants/theme/Image';
+import style from '../../constants/theme/Style';
+const { height } = Dimensions.get('window');
 
 export type PropType = {
   navigation?: any;
@@ -30,112 +36,83 @@ export type CategoryType = {
 
 
 const Products: React.FC<PropType> = (props) => {
-  const {navigation} = props || {};
+  const { navigation } = props || {};
   const [isProgress, setIsProgress] = useState(false);
   const [productsData, setProductsData] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [selectedCat, setSelectedCat] = useState({});
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    getAllProducts();
     getAllCategories();
-    const willFocusSubscription = navigation.addListener('focus', () => {
-      getAllProducts();
-    });
-
-    return willFocusSubscription;
   }, []);
 
   const getAllCategories = () => {
-    callGetApi(`${url.categories}`, accessToken)
+    callGetApi(`${url.posts}`)
       .then(response => {
+        console.log('response in screen--', response)
         if (response.valid) {
-          setCategories(response.value.categories);
+          setPosts(response.value);
         } else {
           if (response.value.errors) {
             setErrors(response.value.errors);
           }
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   };
 
-  const getAllProducts = () => {
-    setIsProgress(true);
-    callGetApi(`${url.products}`, accessToken)
-      .then(response => {
-        console.log('response----=====', response);
-        if (response.valid) {
-          setProductsData(response.value.products);
-        } else {
-          if (response.value.errors) {
-            setErrors(response.value.errors);
-          }
-        }
-        setIsProgress(false);
-      })
-      .catch(err => {
-        setIsProgress(false);
-        console.log('errorInspection1', err);
-      });
-  };
 
   const onPressProduct = (item: productDataType) => {
-    const {navigation} = props || {};
-    navigation.navigate('ProductDetails', {item: item});
+    const { navigation } = props || {};
+    navigation.navigate('ProductDetails', { item: item });
   };
 
   const onSelectCategory = (item: CategoryType) => {
     setSelectedCat(item);
   };
-  const categoryList = (
-    <FlatList
-      testID='KeyboardAwareScrollView1'
-      contentContainerStyle={{paddingLeft: 10, marginBottom: 10,}}
-      showsHorizontalScrollIndicator={false}
-      extraData={categories}
-      data={categories}
-      keyExtractor={(item, i) => i.toString()}
-      horizontal
-      renderItem={({item}) => {
-        const {name} = item || {};
-        const {name: names} = selectedCat || {};
-        return (
-          <TouchableOpacity
-            onPress={() => onSelectCategory(item)}
-            activeOpacity={0.7}
-            style={styles.mainCard1}
-          >
-            <View
-              style={
-                name === names
-                  ? styles.selectCatTextView
-                  : styles.textView1
-              }
-            >
-              <Text
-                style={
-                  name === names
-                    ? styles.selectCatTextStyle
-                    : styles.textStyle1
-                }
-                numberOfLines={1}
-              >
-                {name}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        );
-      }}
-    />
-  );
+
+
+  const logOutConfirmation = () => {
+    Alert.alert(
+      'Confirm!',
+      'Are you sure you want to Logout from app.',
+      [
+        { text: 'Yes', onPress: onLogout },
+        { text: 'No', onPress: () => { }, style: 'cancel' },
+      ],
+      {
+        cancelable: true
+      }
+    );
+  }
+
+  const onLogout = () => {
+    auth()
+      .signOut()
+      .then(() => {
+        console.log('logout success!')
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              { name: 'Login' }
+            ]
+          })
+        )
+      });
+  }
+
   return (
     <View
       style={[CommonStyles.mainContainer, CommonStyles.backWhite]}
     >
-      <CommonHeader logo search />
 
+      <CommonHeader
+        title={'Posts'}
+        logOutIcon
+        onPressLogout={logOutConfirmation}
+      />
       <KeyboardAwareScrollView
         enableOnAndroid
         keyboardShouldPersistTaps="handled"
@@ -144,14 +121,12 @@ const Products: React.FC<PropType> = (props) => {
       >
         <FlatList
           testID='FlatList1'
-          contentContainerStyle={{width: '100%', alignSelf:'center'}}
-          extraData={productsData}
-          data={productsData}
+          contentContainerStyle={{ width: '100%', alignSelf: 'center' }}
+          extraData={posts}
+          data={posts}
           keyExtractor={(item, i) => i.toString()}
-          numColumns={2}
-          ListHeaderComponent={categoryList}
-          renderItem={({item}) => {
-            const {name, price, avatar} = item || {}
+          renderItem={({ item }) => {
+            const { id, body, title, avatar = 'https://dummyimage.com/300' } = item || {}
             return (
               <TouchableOpacity
                 onPress={() => onPressProduct(item)}
@@ -159,15 +134,23 @@ const Products: React.FC<PropType> = (props) => {
                 style={styles.mainCard}
               >
                 <View style={styles.subView}>
-                  <Image style={styles.imgStyles} source={{uri: avatar}} />
+                  <View style={styles.subView1}>
+                    <Image style={styles.imgStyles} source={image.userImg} />
+                  </View>
                 </View>
                 <View style={styles.textView}>
                   <Text style={styles.textStyle} numberOfLines={1}>
-                    {name}
+                    {id}
                   </Text>
-                  <Text style={styles.textStyle} numberOfLines={1}>
-                    $ {price}
+                  <Text style={styles.textStyle} numberOfLines={2}>
+                    {title}
                   </Text>
+                </View>
+                <View style={styles.thirdView}>
+                  <Feather
+                    name='chevron-right'
+                    size={23}
+                  />
                 </View>
               </TouchableOpacity>
             );
@@ -176,17 +159,6 @@ const Products: React.FC<PropType> = (props) => {
       </KeyboardAwareScrollView>
 
       <ProgressBarView visible={isProgress} />
-      <TouchableOpacity
-        onPress={() => navigation.navigate('AddProduct')}
-        activeOpacity={1}
-        style={styles.buttonStyle}
-      >
-      <AntDesign 
-      name = 'plus'
-      size = {33}
-      />
-        {/* <Text style={{fontSize: 40, fontWeight: '400'}}>+</Text> */}
-      </TouchableOpacity>
     </View>
   );
 };
@@ -195,11 +167,12 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingBottom: 30,
-    backgroundColor: color.defaultBackGrey,
+    backgroundColor: color.white,
   },
   mainCard: {
-    height: height / 3.5,
-    width: '47%',
+    flexDirection: 'row',
+    height: 80,
+    width: '100%',
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: {
@@ -210,10 +183,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     alignItems: 'center',
     // padding: 25
-    backgroundColor: 'white',
-    margin: 6,
-    borderRadius: 10,
-    justifyContent: 'space-between',
+    backgroundColor: color.primaryMiddle,
+    margin: 0.7,
+    // borderRadius: 5,
+    // justifyContent: 'space-between',
+    alignSelf: 'center'
   },
   mainCard1: {
     justifyContent: 'center',
@@ -221,55 +195,40 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   subView: {
-    width: '95%',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    flex: 0.2,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    paddingLeft: 8,
+    backgroundColor: color.primaryMiddle
   },
   imgStyles: {
     height: '70%',
-    width: '60%',
-    marginTop: 5,
+    width: '80%',
   },
   textView: {
-    width: '100%',
+    flex: 0.7,
+    // width: '50%',
+    flexDirection: 'column',
     alignItems: 'flex-start',
-    backgroundColor: 'black',
-    height: 55,
-    borderRadius: 10,
-    justifyContent: 'space-between',
-    paddingLeft: 5,
+    backgroundColor: color.primaryMiddle,
+    justifyContent: 'space-around',
     paddingVertical: 5,
+    paddingRight: 20,
+    paddingLeft: 10
   },
   textView1: {
     width: '100%',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: color.primaryMiddle,
     justifyContent: 'center',
     height: 45,
     borderRadius: 10,
     paddingHorizontal: 20,
   },
   textStyle: {
-    color: 'white',
+    color: color.black,
     fontWeight: 'bold',
     fontSize: 15,
-  },
-  selectCatTextView: {
-    width: '100%',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    height: 50,
-    borderRadius: 10,
-    borderColor: 'black',
-    borderWidth: 2,
-    paddingHorizontal: 20,
-  },
-  selectCatTextStyle: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 15,
-    textAlign: 'center',
   },
   textStyle1: {
     color: 'white',
@@ -299,6 +258,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
   },
+  subView1: {
+    height: 66,
+    width: 66,
+    borderRadius: 33,
+    backgroundColor: color.primaryOff,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  thirdView: {
+    flex: 0.1,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  }
 });
 
 export default Products;

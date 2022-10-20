@@ -13,12 +13,12 @@ const responseCode = {
 }
 
 const activeBaseURL = {
-  base: 'https://upayments-studycase-api.herokuapp.com/api/'
+  base: 'https://jsonplaceholder.typicode.com/'
 }
 
 const url = {
-  products: 'products',
-  categories: 'categories'
+  posts: 'posts',
+  postDetails: 'posts/'
 }
 
 const googleApiKey = "AIzaSyBPAy9LB51jzBwiW0j3Rq1kC3kZBTsvFSk"

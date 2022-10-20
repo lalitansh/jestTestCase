@@ -35,7 +35,7 @@ const App: React.FC = () => {
     <>
     {/* <MyStatusBar backgroundColor={color.white} barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
     
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} translucent={true} backgroundColor={color.defaultBackGrey}/>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} translucent={true} backgroundColor={color.primary}/>
       
       <View style={{flex: 1, backgroundColor: color.defaultBackGrey}}>
           <Container />

@@ -115,6 +115,7 @@ export function callGetApi(urlStr: string, accessToken: string) {
   })
     .then(response => response.json())
     .then(responseJson => {
+      console.log('result--',responseJson)
       let isSucess = false;
       if (
         responseJson.status_code == responseCode.success ||
@@ -122,13 +123,15 @@ export function callGetApi(urlStr: string, accessToken: string) {
         responseJson.message === 'Success'
       ) {
         isSucess = true;
-      } else if (
+      }else if (
         responseJson.status_code == responseCode.sessionExpire ||
         responseJson.statusCode == responseCode.sessionExpire
       ) {
         Alert.alert('Session expired');
       } else {
-        if (responseJson.message == null || responseJson.message == '') {
+        if (responseJson !== null) {
+          isSucess = true;
+        }else if (responseJson.message == null || responseJson.message == '') {
           setTimeout(() => {
             Alert.alert('', 'Server Error!!! Please Try After Some Time');
           }, 200);

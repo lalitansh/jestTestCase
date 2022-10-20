@@ -1,35 +1,38 @@
 import React from 'react';
-import {View, Image, StatusBar, StyleSheet} from 'react-native';
-import {color} from '../../../constants/theme/Color';
-import {image} from '../../../constants/theme/Image';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
+import { View, Image, StatusBar, StyleSheet, Text, Dimensions } from 'react-native';
+import { color } from '../../../constants/theme/Color';
+import { image } from '../../../constants/theme/Image';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
+const { height, width } = Dimensions.get('window')
 type PropsType = {
-  logo?: boolean;
-  search?: boolean;
+  title: string;
+  back?: boolean;
+  navigation?: {};
+  logOutIcon?:boolean;
+  onPressLogout?: ()=> void;
 };
 
 const CommonHeader: React.FC<PropsType> = (props: any) => {
-  const {logo, search} = props;
+  const { title = '', back = false, navigation = {}, onPressLogout, logOutIcon=false } = props;
 
   return (
     <>
       <StatusBar translucent={true} backgroundColor={color.white} />
       <View style={styles.mainView}>
-        {logo && 
-        <View style= {styles.view1}>
-        <Image source={image.iconUpayment} style={styles.img1Style} />
+        <View style={styles.view1}>{back ? <Text
+          onPress={() => navigation.goBack()}
+          style={styles.commonFont}>Back</Text> : null}</View>
+        <View style={styles.view2}><Text style={[styles.commonFont, { textAlign: 'center' }]}>{title}</Text></View>
+        <View style={[styles.view1, {alignItems:'flex-end'}]}>
+          {logOutIcon ? <AntDesign
+            name='logout'
+            onPress={onPressLogout}
+            color={color.white}
+            size={22}/>: null
+          }
         </View>
-        }
-        {search && (
-          <View style= {styles.view2}>
-          <Image
-            resizeMode="contain"
-            source={image.iconSearch}
-            style={styles.img2Style}
-          />
-          </View>
-        )}
       </View>
     </>
   );
@@ -38,31 +41,26 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
 export default CommonHeader;
 
 const styles = StyleSheet.create({
+  commonFont: {
+    color: color.white,
+    fontSize: 16
+  },
   mainView: {
     flexDirection: 'row',
     width: '100%',
     paddingVertical: 16,
     paddingHorizontal: 20,
-    backgroundColor: color.defaultBackGrey,
+    backgroundColor: color.primary,
     marginTop: getStatusBarHeight(),
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 65
   },
   view1: {
-    flex: 0.7,
-    paddingLeft: 10,
-    alignItems:'flex-start',
+    flex: 0.2
   },
   view2: {
-    flex: 0.3,
-    alignItems: 'flex-end',
-  },
-  img1Style: {
-    width: '100%',
-    height: 40,
-    marginLeft: -10,
-  },
-  img2Style: {
-    width: 50,
-    height: 50,
-  },
+    flex: 0.8
+  }
+
 });

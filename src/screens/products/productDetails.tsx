@@ -1,14 +1,14 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState, useEffect} from 'react';
-import {Text, View, StyleSheet, Image, Dimensions} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 import CommonHeader from '../../components/common/Header/commonHeader';
-import {CommonStyles} from '../../components/common/styles/commonStyles';
-import {url, accessToken} from '../../constants/apiConstant';
-import {callGetApi} from '../../network/api';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { CommonStyles } from '../../components/common/styles/commonStyles';
+import { url, accessToken } from '../../constants/apiConstant';
+import { callGetApi } from '../../network/api';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ProgressBarView from '../../components/ProgressBarView';
-import {color} from '../../constants/theme/Color';
-const {height} = Dimensions.get('window');
+import { color } from '../../constants/theme/Color';
+const { height } = Dimensions.get('window');
 
 type PropTypes = {};
 
@@ -29,8 +29,8 @@ const Products: React.FC<PropTypes> = (props: any) => {
   }, []);
 
   const getProduct = () => {
-    const {item} = props.route.params || {};
-    const {_id} = item || {};
+    const { item } = props.route.params || {};
+    const { _id } = item || {};
     setIsProgress(true);
     callGetApi(`${url.products}/${_id}`, accessToken)
       .then(response => {
@@ -50,18 +50,22 @@ const Products: React.FC<PropTypes> = (props: any) => {
       });
   };
 
-  const {avatar = '', name = '', price = 0, description = ''} =
+  const { avatar = '', name = '', price = 0, description = '' } =
     productsData || {};
   return (
     <View style={[CommonStyles.mainContainer, CommonStyles.backWhite]}>
-      <CommonHeader />
+      <CommonHeader
+        back
+        navigation={props.navigation}
+        title={'Post Detail'}
+      />
 
       <KeyboardAwareScrollView
         enableOnAndroid
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.container}
       >
-        <View style={{justifyContent: 'space-between', flex: 1}}>
+        <View style={{ justifyContent: 'space-between', flex: 1 }}>
           <View
             style={{
               height: height / 2.5,
@@ -71,8 +75,8 @@ const Products: React.FC<PropTypes> = (props: any) => {
             }}
           >
             <Image
-              source={{uri: avatar}}
-              style={{height: '50%', width: '70%'}}
+              source={{ uri: avatar }}
+              style={{ height: '50%', width: '70%' }}
             />
           </View>
 
@@ -100,18 +104,18 @@ const Products: React.FC<PropTypes> = (props: any) => {
                 }}
               >
                 <Text
-                  style={{color: 'white', fontWeight: 'bold', fontSize: 30}}
+                  style={{ color: 'white', fontWeight: 'bold', fontSize: 30 }}
                 >
                   {name}
                 </Text>
                 <Text
-                  style={{color: 'white', fontWeight: 'bold', fontSize: 15}}
+                  style={{ color: 'white', fontWeight: 'bold', fontSize: 15 }}
                 >
                   ${price}
                 </Text>
               </View>
 
-              <Text style={{color: 'white', marginTop: 35}}>
+              <Text style={{ color: 'white', marginTop: 35 }}>
                 ${description}
               </Text>
             </View>
