@@ -19,10 +19,11 @@ function Container() {
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
-  }, [user]);
+  }, []);
 
   // Handle user state changes
   function onAuthStateChanged(user) {
+    console.log('user======>', user)
     setUser(user);
     if (initializing) setInitializing(false);
   }
@@ -30,7 +31,7 @@ function Container() {
   if (initializing) return null;
 
   return (
-    <NavigationContainer ref={navigationRef} initialRouteName={user ? 'Products': 'Login'}>
+    <NavigationContainer ref={navigationRef} initialRouteName={(user && user !== null) ? 'Products': 'Login'}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Products" component={Products} />
         <Stack.Screen name="Login" component={Login} />
