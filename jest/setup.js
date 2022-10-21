@@ -1,6 +1,18 @@
 /* eslint-env jest */
 /* eslint-disable import/no-extraneous-dependencies */
 
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({adapter: new Adapter()});
+
+jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({test: 100}),
+  }),
+);
+
 jest.mock('react-native-simple-toast', () => ({
   SHORT: jest.fn(),
 }));
@@ -16,7 +28,7 @@ jest.mock('react-native-simple-toast', () => ({
 //     processColor,
 //   } = require('react-native');
 
-  // jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+// jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 //   function NOOP() {
 //     // noop
 //   }
@@ -215,4 +227,3 @@ jest.mock('react-native-simple-toast', () => ({
 // });
 
 // // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
-

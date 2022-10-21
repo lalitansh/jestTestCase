@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StatusBar, StyleSheet, Text, Dimensions } from 'react-native';
+import { View, Image, StatusBar, StyleSheet, Text, Dimensions, Platform } from 'react-native';
 import { color } from '../../../constants/theme/Color';
 import { image } from '../../../constants/theme/Image';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
@@ -19,7 +19,6 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
 
   return (
     <>
-      <StatusBar translucent={true} backgroundColor={color.white} />
       <View style={styles.mainView}>
         <View style={styles.view1}>{back ? <Text
           onPress={() => navigation.goBack()}
@@ -51,7 +50,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 20,
     backgroundColor: color.primary,
-    // marginTop: getStatusBarHeight(),
+    marginTop: Platform.OS === 'android' ? getStatusBarHeight() : undefined,
     // justifyContent: 'space-between',
     alignItems: 'center',
     height: 65

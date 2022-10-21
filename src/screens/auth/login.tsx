@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { Text, View, ScrollView, StyleSheet } from 'react-native';
-import CustomeButton from '../../components/common/Button/button';
+import CustomButton from '../../components/common/Button/button';
 import TextField from '../../components/common/EditTextInput';
 import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
@@ -19,8 +19,6 @@ const Login: React.FC<PropType> = (props) => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
   const [isProgress, setIsProgress] = useState(false);
-
-  useEffect(() => { }, []);
 
   const handleSetForm = (key, value) => {
     console.log('value, key', value, key);
@@ -108,7 +106,7 @@ const Login: React.FC<PropType> = (props) => {
         />
 
         <View style={styles.customButton}>
-          <CustomeButton
+          <CustomButton
             isGreenBack
             isWhiteText
             title={'Login'} onPress={() => onSave()} />

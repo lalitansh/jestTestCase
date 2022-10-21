@@ -1,7 +1,6 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { Text, View, ScrollView, StyleSheet } from 'react-native';
-import CustomeButton from '../../components/common/Button/button';
+import CustomButton from '../../components/common/Button/button';
 import TextField from '../../components/common/EditTextInput';
 import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
@@ -78,7 +77,6 @@ const Signup: React.FC<PropType> = (props) => {
             });
 
     };
-    const navigation: any = useNavigation();
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.mrVer50} />
@@ -109,7 +107,7 @@ const Signup: React.FC<PropType> = (props) => {
                 />
 
                 <TextField
-                    label={'Confirm password:'}
+                    label={'CONFIRM PASSWORD:'}
                     placeholder={'re-enter password'}
                     keyboardType='email-address'
                     value={form.confirmPassword}
@@ -120,7 +118,7 @@ const Signup: React.FC<PropType> = (props) => {
                 />
 
                 <View style={styles.customButton}>
-                    <CustomeButton
+                    <CustomButton
                         isGreenBack
                         isWhiteText
                         title={'Signup'} onPress={() => onSave()} />

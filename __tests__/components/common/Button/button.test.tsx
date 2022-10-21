@@ -1,12 +1,16 @@
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 import React from 'react';
 import CustomButton from '../../../../src/components/common/Button/button';
 
 const mockParam = {
-title : 'Add Product'
+  title: 'Add Product'
 }
 
-it('renders correctly across screens', () => {
-  const tree = renderer.create(<CustomButton {...mockParam}/>).toJSON();
-  expect(tree).toMatchSnapshot();
+describe('Button', () => {
+  describe('Rendering', () => {
+    it('should match to snapshot', () => {
+      const component = shallow(<CustomButton {...mockParam} />)
+      expect(component).toMatchSnapshot()
+    });
+  });
 });

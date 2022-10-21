@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Image, Dimensions, Platform } from 'react-native';
+import { Text, View, StyleSheet, Image, Dimensions, Platform, ScrollView } from 'react-native';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import { CommonStyles } from '../../components/common/styles/commonStyles';
 import { url } from '../../constants/apiConstant';
@@ -53,7 +53,7 @@ const PostDetail: React.FC<PropTypes> = (props: any) => {
   const { id = 0, title = '', body = '' } =
     postData || {};
   return (
-    <View style={[CommonStyles.mainContainer, CommonStyles.backWhite]}>
+    <View style={CommonStyles.mainContainer}>
       <CommonHeader
         back
         navigation={props.navigation}
@@ -64,66 +64,69 @@ const PostDetail: React.FC<PropTypes> = (props: any) => {
         enableOnAndroid
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+        testID='KeyboardAwareScrollView3'
       >
         <View style={{ flex: 1 }}>
           <View
-            style={{
-              height: height / 3,
-              width: '100%',
-              backgroundColor: color.defaultBackGrey,
-              alignItems: 'center',
-              justifyContent:'center'
-            }}
+            style={[styles.container1, {flex: 0.3}]}
           >
             <Image
-            resizeMode='contain'
+              resizeMode='contain'
               source={image.userImg}
-              style={{ height: '100%', width: '100%' }}
+              style={styles.fullImg}
             />
-          </View>
 
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: color.white,
-            }}
-          >
-            
-            <View
-              style={{
-                backgroundColor: 'black',
-                flex: 1,
-                paddingHorizontal: 20,
-              }}
-            >
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginTop: 35,
-                }}
-              >
-                
-                <Text
-                  style={styles.text1}
-                >
-                  {title}
-                </Text>
-              </View>
-
-              <Text style={styles.text2}>
-                {body}
-              </Text>
-            </View>
-            <View style={styles.subRightView}>
-            <Text
-                  style={{ color: 'white', fontWeight: 'bold', fontSize: 30 }}
-                >
-                  {id}
-                </Text>
+<View style={styles.subRightView}>
+                  <Text
+                    style={{ color: 'white', fontWeight: 'bold', fontSize: 20 }}
+                  >
+                    {id}
+                  </Text>
                 </View>
           </View>
+
+            <ScrollView 
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ flexGrow: 1, flex:0.7, paddingBottom: 100, backgroundColor: 'black', }}>
+
+
+              <View
+                style={{
+                  backgroundColor: 'black',
+                  paddingHorizontal: 20,
+                  marginTop: -30
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginTop: 35,
+                  }}
+                >
+
+                  <Text
+                    style={styles.text1}
+                  >
+                    {title}
+                  </Text>
+                </View>
+
+                <Text style={styles.text2}>
+                  {body}
+                </Text>
+
+                
+              </View>
+
+            </ScrollView>
+            
+
+          
+          
         </View>
+        
       </KeyboardAwareScrollView>
       <ProgressBarView visible={isProgress} />
     </View>
@@ -135,34 +138,47 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: color.white
   },
+  fullImg: {
+    height: '100%', width: '100%'
+  },
+  container1: {
+    height: height / 3,
+    width: '100%',
+    backgroundColor: color.defaultBackGrey,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   alignRight: {
-    alignItems:'flex-end',
-    backgroundColor:color.black,
+    alignItems: 'flex-end',
+    backgroundColor: color.black,
     paddingRight: 30,
   },
   text1: {
-    color: 'white', 
-    fontWeight: Platform.OS === 'ios' ? '500' : 'bold', 
+    color: 'white',
+    fontWeight: Platform.OS === 'ios' ? '500' : 'bold',
     fontSize: 30
   },
   text2: {
-    color: 'white', 
+    color: 'white',
     marginTop: 35,
     fontSize: 20,
     // fontFamily: 'Poppins-Regular'
   },
   subRightView: {
-    height: 70,
-    width: 70,
-    backgroundColor: color.primary,
-    justifyContent: 'center',
-    alignItems:'center',
-    borderBottomRightRadius: 20,
-    borderTopLeftRadius: 20,
+    height: 60,
+    width: 50,
+    // borderRadius: 25,
+    backgroundColor: color.black,
+    justifyContent: 'flex-end',
+    paddingBottom: 5,
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 5,
     position: 'absolute',
-    right: 20,
-    bottom: height/2.2,
-    zIndex: 20
+    top: -15,
+    left: 10,
+    // bottom: Platform.OS === 'ios' ? height / 2.65 : height / 2.1,
   },
   mainCard: {
     height: height / 3.5,

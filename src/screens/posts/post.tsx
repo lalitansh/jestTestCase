@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
-import { productDataType } from './productDetails';
+import { PostDetailType } from './postDetail';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import { CommonStyles } from '../../components/common/styles/commonStyles';
 import { url } from '../../constants/apiConstant';
@@ -59,7 +59,7 @@ const Posts: React.FC<PropType> = (props) => {
   };
 
 
-  const onPressProduct = (item: productDataType) => {
+  const onPressPost = (item: PostDetailType) => {
     const { navigation } = props || {};
     navigation.navigate('PostDetail', { item: item });
   };
@@ -125,7 +125,7 @@ const Posts: React.FC<PropType> = (props) => {
             const { id, body, title, avatar = 'https://dummyimage.com/300' } = item || {}
             return (
               <TouchableOpacity
-                onPress={() => onPressProduct(item)}
+                onPress={() => onPressPost(item)}
                 activeOpacity={0.7}
                 style={styles.mainCard}
               >

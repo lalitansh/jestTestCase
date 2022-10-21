@@ -32,7 +32,7 @@ const CommonFontFamily = StyleSheet.create({
 const CommonStyles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: color.white,
+    // backgroundColor: color.white,
   },
   mainDullContainer: {
     flex: 1,

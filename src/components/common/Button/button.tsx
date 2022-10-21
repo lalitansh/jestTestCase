@@ -16,7 +16,7 @@ type propsType = {
   buttonRef?: any;
 };
 
-const CustomeButton: React.FC<propsType> = (props: propsType) => {
+const CustomButton: React.FC<propsType> = (props: propsType) => {
   const {
     title,
     onPress,
@@ -90,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomeButton;
+export default CustomButton;
