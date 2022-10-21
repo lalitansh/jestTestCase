@@ -57,7 +57,7 @@ const Signup: React.FC<PropType> = (props) => {
                     CommonActions.reset({
                         index: 0,
                         routes: [
-                            { name: 'Products' }
+                            { name: 'Posts' }
                         ]
                     })
                 )
