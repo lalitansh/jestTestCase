@@ -98,23 +98,23 @@ const Signup: React.FC<PropType> = (props) => {
                 <TextField
                     label={'PASSWORD:'}
                     placeholder={'Enter your password'}
-                    keyboardType='email-address'
                     value={form.password}
                     secureTextEntry={true}
                     name={'password'}
                     errors={!isEmpty(errors) && errors}
                     onChange={(value: string) => handleSetForm('password', value)}
+                    secureTextEntry={true}
                 />
 
                 <TextField
                     label={'CONFIRM PASSWORD:'}
                     placeholder={'re-enter password'}
-                    keyboardType='email-address'
                     value={form.confirmPassword}
                     secureTextEntry={true}
                     name={'confirmPassword'}
                     errors={!isEmpty(errors) && errors}
                     onChange={(value: string) => handleSetForm('confirmPassword', value)}
+                    secureTextEntry={true}
                 />
 
                 <View style={styles.customButton}>

@@ -6,6 +6,7 @@ import PostDetail from './posts/postDetail';
 import Login from './auth/login';
 import Signup from './auth/signup';
 import auth from '@react-native-firebase/auth';
+import Chat from './chat/chat';
 
 const Stack = createStackNavigator();
 export const navigationRef = React.createRef();
@@ -34,8 +35,8 @@ const Container: React.FC<PropType> = (props) => {
     <NavigationContainer ref={navigationRef} >
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {!user ?
-          < Stack.Screen name="Login" component={Login} />:
-        <Stack.Screen name="Posts" component={Posts} />
+          <Stack.Screen name="Login" component={Login} />:
+        <Stack.Screen name="Chat" component={Chat} />
         }
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="PostDetail" component={PostDetail} />

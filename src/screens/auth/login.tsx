@@ -57,7 +57,7 @@ const Login: React.FC<PropType> = (props) => {
           CommonActions.reset({
             index: 0,
             routes: [
-              { name: 'Posts' }
+              { name: 'Chat' }
             ]
           })
         )
@@ -97,7 +97,6 @@ const Login: React.FC<PropType> = (props) => {
         <TextField
           label={'PASSWORD:'}
           placeholder={'Enter your password'}
-          keyboardType='email-address'
           value={form.password}
           secureTextEntry={true}
           name={'password'}
