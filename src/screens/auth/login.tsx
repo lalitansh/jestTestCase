@@ -1,45 +1,48 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState, useEffect } from 'react';
-import { Text, View, ScrollView, StyleSheet } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import React, {useState, useEffect} from 'react';
+import {Text, View, ScrollView, StyleSheet} from 'react-native';
 import CustomButton from '../../components/common/Button/button';
 import TextField from '../../components/common/EditTextInput';
 import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
 import unset from 'lodash/unset';
-import { color } from '../../constants/theme/Color';
+import {color} from '../../constants/theme/Color';
 import auth from '@react-native-firebase/auth';
-import { CommonActions } from '@react-navigation/native';
+import {CommonActions} from '@react-navigation/native';
 import ProgressBarView from '../../components/ProgressBarView';
 
 export type PropType = {
   navigation?: any;
 };
 
-const Login: React.FC<PropType> = (props) => {
+const Login: React.FC<PropType> = props => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
   const [isProgress, setIsProgress] = useState(false);
 
   const handleSetForm = (key, value) => {
     console.log('value, key', value, key);
-    setForm({ ...form, [key]: value });
+    setForm({...form, [key]: value});
     unset(errors, key);
     // console.log(`name = ${form.key}, value = ${form.value}`)
   };
 
   const validate = () => {
     let errors = {};
-    const { email, password } = form;
+    const {email, password} = form;
 
     let expInvailid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
     let emailEmptyCheck = isEmpty(email);
 
+    if (emailEmptyCheck) {
+      set(errors, 'email', ['email is required']);
+    } else if (!expInvailid) {
+      set(errors, 'email', ['Invalid email format']);
+    }
 
-    if (emailEmptyCheck) set(errors, 'email', ['email is required']);
-    else if (!expInvailid) set(errors, 'email', ['Invalid email format']);
-
-    if (isEmpty(password)) set(errors, 'password', ['password is required']);
-
+    if (isEmpty(password)) {
+      set(errors, 'password', ['password is required']);
+    }
 
     return errors;
   };
@@ -47,24 +50,24 @@ const Login: React.FC<PropType> = (props) => {
   const onSave = () => {
     let errors = validate();
     console.log('errors', errors);
-    if (!isEmpty(errors)) return setErrors(errors);
-    setIsProgress(true)
+    if (!isEmpty(errors)) {
+      return setErrors(errors);
+    }
+    setIsProgress(true);
     auth()
       .signInWithEmailAndPassword(form.email, form.password)
       .then(() => {
-        setIsProgress(false)
+        setIsProgress(false);
         props.navigation.dispatch(
           CommonActions.reset({
             index: 0,
-            routes: [
-              { name: 'Chat' }
-            ]
-          })
-        )
+            routes: [{name: 'Chat'}],
+          }),
+        );
         console.log('User account created & signed in!');
       })
       .catch(error => {
-        setIsProgress(false)
+        setIsProgress(false);
         if (error.code === 'auth/email-already-in-use') {
           console.log('That email address is already in use!');
         }
@@ -80,7 +83,7 @@ const Login: React.FC<PropType> = (props) => {
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.mrVer50} />
 
-      <View style={{ flex: 0.7 }}>
+      <View style={{flex: 0.7}}>
         <View style={styles.headerTextView}>
           <Text style={styles.headerText}>Login</Text>
         </View>
@@ -108,9 +111,17 @@ const Login: React.FC<PropType> = (props) => {
           <CustomButton
             isGreenBack
             isWhiteText
-            title={'Login'} onPress={() => onSave()} />
-          <Text style={styles.text1}>Don't have account?
-            <Text style={styles.text2} onPress={() => props.navigation.navigate('Signup')}> Signup</Text>
+            title={'Login'}
+            onPress={() => onSave()}
+          />
+          <Text style={styles.text1}>
+            Don't have account?
+            <Text
+              style={styles.text2}
+              onPress={() => props.navigation.navigate('Signup')}>
+              {' '}
+              Signup
+            </Text>
           </Text>
         </View>
       </View>
@@ -128,7 +139,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     marginTop: 10,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   text2: {
     color: color.primary,

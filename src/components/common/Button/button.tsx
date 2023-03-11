@@ -30,9 +30,7 @@ const CustomButton: React.FC<propsType> = (props: propsType) => {
     buttonRef,
   } = props;
   return (
-    <View
-      style={[styles.buttonParentView, customButtonParentStyle]}
-    >
+    <View style={[styles.buttonParentView, customButtonParentStyle]}>
       <View style={style.ButtonStyle}>
         <TouchableOpacity
           ref={buttonRef}
@@ -43,15 +41,13 @@ const CustomButton: React.FC<propsType> = (props: propsType) => {
             isErrorStyle ? styles.isErrorStyle : null,
             customeStyle,
           ]}
-          onPress={onPress}
-        >
+          onPress={onPress}>
           <Text
             style={[
               styles.buttonTextStyle,
               isWhiteText ? styles.iswhiteTextStyle : null,
               customButtonTextStyle,
-            ]}
-          >
+            ]}>
             {title}
           </Text>
         </TouchableOpacity>
