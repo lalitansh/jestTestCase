@@ -14,11 +14,15 @@ export default class GetStarted extends React.Component {
 
   // Get the phone number (first gif)
   _onPhoneNumberPressed = async () => {
+    const {navigation} = this.props;
+    const navigates = navigation.navigate('OtpMpin');
     try {
       const phoneNumber = await SmsRetriever.requestPhoneNumber();
       console.log('phonenumber::', phoneNumber);
+      navigates();
     } catch (error) {
       console.log('err', JSON.stringify(error));
+      navigates();
     }
   };
 
@@ -52,7 +56,7 @@ export default class GetStarted extends React.Component {
           }}>
           <Image style={{height: 80, width: 80}} source={image.white_logo} />
           <Text style={[style.navigationTitle, {marginTop: 27}]}>
-            {Message.certifiedInspect}
+            {Message.Polytrend}
           </Text>
         </View>
         <View style={{marginTop: 48, alignItems: 'center', width: '100%'}}>

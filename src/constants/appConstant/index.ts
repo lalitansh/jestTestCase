@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { build, environment } from '../appConfiguration';
-import { Platform } from 'react-native';
+import {build, environment} from '../appConfiguration';
+import {Platform} from 'react-native';
 import Moment from 'moment';
 
-import {
-  Dimensions,
-} from 'react-native';
+import {Dimensions} from 'react-native';
 
 //import { getNotificationBadgeSetting, setBadgeCount } from 'react-native-notification-badge';
 
@@ -14,16 +12,16 @@ var badgeCount = null;
 
 export async function setData(key, value) {
   try {
-    await AsyncStorage.setItem(key, value.toString())
+    await AsyncStorage.setItem(key, value.toString());
   } catch (e) {
     // saving error
-    console.log(e)
+    console.log(e);
   }
 }
 
 export async function getData(key) {
   try {
-    return await AsyncStorage.getItem(key)
+    return await AsyncStorage.getItem(key);
   } catch (e) {
     // error reading value
     console.log(e);
@@ -32,7 +30,7 @@ export async function getData(key) {
 
 export async function removeData(key) {
   try {
-    return await AsyncStorage.removeItem(key)
+    return await AsyncStorage.removeItem(key);
   } catch (e) {
     // error reading value
     console.log(e);
@@ -69,15 +67,18 @@ const margins = {
   superSmall: 4,
   small: 8,
   medium: 10,
-  large: 12
-}
+  large: 12,
+};
 
 const AppConts = {
-  deviceType: (Platform.OS === 'android') ? 'android' : 'ios',
+  deviceType: Platform.OS === 'android' ? 'android' : 'ios',
   userType: 2, // customer
   googleAPIKey: 'AIzaSyAst9oCvLfJnq-xFM3w-aaYfR6Mo6m25qI',
-  razoPayKey: (environment.build == 1) ? 'rzp_test_1hATxfDuLh9I4s' : 'rzp_live_JMAKreEuCGvchn'
-}
+  razoPayKey:
+    environment.build == 1
+      ? 'rzp_test_1hATxfDuLh9I4s'
+      : 'rzp_live_JMAKreEuCGvchn',
+};
 
 const LocalKeys = {
   trueStr: 'true',
@@ -92,47 +93,48 @@ const LocalKeys = {
   accessToken: 'accessToken',
   isMobileVerified: 'isMobileVerified',
   user: 'user',
-  mobileVerifyed: "mobileVerifyed",
-  sessionExpire: "sessionExpire",
-}
+  mobileVerifyed: 'mobileVerifyed',
+  sessionExpire: 'sessionExpire',
+};
 
 const AlertText = {
-  title: "Hygea",
-  okButtonTitle: "OK",
-  deleteButtonTitle: "Delete",
-  cancelButtonTitle: "Cancel",
-  confirmButtonTitle: "Confirm",
-  continueButtonTitle: "Continue",
-  editLocationTitle: "Edit Location",
-  confirmBookingButtonTitle: "Confirm booking",
-  photoLibrary: "Choose from Gallery",
-  camera: "Take Photo",
-  settingButtonTitle: "Settings",
+  title: 'Hygea',
+  okButtonTitle: 'OK',
+  deleteButtonTitle: 'Delete',
+  cancelButtonTitle: 'Cancel',
+  confirmButtonTitle: 'Confirm',
+  continueButtonTitle: 'Continue',
+  editLocationTitle: 'Edit Location',
+  confirmBookingButtonTitle: 'Confirm booking',
+  photoLibrary: 'Choose from Gallery',
+  camera: 'Take Photo',
+  settingButtonTitle: 'Settings',
   logoutTitle: 'Log Out',
   logoutSubtitle: 'Are you sure you want to logout?',
   logoutButton: 'Logout',
-
-}
+};
 
 const Walkthrough = {
-  on1Title: "Manage Your Inspections On\nYour Phone",
-  on2Title: "Be Guided Through The\nProcess",
-  on3Title: "Track Approvals &\nHistory",
-  on1Message: "You can see your past inspections and be\nalerted when new requests are available.",
-  on2Message: "The inspection wizard guides you through the\nexact process.",
-  on3Message: "Track your past inspections for your own records."
-}
+  on1Title: 'Manage Your Inspections On\nYour Phone',
+  on2Title: 'Be Guided Through The\nProcess',
+  on3Title: 'Track Approvals &\nHistory',
+  on1Message:
+    'You can see your past inspections and be\nalerted when new requests are available.',
+  on2Message: 'The inspection wizard guides you through the\nexact process.',
+  on3Message: 'Track your past inspections for your own records.',
+};
 
 const Message = {
   enterEmail: 'Please enter email',
   enterValidEmail: 'Please enter vaild email',
-  certifiedInspect: 'CertifiedInspect',
+  Polytrend: 'Polytrend',
   letGetStarted: 'Let’s get started',
-  toBegin: 'To begin inspecting vehicles you will need to\nsign in with your details below.',
+  toBegin:
+    'To begin inspecting vehicles you will need to\nsign in with your details below.',
   dontHaveAccount: 'Don’t have an account? ',
   requestAnInvite: 'Request An Invite',
-  logoutSuccess: 'successfully logged out'
-}
+  logoutSuccess: 'successfully logged out',
+};
 
 const ComponentName = {
   onboarding: 'onboarding',
@@ -142,16 +144,16 @@ const ComponentName = {
   appWebView: 'appWebView',
   forgotPassword: 'forgotPassword',
   inspectorApp: 'InspectorApp',
-}
+};
 
 const KeyboardType = {
-  email: "email-address",
+  email: 'email-address',
   numeric: 'numeric',
   numberPad: 'number-pad',
   phonePad: 'phone-pad',
   decimalPad: 'decimal-pad',
-  default: 'default'
-}
+  default: 'default',
+};
 
 const ProgressSize = {
   zero: '0%',
@@ -165,11 +167,18 @@ const ProgressSize = {
   eight: '80%',
   nine: '90%',
   ten: '100%',
-}
+};
 
 export {
-  AppConts, AlertText, Message,
-  screenHeight, screenWidth, margins,
-  Walkthrough, LocalKeys, ComponentName,
-  KeyboardType, ProgressSize
-}
+  AppConts,
+  AlertText,
+  Message,
+  screenHeight,
+  screenWidth,
+  margins,
+  Walkthrough,
+  LocalKeys,
+  ComponentName,
+  KeyboardType,
+  ProgressSize,
+};

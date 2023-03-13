@@ -24,13 +24,14 @@ import {
 } from 'react-native';
 import {image} from '../../constants/theme/Image';
 import style from '../../constants/theme/Style';
+import SkeletonEffect from '../../components/common/SkeletonComponent';
 const {height} = Dimensions.get('window');
 
 export type PropType = {
   navigation?: any;
 };
 
-const Posts: React.FC<PropType> = props => {
+const Dashboard: React.FC<PropType> = props => {
   const {navigation} = props || {};
   const [isProgress, setIsProgress] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -99,58 +100,63 @@ const Posts: React.FC<PropType> = props => {
 
   return (
     <View style={[CommonStyles.mainContainer, CommonStyles.backWhite]}>
-      <CommonHeader
-        title={'Posts'}
+      {/* <CommonHeader
+        title={'Dashboard'}
         logOutIcon
         onPressLogout={logOutConfirmation}
-      />
-      <KeyboardAwareScrollView
-        enableOnAndroid
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={styles.container}
-        testID="KeyboardAwareScrollView2">
-        <FlatList
-          testID="FlatList1"
-          contentContainerStyle={{width: '100%', alignSelf: 'center'}}
-          extraData={posts}
-          data={posts}
-          initialNumToRender={15}
-          keyExtractor={(item, i) => i.toString()}
-          renderItem={({item}) => {
-            const {
-              id,
-              body,
-              title,
-              avatar = 'https://dummyimage.com/300',
-            } = item || {};
-            return (
-              <TouchableOpacity
-                onPress={() => onPressPost(item)}
-                activeOpacity={0.7}
-                style={styles.mainCard}>
-                <View style={styles.subView}>
-                  <View style={styles.subView1}>
-                    <Image style={styles.imgStyles} source={image.userImg} />
-                  </View>
-                </View>
-                <View style={styles.textView}>
-                  <Text style={styles.textStyle} numberOfLines={1}>
-                    {id}
-                  </Text>
-                  <Text style={styles.textStyle} numberOfLines={2}>
-                    {title}
-                  </Text>
-                </View>
-                <View style={styles.thirdView}>
-                  <Feather name="chevron-right" size={23} />
-                </View>
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </KeyboardAwareScrollView>
+      /> */}
 
-      <ProgressBarView visible={isProgress} />
+      {isProgress ? (
+        <SkeletonEffect />
+      ) : (
+        <KeyboardAwareScrollView
+          enableOnAndroid
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={styles.container}
+          testID="KeyboardAwareScrollView2">
+          <FlatList
+            testID="FlatList1"
+            contentContainerStyle={{width: '100%', alignSelf: 'center'}}
+            extraData={posts}
+            data={posts}
+            initialNumToRender={15}
+            keyExtractor={(item, i) => i.toString()}
+            renderItem={({item}) => {
+              const {
+                id,
+                body,
+                title,
+                avatar = 'https://dummyimage.com/300',
+              } = item || {};
+              return (
+                <TouchableOpacity
+                  onPress={() => onPressPost(item)}
+                  activeOpacity={0.7}
+                  style={styles.mainCard}>
+                  <View style={styles.subView}>
+                    <View style={styles.subView1}>
+                      <Image style={styles.imgStyles} source={image.userImg} />
+                    </View>
+                  </View>
+                  <View style={styles.textView}>
+                    <Text style={styles.textStyle} numberOfLines={1}>
+                      {id}
+                    </Text>
+                    <Text style={styles.textStyle} numberOfLines={2}>
+                      {title}
+                    </Text>
+                  </View>
+                  <View style={styles.thirdView}>
+                    <Feather name="chevron-right" size={23} />
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </KeyboardAwareScrollView>
+      )}
+
+      {/* <ProgressBarView visible={isProgress} /> */}
     </View>
   );
 };
@@ -265,4 +271,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Posts;
+export default Dashboard;

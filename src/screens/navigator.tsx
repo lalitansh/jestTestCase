@@ -9,6 +9,9 @@ import auth from '@react-native-firebase/auth';
 import Splash from './splash';
 import onboarding from './onboarding';
 import GetStarted from './auth/getStarted';
+import OtpMpin from './auth/otpMpin';
+import TabNavigator from './navigation/tabNavigation';
+import DrawerDemo from './navigation/drawerNavigation';
 
 const Stack = createStackNavigator();
 export const navigationRef = React.createRef();
@@ -43,6 +46,7 @@ const Container: React.FC<PropType> = props => {
         <Stack.Screen name="onboarding" component={onboarding} />
         <Stack.Screen name="GetStarted" component={GetStarted} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="OtpMpin" component={OtpMpin} />
         {/* {!user ? (
           <Stack.Screen name="Login" component={Login} />
         ) : (
@@ -51,6 +55,7 @@ const Container: React.FC<PropType> = props => {
 
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="PostDetail" component={PostDetail} />
+        <Stack.Screen name="Dashboard" component={DrawerDemo} />
       </Stack.Navigator>
     </NavigationContainer>
   );
