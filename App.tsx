@@ -14,6 +14,7 @@ import {
   View,
   SafeAreaView,
   Platform,
+  LogBox,
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
@@ -23,6 +24,9 @@ import {color} from './src/constants/theme/Color';
 // import { SafeAreaView, SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 const App: React.FC = () => {
   const isDarkMode = useColorScheme() === 'dark';
+
+  LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+  LogBox.ignoreAllLogs(); //Ignore all log notifications
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,

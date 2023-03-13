@@ -139,7 +139,7 @@ export default class onboarding extends React.Component {
               {
                 key: 1,
                 backgroundColor: color.white,
-                image: image.on1,
+                image: image.splash,
                 title: Walkthrough.on1Title,
                 subtitle: Walkthrough.on1Message,
                 titleStyles: styles.title,
@@ -149,7 +149,7 @@ export default class onboarding extends React.Component {
               {
                 key: 2,
                 backgroundColor: color.white,
-                image: image.on2,
+                image: image.splash,
                 title: Walkthrough.on2Title,
                 subtitle: Walkthrough.on2Message,
                 titleStyles: styles.title,
@@ -159,7 +159,7 @@ export default class onboarding extends React.Component {
               {
                 key: 3,
                 backgroundColor: color.white,
-                image: image.on3,
+                image: image.splash,
                 title: Walkthrough.on3Title,
                 subtitle: Walkthrough.on3Message,
                 titleStyles: styles.title,

@@ -268,7 +268,10 @@ export default class Splash extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={{height: 80, width: 80}} source={image.white_logo} />
+        <Image
+          style={{height: 80, width: 80, borderRadius: 40}}
+          source={image.splash}
+        />
         <Text style={[style.navigationTitle, {marginTop: 27}]}>Polytrend</Text>
 
         <ProgressBarView visible={this.state.isProgress} />

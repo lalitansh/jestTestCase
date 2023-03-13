@@ -11,6 +11,7 @@ import {color} from '../../constants/theme/Color';
 import Feather from 'react-native-vector-icons/Feather';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
+import {SwiperFlatList} from 'react-native-swiper-flatlist';
 
 import {
   Text,
@@ -21,14 +22,38 @@ import {
   Image,
   Dimensions,
   Alert,
+  ImageBackground,
 } from 'react-native';
 import {image} from '../../constants/theme/Image';
 import style from '../../constants/theme/Style';
 import SkeletonEffect from '../../components/common/SkeletonComponent';
+import {screenHeight, screenWidth} from '../../constants/appConstant';
+import {sliderData} from '../../utils/data';
 const {height} = Dimensions.get('window');
 
 export type PropType = {
   navigation?: any;
+};
+
+const SliderBox = ({key, image}) => {
+  console.log(key, image);
+  return (
+    <View
+      style={{
+        width: screenWidth,
+        borderRadius: 5,
+        height: screenHeight / 4,
+        paddingHorizontal: 20,
+      }}>
+      <ImageBackground
+        key={`title${key}`}
+        imageStyle={{borderRadius: 5}}
+        resizeMode={'cover'}
+        style={{height: '100%', width: '100%'}}
+        source={image}
+      />
+    </View>
+  );
 };
 
 const Dashboard: React.FC<PropType> = props => {
@@ -114,7 +139,25 @@ const Dashboard: React.FC<PropType> = props => {
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={styles.container}
           testID="KeyboardAwareScrollView2">
-          <FlatList
+          <SwiperFlatList
+            autoplay
+            autoplayDelay={2.5}
+            autoplayLoop
+            height={140}
+            autoplayLoopKeepAnimation={true}
+            //index={2}
+            paginationStyle={{
+              height: 10,
+              width: 100,
+              backgroundColor: 'red',
+              color: 'green',
+            }}
+            paginationStyleItem={{height: 4, width: 4}}
+            showPagination
+            data={sliderData}
+            renderItem={({item, i}) => <SliderBox id={i} image={item.image} />}
+          />
+          {/* <FlatList
             testID="FlatList1"
             contentContainerStyle={{width: '100%', alignSelf: 'center'}}
             extraData={posts}
@@ -152,7 +195,7 @@ const Dashboard: React.FC<PropType> = props => {
                 </TouchableOpacity>
               );
             }}
-          />
+          /> */}
         </KeyboardAwareScrollView>
       )}
 

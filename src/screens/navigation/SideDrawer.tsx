@@ -35,7 +35,7 @@ const DrawerContent = props => {
             <View style={styles.rowDirection}>
               <TouchableNativeFeedback
                 onPress={() => props.navigation.navigate('Profile')}>
-                <Image style={styles.normalImage} source={image.demoImage} />
+                <Image style={styles.normalImage} source={image.splash} />
               </TouchableNativeFeedback>
 
               <View style={styles.marginLeft20}>

@@ -42,7 +42,7 @@ export default class GetStarted extends React.Component {
         <View style={{height: '45%', width: '100%'}}>
           <Image
             style={{height: '100%', width: '100%'}}
-            source={image.getStarted}
+            source={image.splash}
           />
         </View>
         <View
