@@ -21,6 +21,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import Container from './src/screens/navigator';
 import {color} from './src/constants/theme/Color';
+import 'react-native-gesture-handler';
 // import { SafeAreaView, SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 const App: React.FC = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -38,7 +39,7 @@ const App: React.FC = () => {
         <StatusBar
           barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           translucent={true}
-          backgroundColor={color.themeGrey}
+          backgroundColor={color.primaryDark}
         />
       ) : (
         <SafeAreaView

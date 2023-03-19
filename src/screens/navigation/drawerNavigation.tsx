@@ -28,6 +28,7 @@ export default function DrawerDemo() {
     <Drawer.Navigator
       screenOptions={{
         drawerType: 'slide',
+        headerShown: false,
       }}
       drawerContent={props => <SideDrawer {...props} />}>
       <Drawer.Screen name="DrawerRoot" component={drawerStack} />
@@ -44,6 +45,7 @@ const drawerStack = () => {
       initialRouteName={'Home'} //{currentUser == "vendor" ? "Vender" : "Customer"}
       screenOptions={{
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        headerShown: false,
       }}>
       <Stack.Screen
         name="Home"

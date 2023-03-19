@@ -1,9 +1,11 @@
 const color = {
   primary: '#6887ff', //'#167351',
-  primaryOff: '#c4dcd3',
-  primaryMiddle: '#a4c5b9',
+  primaryDark: '#5f80ff',
+  primaryOff: '#b9c7fe',
+  primaryMiddle: '#809aff',
+  primaryBlue: '#004D8C', //'#167351',
   white: 'white',
-  black: 'black',
+  black: '#17181D',
   red: 'red',
   title: '#171717',
   subtile: '#7A7A7A', //text disabled color

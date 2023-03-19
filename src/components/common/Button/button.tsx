@@ -33,6 +33,7 @@ const CustomButton: React.FC<propsType> = (props: propsType) => {
     <View style={[styles.buttonParentView, customButtonParentStyle]}>
       <View style={style.ButtonStyle}>
         <TouchableOpacity
+          activeOpacity={0.8}
           ref={buttonRef}
           disabled={isDisabled}
           style={[

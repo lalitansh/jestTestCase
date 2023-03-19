@@ -12,6 +12,9 @@ import GetStarted from './auth/getStarted';
 import OtpMpin from './auth/otpMpin';
 import TabNavigator from './navigation/tabNavigation';
 import DrawerDemo from './navigation/drawerNavigation';
+import OilImports from './OilImports';
+import Sellers from './Sellers';
+import Buyers from './Buyers';
 
 const Stack = createStackNavigator();
 export const navigationRef = React.createRef();
@@ -47,6 +50,9 @@ const Container: React.FC<PropType> = props => {
         <Stack.Screen name="GetStarted" component={GetStarted} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="OtpMpin" component={OtpMpin} />
+        <Stack.Screen name="OilImports" component={OilImports} />
+        <Stack.Screen name="Sellers" component={Sellers} />
+        <Stack.Screen name="Buyers" component={Buyers} />
         {/* {!user ? (
           <Stack.Screen name="Login" component={Login} />
         ) : (

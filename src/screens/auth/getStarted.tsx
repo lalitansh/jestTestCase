@@ -67,11 +67,13 @@ export default class GetStarted extends React.Component {
         </View>
         <View style={{marginTop: 48, marginLeft: 20, marginRight: 20}}>
           <TouchableOpacity
+            activeOpacity={0.8}
             onPress={this._onPhoneNumberPressed.bind(this)}
             style={style.defaultButton}>
             <Text style={[style.buttonTitle]}>Sign In</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            activeOpacity={0.8}
             onPress={this.goToSignUp.bind(this)}
             style={[style.secButton, {marginTop: 12}]}>
             <Text style={[style.secButtonTitle]}>Sign Up</Text>
@@ -86,7 +88,9 @@ export default class GetStarted extends React.Component {
               ]}>
               {Message.dontHaveAccount}
             </Text>
-            <TouchableOpacity onPress={this.goToSignUp.bind(this)}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={this.goToSignUp.bind(this)}>
               <Text
                 style={[
                   style.subtitle,

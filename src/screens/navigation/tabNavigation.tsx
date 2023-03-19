@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {lazy, useState} from 'react';
 import {Animated, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import {color} from '../../constants/theme/Color';
+import BuyPost from '../BuyPost';
 import Dashboard from '../Dashboard';
+import SellPost from '../SellPost';
 
 const Screen1 = () => {
   return (
@@ -17,34 +20,45 @@ const Screen2 = () => {
   return <View style={styles.screen2} />;
 };
 
-export default function TabNavigator() {
+export default function TabNavigator(props) {
+  const {navigation} = props;
+  const [currentRoute, setCurrentRoute] = useState('Dashboard');
   const _renderIcon = (routeName, selectedTab) => {
     let icon = '';
 
     switch (routeName) {
-      case 'title1':
-        icon = 'ios-home-outline';
+      case 'Buy Post':
+        icon = 'cart-arrow-down';
         break;
-      case 'title2':
-        icon = 'settings-outline';
+      case 'Sell Post':
+        icon = 'cart-arrow-up';
         break;
     }
 
     return (
       <>
-        <Ionicons
+        <MCI
           name={icon}
           size={25}
-          color={routeName === selectedTab ? color.primary : 'gray'}
+          color={routeName === selectedTab ? color.primary : color.white}
         />
-        <Text>{routeName}</Text>
+        <Text
+          style={{
+            color: routeName === selectedTab ? color.primary : color.white,
+          }}>
+          {routeName}
+        </Text>
       </>
     );
   };
   const renderTabBar = ({routeName, selectedTab, navigate}) => {
     return (
       <TouchableOpacity
-        onPress={() => navigate(routeName)}
+        activeOpacity={0.8}
+        onPress={() => {
+          setCurrentRoute(routeName);
+          navigate(routeName);
+        }}
         style={styles.tabbarItem}>
         {_renderIcon(routeName, selectedTab)}
       </TouchableOpacity>
@@ -53,38 +67,46 @@ export default function TabNavigator() {
 
   return (
     <CurvedBottomBar.Navigator
-      type="UP"
+      type={'UP'}
       // style={styles.bottomBar}
-      screenOptions={{headerShown: false}}
+      screenOptions={{headerShown: false, lazy: true}}
       shadowStyle={styles.shawdow}
       height={55}
       circleWidth={50}
-      bgColor={color.white}
-      initialRouteName="title1"
+      bgColor={color.primaryBlue}
+      initialRouteName={currentRoute}
       borderTopLeftRight
       renderCircle={({selectedTab, navigate}) => (
         <Animated.View style={styles.btnCircleUp}>
           <TouchableOpacity
+            activeOpacity={0.8}
             style={styles.button}
-            onPress={() => navigate('title0')}>
-            <Ionicons name={'apps-sharp'} color="gray" size={25} />
+            onPress={() => {
+              setCurrentRoute('Dashboard');
+              navigate('Dashboard');
+            }}>
+            <Ionicons
+              name={'ios-home-outline'}
+              color={currentRoute === 'Dashboard' ? color.primary : color.white}
+              size={25}
+            />
           </TouchableOpacity>
         </Animated.View>
       )}
       tabBar={renderTabBar}>
       <CurvedBottomBar.Screen
-        name="title1"
-        position="LEFT"
-        component={() => <Dashboard />}
-      />
-      <CurvedBottomBar.Screen
-        name="title0"
-        component={() => <Screen2 />}
+        name="Dashboard"
         position="CIRCLE"
+        component={() => <Dashboard navigation={navigation} />}
       />
       <CurvedBottomBar.Screen
-        name="title2"
-        component={() => <Screen2 />}
+        name="Buy Post"
+        component={() => <BuyPost navigation={navigation} />}
+        position="LEFT"
+      />
+      <CurvedBottomBar.Screen
+        name="Sell Post"
+        component={() => <SellPost navigation={navigation} />}
         position="RIGHT"
       />
     </CurvedBottomBar.Navigator>
@@ -97,7 +119,7 @@ export const styles = StyleSheet.create({
     padding: 20,
   },
   shawdow: {
-    shadowColor: '#DDDDDD',
+    shadowColor: color.white,
     shadowOffset: {
       width: 0,
       height: 0,

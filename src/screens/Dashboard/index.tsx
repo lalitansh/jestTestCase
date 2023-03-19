@@ -2,16 +2,24 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {PostDetailType} from './postDetail';
 import CommonHeader from '../../components/common/Header/commonHeader';
-import {CommonStyles} from '../../components/common/styles/commonStyles';
+import {
+  CommonFontFamily,
+  CommonStyles,
+} from '../../components/common/styles/commonStyles';
 import {url} from '../../constants/apiConstant';
 import {callGetApi} from '../../network/api';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ProgressBarView from '../../components/ProgressBarView';
 import {color} from '../../constants/theme/Color';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
+import FA5 from 'react-native-vector-icons/FontAwesome5';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
 import {SwiperFlatList} from 'react-native-swiper-flatlist';
+import MarqueeText from 'react-native-marquee';
+import styles from './styles';
 
 import {
   Text,
@@ -28,7 +36,10 @@ import {image} from '../../constants/theme/Image';
 import style from '../../constants/theme/Style';
 import SkeletonEffect from '../../components/common/SkeletonComponent';
 import {screenHeight, screenWidth} from '../../constants/appConstant';
-import {sliderData} from '../../utils/data';
+import {RecentPostData, sliderData} from '../../utils/data';
+import CellComponent from '../../components/common/CellComponent';
+import BlinkingDot from '../../components/common/BlinkingDot';
+import LabelWithIcon from '../../components/common/LabelWithIcon';
 const {height} = Dimensions.get('window');
 
 export type PropType = {
@@ -43,13 +54,13 @@ const SliderBox = ({key, image}) => {
         width: screenWidth,
         borderRadius: 5,
         height: screenHeight / 4,
-        paddingHorizontal: 20,
+        // paddingHorizontal: 20,
       }}>
-      <ImageBackground
+      <Image
         key={`title${key}`}
         imageStyle={{borderRadius: 5}}
         resizeMode={'cover'}
-        style={{height: '100%', width: '100%'}}
+        style={{height: '100%', width: '100%', backgroundColor: 'green'}}
         source={image}
       />
     </View>
@@ -58,6 +69,7 @@ const SliderBox = ({key, image}) => {
 
 const Dashboard: React.FC<PropType> = props => {
   const {navigation} = props || {};
+  console.log('navigation--', navigation);
   const [isProgress, setIsProgress] = useState(false);
   const [posts, setPosts] = useState([]);
   const [errors, setErrors] = useState({});
@@ -73,7 +85,8 @@ const Dashboard: React.FC<PropType> = props => {
         setIsProgress(false);
         console.log('response in screen--', response);
         if (response.valid) {
-          setPosts(response.value);
+          const newArr = [...response.value].slice(0, 10);
+          setPosts(newArr);
         } else {
           if (response.value.errors) {
             setErrors(response.value.errors);
@@ -123,18 +136,82 @@ const Dashboard: React.FC<PropType> = props => {
       });
   };
 
+  const LatestNews = (
+    <>
+      <LabelWithIcon
+        iconComponent={
+          <Ionicons
+            name="megaphone-outline"
+            onPress={() => {}}
+            color={color.black}
+            size={32}
+          />
+        }
+        leftText="Latest News"
+        rightText="View all"
+      />
+      <FlatList
+        nestedScrollEnabled={true}
+        showsHorizontalScrollIndicator={false}
+        testID="FlatList1"
+        numColumns={2}
+        columnWrapperStyle={{
+          justifyContent: 'space-around',
+          paddingHorizontal: 8,
+        }}
+        contentContainerStyle={{
+          paddingBottom: 16,
+        }}
+        extraData={posts}
+        data={posts}
+        initialNumToRender={15}
+        keyExtractor={(item, i) => i.toString()}
+        renderItem={({item}) => {
+          const {id, location, image, title} = item || {};
+          return <ListComponent id={id} onPress={() => {}} title={title} />;
+        }}
+      />
+    </>
+  );
+
   return (
     <View style={[CommonStyles.mainContainer, CommonStyles.backWhite]}>
-      {/* <CommonHeader
-        title={'Dashboard'}
-        logOutIcon
-        onPressLogout={logOutConfirmation}
-      /> */}
+      <CommonHeader
+        title={'Polytrend'}
+        // logOutIcon
+        // onPressLogout={logOutConfirmation}
+        customRightComponent={
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <FA5
+              name="hand-holding-water"
+              onPress={() => {}}
+              color={color.white}
+              size={18}
+              style={{marginRight: 4}}
+            />
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => navigation.navigate('OilImports')}>
+              <Text style={styles.customRightText}>Oil-inr</Text>
+            </TouchableOpacity>
+          </View>
+        }
+        titleAlign="left"
+        drawerIcon
+        navigation={navigation}
+      />
+      <View
+        style={{height: 50, backgroundColor: color.primary, paddingLeft: 16}}>
+        <Text style={styles.textStyle1}>Home</Text>
+      </View>
+
+      {/* <BlinkingDot /> */}
 
       {isProgress ? (
         <SkeletonEffect />
       ) : (
         <KeyboardAwareScrollView
+          nestedScrollEnabled={true}
           enableOnAndroid
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={styles.container}
@@ -143,59 +220,139 @@ const Dashboard: React.FC<PropType> = props => {
             autoplay
             autoplayDelay={2.5}
             autoplayLoop
-            height={140}
             autoplayLoopKeepAnimation={true}
-            //index={2}
-            paginationStyle={{
-              height: 10,
-              width: 100,
-              backgroundColor: 'red',
-              color: 'green',
-            }}
-            paginationStyleItem={{height: 4, width: 4}}
-            showPagination
             data={sliderData}
             renderItem={({item, i}) => <SliderBox id={i} image={item.image} />}
           />
-          {/* <FlatList
+
+          <View style={{backgroundColor: color.black, paddingVertical: 12}}>
+            <MarqueeText
+              style={{fontSize: 18, color: color.white}}
+              speed={0.3}
+              marqueeOnStart={true}
+              loop={true}
+              delay={1000}>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry and typesetting industry.
+            </MarqueeText>
+          </View>
+          <View
+            style={{
+              backgroundColor: color.defaultBackGrey,
+              paddingBottom: 16,
+            }}>
+            <View style={styles.rowStyle}>
+              <CellComponent
+                // isGreenBack
+                isWhiteText
+                title={'Buyers'}
+                onPress={() => navigation.navigate('Buyers')}
+                customeStyle={{borderRadius: 5}}
+                iconComponent={
+                  <Ionicons
+                    name="enter-outline"
+                    onPress={() => {}}
+                    color={color.white}
+                    size={50}
+                  />
+                }
+              />
+              <CellComponent
+                // isGreenBack
+                isWhiteText
+                title={'Sellers'}
+                onPress={() => navigation.navigate('Sellers')}
+                customeStyle={{borderRadius: 5}}
+                iconComponent={
+                  <Ionicons
+                    name="exit-outline"
+                    onPress={() => {}}
+                    color={color.white}
+                    size={50}
+                  />
+                }
+              />
+            </View>
+            <View style={[styles.rowStyle, styles.marginTop12]}>
+              <CellComponent
+                isWhiteText
+                title={'Additives'}
+                onPress={() => Alert.alert('ok')}
+                customeStyle={{borderRadius: 5}}
+                iconComponent={
+                  <MCI
+                    name="bookmark-plus-outline"
+                    onPress={() => {}}
+                    color={color.white}
+                    size={50}
+                  />
+                }
+              />
+              <CellComponent
+                isWhiteText
+                title={'Job work'}
+                onPress={() => Alert.alert('ok')}
+                customeStyle={{borderRadius: 5}}
+                iconComponent={
+                  <MCI
+                    name="shopping-outline"
+                    onPress={() => {}}
+                    color={color.white}
+                    size={50}
+                  />
+                }
+              />
+            </View>
+          </View>
+          {LatestNews}
+
+          <LabelWithIcon
+            iconComponent={
+              <MCI
+                name="image-edit-outline"
+                onPress={() => {}}
+                color={color.black}
+                size={32}
+              />
+            }
+            customButtonParentStyle={{marginTop: 16}}
+            leftText="Recent Post"
+          />
+
+          <FlatList
+            nestedScrollEnabled={true}
+            showsHorizontalScrollIndicator={false}
             testID="FlatList1"
-            contentContainerStyle={{width: '100%', alignSelf: 'center'}}
-            extraData={posts}
-            data={posts}
+            contentContainerStyle={{
+              paddingBottom: 100,
+            }}
+            extraData={RecentPostData}
+            data={RecentPostData}
+            horizontal
             initialNumToRender={15}
             keyExtractor={(item, i) => i.toString()}
             renderItem={({item}) => {
-              const {
-                id,
-                body,
-                title,
-                avatar = 'https://dummyimage.com/300',
-              } = item || {};
+              const {id, location, image, stone} = item || {};
               return (
                 <TouchableOpacity
-                  onPress={() => onPressPost(item)}
-                  activeOpacity={0.7}
-                  style={styles.mainCard}>
-                  <View style={styles.subView}>
-                    <View style={styles.subView1}>
-                      <Image style={styles.imgStyles} source={image.userImg} />
+                  onPress={() => {}}
+                  activeOpacity={0.8}
+                  style={styles.mainCard2}>
+                  <ImageBackground
+                    source={image}
+                    resizeMode="stretch"
+                    style={styles.stoneView}>
+                    <View style={styles.stoneSubView}>
+                      <Text style={[styles.textStyle2]}>{stone}</Text>
+                      <Text style={[styles.textStyle2, {marginTop: 4}]}>
+                        {location}
+                      </Text>
                     </View>
-                  </View>
-                  <View style={styles.textView}>
-                    <Text style={styles.textStyle} numberOfLines={1}>
-                      {id}
-                    </Text>
-                    <Text style={styles.textStyle} numberOfLines={2}>
-                      {title}
-                    </Text>
-                  </View>
-                  <View style={styles.thirdView}>
-                    <Feather name="chevron-right" size={23} />
-                  </View>
+                  </ImageBackground>
                 </TouchableOpacity>
               );
             }}
-          /> */}
+          />
         </KeyboardAwareScrollView>
       )}
 
@@ -204,114 +361,31 @@ const Dashboard: React.FC<PropType> = props => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    paddingBottom: 30,
-    backgroundColor: color.white,
-  },
-  mainCard: {
-    flexDirection: 'row',
-    height: 80,
-    width: '100%',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    alignItems: 'center',
-    // padding: 25
-    backgroundColor: color.primaryMiddle,
-    margin: 0.7,
-    // borderRadius: 5,
-    // justifyContent: 'space-between',
-    alignSelf: 'center',
-  },
-  mainCard1: {
-    justifyContent: 'center',
-    marginRight: 20,
-    alignItems: 'center',
-  },
-  subView: {
-    flex: 0.2,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    paddingLeft: 8,
-    backgroundColor: color.primaryMiddle,
-  },
-  imgStyles: {
-    height: '70%',
-    width: '80%',
-  },
-  textView: {
-    flex: 0.7,
-    // width: '50%',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    backgroundColor: color.primaryMiddle,
-    justifyContent: 'space-around',
-    paddingVertical: 5,
-    paddingRight: 20,
-    paddingLeft: 10,
-  },
-  textView1: {
-    width: '100%',
-    alignItems: 'center',
-    backgroundColor: color.primaryMiddle,
-    justifyContent: 'center',
-    height: 45,
-    borderRadius: 10,
-    paddingHorizontal: 20,
-  },
-  textStyle: {
-    color: color.black,
-    fontWeight: 'bold',
-    fontSize: 15,
-  },
-  textStyle1: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 15,
-    alignItems: 'center',
-  },
-  buttonStyle: {
-    position: 'absolute',
-    height: 60,
-    width: 60,
-    borderRadius: 30,
-    borderColor: 'black',
-    borderWidth: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    bottom: 50,
-    right: 30,
-    backgroundColor: 'white',
-    elevation: 2,
-
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-  },
-  subView1: {
-    height: 66,
-    width: 66,
-    borderRadius: 33,
-    backgroundColor: color.primaryOff,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  thirdView: {
-    flex: 0.1,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
-});
-
 export default Dashboard;
+
+const ListComponent = props => {
+  const {
+    id,
+    body,
+    title,
+    avatar = 'https://dummyimage.com/300',
+    onPress,
+  } = props || {};
+  return (
+    <TouchableOpacity
+      onPress={() => {}}
+      activeOpacity={0.8}
+      style={[styles.mainCard2, {marginLeft: 0}]}>
+      <ImageBackground
+        source={image.splash}
+        resizeMode="stretch"
+        style={styles.stoneView1}>
+        <View style={styles.stoneSubView1}>
+          <Text numberOfLines={2} style={[styles.textStyle2, {marginTop: 4}]}>
+            {title}
+          </Text>
+        </View>
+      </ImageBackground>
+    </TouchableOpacity>
+  );
+};

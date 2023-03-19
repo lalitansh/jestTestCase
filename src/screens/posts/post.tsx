@@ -125,8 +125,8 @@ const Posts: React.FC<PropType> = props => {
             } = item || {};
             return (
               <TouchableOpacity
+                activeOpacity={0.8}
                 onPress={() => onPressPost(item)}
-                activeOpacity={0.7}
                 style={styles.mainCard}>
                 <View style={styles.subView}>
                   <View style={styles.subView1}>
