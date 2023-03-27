@@ -8,25 +8,18 @@ import BuyPost from '../BuyPost';
 import Dashboard from '../Dashboard';
 import SellPost from '../SellPost';
 
-const Screen1 = () => {
-  return (
-    <View style={styles.screen1}>
-      <Text>Hello </Text>
-    </View>
-  );
-};
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-const Screen2 = () => {
-  return <View style={styles.screen2} />;
-};
+const Tab = createBottomTabNavigator();
 
-export default function TabNavigator(props) {
-  const {navigation} = props;
-  const [currentRoute, setCurrentRoute] = useState('Dashboard');
+function MyTabBar({state, descriptors, navigation}) {
   const _renderIcon = (routeName, selectedTab) => {
     let icon = '';
 
     switch (routeName) {
+      case 'Dashboard':
+        icon = 'home-outline';
+        break;
       case 'Buy Post':
         icon = 'cart-arrow-down';
         break;
@@ -39,7 +32,104 @@ export default function TabNavigator(props) {
       <>
         <MCI
           name={icon}
-          size={25}
+          size={routeName === 'Dashboard' ? 32 : 28}
+          color={routeName === selectedTab ? color.primary : color.black}
+        />
+        {/* <Text
+          style={{
+            color: routeName === selectedTab ? color.primary : color.black,
+          }}>
+          {routeName}
+        </Text> */}
+      </>
+    );
+  };
+
+  return (
+    <View style={[styles.cardElevation, {flexDirection: 'row'}]}>
+      {state.routes.map((route, index) => {
+        const {options} = descriptors[route.key];
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+            ? options.title
+            : route.name;
+
+        const isFocused = state.index === index;
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+            canPreventDefault: true,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            // The `merge: true` option makes sure that the params inside the tab screen are preserved
+            navigation.navigate({name: route.name, merge: true});
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
+
+        return (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityState={isFocused ? {selected: true} : {}}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={styles.bottomBar}>
+            {_renderIcon(route.name, isFocused)}
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
+
+export default function MyTabs() {
+  return (
+    <Tab.Navigator
+      screenOptions={{headerShown: false}}
+      tabBar={props => <MyTabBar {...props} />}>
+      <Tab.Screen name="Dashboard" component={Dashboard} />
+      <Tab.Screen name="Buy Post" component={BuyPost} />
+      <Tab.Screen name="Sell Post" component={SellPost} />
+    </Tab.Navigator>
+  );
+}
+
+function TabNavigator(props) {
+  const {navigation} = props;
+  const [currentRoute, setCurrentRoute] = useState('Dashboard');
+  const _renderIcon = (routeName, selectedTab) => {
+    let icon = '';
+
+    switch (routeName) {
+      case 'Dashboard':
+        icon = 'home-outline';
+        break;
+      case 'Buy Post':
+        icon = 'cart-arrow-down';
+        break;
+      case 'Sell Post':
+        icon = 'cart-arrow-up';
+        break;
+    }
+
+    return (
+      <>
+        <MCI
+          name={icon}
+          size={30}
           color={routeName === selectedTab ? color.primary : color.white}
         />
         <Text
@@ -131,7 +221,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  bottomBar: {},
+  bottomBar: {justifyContent: 'center', alignItems: 'center', flex: 1},
   btnCircleUp: {
     width: 60,
     height: 60,
@@ -170,5 +260,19 @@ export const styles = StyleSheet.create({
   screen2: {
     flex: 1,
     backgroundColor: '#FFEBCD',
+  },
+  cardElevation: {
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    backgroundColor: color.white,
+    height: 50,
+    borderTopWidth: 2,
+    borderTopColor: color.defaultBackGrey,
   },
 });

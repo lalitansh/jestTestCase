@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingBottom: 30,
+    backgroundColor: color.white,
   },
   text1: {
     alignItems: 'center',

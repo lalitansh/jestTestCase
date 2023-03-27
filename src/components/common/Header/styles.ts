@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === 'android' ? getStatusBarHeight() : undefined,
     // justifyContent: 'space-between',
     alignItems: 'flex-start',
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
   view1: {
     flex: 0.2,
