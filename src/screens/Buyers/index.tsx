@@ -20,9 +20,9 @@ const Buyers: React.FC<PropType> = props => {
   const {navigation = {}} = props || {};
 
   return (
-    <ScrollView
-      contentContainerStyle={{
-        flexGrow: 1,
+    <View
+      style={{
+        flex: 1,
         backgroundColor: color.defaultBackGrey,
       }}>
       <CommonHeader
@@ -40,7 +40,11 @@ const Buyers: React.FC<PropType> = props => {
           //horizontal={false}
           data={SellerData}
           //horizontal={true}
-          contentContainerStyle={{paddingBottom: 100, marginTop: 20}}
+          contentContainerStyle={{
+            paddingBottom: 200,
+            marginTop: 20,
+            flexGrow: 1,
+          }}
           renderItem={({item, index}) => {
             return (
               <CardOne
@@ -52,7 +56,7 @@ const Buyers: React.FC<PropType> = props => {
           }}
         />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

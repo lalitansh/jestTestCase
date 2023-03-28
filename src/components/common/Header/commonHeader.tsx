@@ -113,8 +113,8 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
       ) : (
         <View
           style={[styles.mainView1, backgroundClean ? styles.backClean : null]}>
-          <View style={styles.view1}>{backOperation()}</View>
-          <View style={[styles.view2, styles.marginTop8]}>
+          <View style={{}}>{backOperation()}</View>
+          <View style={[styles.marginTop8]}>
             <Text
               style={[
                 styles.textStyle1,

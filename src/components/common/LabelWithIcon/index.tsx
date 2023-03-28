@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   buttonParentView: {
     width: '100%',
     flexDirection: 'row',
-    backgroundColor: color.themeGrey,
+    backgroundColor: color.white,
     paddingVertical: 4,
   },
   buttonStyle: {
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     // padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: color.themeGrey,
+    backgroundColor: color.black,
     borderRadius: 10,
     alignSelf: 'center',
     // height: '100%',
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
 
   textColor: {
-    color: color.white,
+    color: color.black,
     fontSize: 14,
     fontWeight: 'bold',
   },
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     backgroundColor: color.red,
   },
   buttonTextStyle: {
-    ...CommonFontFamily.semibold,
-    color: color.blackTransparent,
+    ...CommonFontFamily.regular,
+    color: color.black,
     fontWeight: '500',
     fontSize: 20,
     marginLeft: 8,

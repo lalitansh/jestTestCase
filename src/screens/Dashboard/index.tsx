@@ -51,16 +51,17 @@ const SliderBox = ({key, image}) => {
   return (
     <View
       style={{
-        width: screenWidth,
+        width: screenWidth / 1.2,
         borderRadius: 5,
-        height: screenHeight / 4,
+        height: screenHeight / 4.5,
+        marginHorizontal: 14,
         // paddingHorizontal: 20,
       }}>
       <Image
         key={`title${key}`}
         imageStyle={{borderRadius: 5}}
         resizeMode={'cover'}
-        style={{height: '100%', width: '100%', backgroundColor: 'green'}}
+        style={{height: '100%', width: '100%'}}
         source={image}
       />
     </View>
@@ -139,14 +140,14 @@ const Dashboard: React.FC<PropType> = props => {
   const LatestNews = (
     <>
       <LabelWithIcon
-        iconComponent={
-          <Ionicons
-            name="megaphone-outline"
-            onPress={() => {}}
-            color={color.black}
-            size={32}
-          />
-        }
+        // iconComponent={
+        //   <Ionicons
+        //     name="megaphone-outline"
+        //     onPress={() => {}}
+        //     color={color.black}
+        //     size={32}
+        //   />
+        // }
         leftText="Latest News"
         rightText="View all"
       />
@@ -154,13 +155,15 @@ const Dashboard: React.FC<PropType> = props => {
         nestedScrollEnabled={true}
         showsHorizontalScrollIndicator={false}
         testID="FlatList1"
-        numColumns={2}
-        columnWrapperStyle={{
-          justifyContent: 'space-around',
-          paddingHorizontal: 8,
-        }}
+        horizontal
+        // numColumns={2}
+        // columnWrapperStyle={{
+        //   justifyContent: 'space-around',
+        //   paddingHorizontal: 8,
+        // }}
         contentContainerStyle={{
           paddingBottom: 16,
+          paddingLeft: 16,
         }}
         extraData={posts}
         data={posts}
@@ -168,7 +171,11 @@ const Dashboard: React.FC<PropType> = props => {
         keyExtractor={(item, i) => i.toString()}
         renderItem={({item}) => {
           const {id, location, image, title} = item || {};
-          return <ListComponent id={id} onPress={() => {}} title={title} />;
+          return (
+            <View style={{paddingRight: 16}}>
+              <ListComponent id={id} onPress={() => {}} title={title} />
+            </View>
+          );
         }}
       />
     </>
@@ -216,15 +223,6 @@ const Dashboard: React.FC<PropType> = props => {
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={styles.container}
           testID="KeyboardAwareScrollView2">
-          <SwiperFlatList
-            autoplay
-            autoplayDelay={2.5}
-            autoplayLoop
-            autoplayLoopKeepAnimation={true}
-            data={sliderData}
-            renderItem={({item, i}) => <SliderBox id={i} image={item.image} />}
-          />
-
           <View style={{backgroundColor: color.black, paddingVertical: 12}}>
             <MarqueeText
               style={{fontSize: 18, color: color.white}}
@@ -236,6 +234,15 @@ const Dashboard: React.FC<PropType> = props => {
               industry and typesetting industry.
             </MarqueeText>
           </View>
+          <SwiperFlatList
+            autoplay
+            autoplayDelay={2.5}
+            autoplayLoop
+            autoplayLoopKeepAnimation={true}
+            data={sliderData}
+            renderItem={({item, i}) => <SliderBox id={i} image={item.image} />}
+          />
+
           <View
             style={{
               backgroundColor: color.defaultBackGrey,
@@ -244,61 +251,59 @@ const Dashboard: React.FC<PropType> = props => {
             <View style={styles.rowStyle}>
               <CellComponent
                 // isGreenBack
-                isWhiteText
+                // isWhiteText
                 title={'Buyers'}
                 onPress={() => navigation.navigate('Buyers')}
-                customeStyle={{borderRadius: 5}}
                 iconComponent={
                   <Ionicons
                     name="enter-outline"
                     onPress={() => {}}
-                    color={color.white}
-                    size={50}
+                    color={color.black}
+                    size={25}
                   />
                 }
               />
               <CellComponent
                 // isGreenBack
-                isWhiteText
+                // isWhiteText
                 title={'Sellers'}
                 onPress={() => navigation.navigate('Sellers')}
-                customeStyle={{borderRadius: 5}}
                 iconComponent={
                   <Ionicons
                     name="exit-outline"
                     onPress={() => {}}
-                    color={color.white}
-                    size={50}
+                    color={color.black}
+                    size={25}
                   />
                 }
               />
             </View>
             <View style={[styles.rowStyle, styles.marginTop12]}>
               <CellComponent
-                isWhiteText
+                // isWhiteText
                 title={'Additives'}
                 onPress={() => Alert.alert('ok')}
-                customeStyle={{borderRadius: 5}}
+                // customeStyle={{borderRadius: 5}}
                 iconComponent={
                   <MCI
                     name="bookmark-plus-outline"
                     onPress={() => {}}
-                    color={color.white}
-                    size={50}
+                    color={color.black}
+                    size={25}
                   />
                 }
               />
               <CellComponent
-                isWhiteText
+                // isWhiteText
                 title={'Job work'}
                 onPress={() => Alert.alert('ok')}
-                customeStyle={{borderRadius: 5}}
+                // customeStyle={{borderRadius: 5}}
                 iconComponent={
                   <MCI
                     name="shopping-outline"
                     onPress={() => {}}
-                    color={color.white}
-                    size={50}
+                    color={color.black}
+                    size={25}
                   />
                 }
               />

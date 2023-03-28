@@ -33,7 +33,7 @@ const CardOne = props => {
     <View
       style={[
         styles.container,
-        styles.marginTop10,
+        //styles.marginTop10,
         styles.marginBottom16,
         styles.cardElevation,
       ]}>
@@ -112,18 +112,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   cardElevation: {
-    elevation: 2,
+    elevation: 0.2,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
     backgroundColor: color.white,
-    marginHorizontal: 16,
+    // marginHorizontal: 16,
     paddingBottom: 16,
-    borderRadius: 16,
+    // borderRadius: 16,
+    paddingHorizontal: 8,
   },
   imgStyle: {
     backgroundColor: 'white',
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     flex: 0.1,
   },
   firstPart: {
-    flex: 0.4,
+    flex: 0.3,
     width: '100%',
     // borderRadius:100,
 
