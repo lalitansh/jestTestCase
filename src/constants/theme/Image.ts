@@ -1,6 +1,8 @@
 const image = {
   demoImage: require('../../assets/image/demoImage.jpg'),
   splash: require('../../assets/image/splash.png'),
+  whiteDesign1: require('../../assets/image/whiteDesign1.jpg'),
+  whiteDesign2: require('../../assets/image/whiteDesign2.jpg'),
   //   back: require('../../../assets/image/back.png'),
   //   upload_image: require('../../../assets/image/upload-document.png'),
   //   cancel: require('../../../assets/image/cancel.png'),

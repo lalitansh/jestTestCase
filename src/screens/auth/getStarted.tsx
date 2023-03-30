@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, Image, TouchableOpacity, StatusBar} from 'react-native';
 import style from '../../constants/theme/Style';
 import {color} from '../../constants/theme/Color';
 import {image} from '../../constants/theme/Image';
@@ -37,8 +37,15 @@ export default class GetStarted extends React.Component {
   };
 
   render() {
+    const {navigation} = this.props;
     return (
+      
       <View style={{flex: 1, backgroundColor: color.white}}>
+        <StatusBar
+          // barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          translucent={true}
+          backgroundColor={color.transparent}
+        />
         <View style={{height: '45%', width: '100%'}}>
           <Image
             style={{height: '100%', width: '100%'}}
@@ -68,7 +75,7 @@ export default class GetStarted extends React.Component {
         <View style={{marginTop: 48, marginLeft: 20, marginRight: 20}}>
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={this._onPhoneNumberPressed.bind(this)}
+            onPress={()=> navigation.navigate('OtpMpin')}
             style={style.defaultButton}>
             <Text style={[style.buttonTitle]}>Sign In</Text>
           </TouchableOpacity>

@@ -1,5 +1,5 @@
 const color = {
-  primary: '#6887ff', //'#167351',
+  primary: '#7f95e8',//'#6887ff', //'#167351',
   primaryDark: '#5f80ff',
   primaryOff: '#b9c7fe',
   primaryMiddle: '#809aff',
@@ -19,6 +19,11 @@ const color = {
   themeGrey: '#cecece', //disabled button
   defaultBackGrey: '#f2f2f2',
   dullPlaceholder: '#ACACAC',
+  CornSilk: "	#FFF8DC",
+  LightGolder: "#FAFAD2",
+  GhostWhite: "#F8F8FF",
+  LemonChiffon: "#FFFACD",
+  AntiqueWhite: "#FAEBD7"
 };
 
 export {color};

@@ -40,6 +40,7 @@ import {RecentPostData, sliderData} from '../../utils/data';
 import CellComponent from '../../components/common/CellComponent';
 import BlinkingDot from '../../components/common/BlinkingDot';
 import LabelWithIcon from '../../components/common/LabelWithIcon';
+import { getRandomItem } from '../../utils/functions/getters';
 const {height} = Dimensions.get('window');
 
 export type PropType = {
@@ -73,6 +74,8 @@ const Dashboard: React.FC<PropType> = props => {
   const [isProgress, setIsProgress] = useState(false);
   const [posts, setPosts] = useState([]);
   const [errors, setErrors] = useState({});
+
+  const lightColors = [color.AntiqueWhite, color.CornSilk, color.LemonChiffon, color.LightGolder]
 
   useEffect(() => {
     getAllPosts();
@@ -238,36 +241,36 @@ const Dashboard: React.FC<PropType> = props => {
           </View>
           <View
             style={{
-              backgroundColor: color.defaultBackGrey,
+              backgroundColor: color.white,
               paddingBottom: 16,
             }}>
             <View style={styles.rowStyle}>
               <CellComponent
                 // isGreenBack
-                isWhiteText
+                // isWhiteText
                 title={'Buyers'}
                 onPress={() => navigation.navigate('Buyers')}
-                customeStyle={{borderRadius: 5}}
+                customeStyle={{borderRadius: 5, backgroundColor: getRandomItem(lightColors)}}
                 iconComponent={
                   <Ionicons
                     name="enter-outline"
                     onPress={() => {}}
-                    color={color.white}
+                    color={color.subtile}
                     size={50}
                   />
                 }
               />
               <CellComponent
                 // isGreenBack
-                isWhiteText
+                // isWhiteText
                 title={'Sellers'}
                 onPress={() => navigation.navigate('Sellers')}
-                customeStyle={{borderRadius: 5}}
+                customeStyle={{borderRadius: 5, backgroundColor: getRandomItem(lightColors)}}
                 iconComponent={
                   <Ionicons
                     name="exit-outline"
                     onPress={() => {}}
-                    color={color.white}
+                    color={color.subtile}
                     size={50}
                   />
                 }
@@ -275,29 +278,29 @@ const Dashboard: React.FC<PropType> = props => {
             </View>
             <View style={[styles.rowStyle, styles.marginTop12]}>
               <CellComponent
-                isWhiteText
+                // isWhiteText
                 title={'Additives'}
                 onPress={() => Alert.alert('ok')}
-                customeStyle={{borderRadius: 5}}
+                customeStyle={{borderRadius: 5, backgroundColor: getRandomItem(lightColors)}}
                 iconComponent={
                   <MCI
                     name="bookmark-plus-outline"
                     onPress={() => {}}
-                    color={color.white}
+                    color={color.subtile}
                     size={50}
                   />
                 }
               />
               <CellComponent
-                isWhiteText
+                // isWhiteText
                 title={'Job work'}
                 onPress={() => Alert.alert('ok')}
-                customeStyle={{borderRadius: 5}}
+                customeStyle={{borderRadius: 5, backgroundColor: getRandomItem(lightColors)}}
                 iconComponent={
                   <MCI
                     name="shopping-outline"
                     onPress={() => {}}
-                    color={color.white}
+                    color={color.subtile}
                     size={50}
                   />
                 }

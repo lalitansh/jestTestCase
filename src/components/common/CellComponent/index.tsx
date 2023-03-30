@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {color} from '../../../constants/theme/Color';
+import { getRandomItem } from '../../../utils/functions/getters';
 import {CommonFontFamily} from '../styles/commonStyles';
 
 type propsType = {
@@ -28,6 +29,7 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
     buttonRef,
     iconComponent,
   } = props;
+
   return (
     <View style={[styles.buttonParentView, customButtonParentStyle]}>
       <TouchableOpacity
@@ -44,7 +46,7 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
         }
         onPress={onPress}>
         <LinearGradient
-          colors={[color.primaryOff, color.primaryMiddle, color.primary]}
+          colors={[color.transparent, color.transparent]}
           // start={{x: 0, y: 1}}
           // end={{x: 1, y: 1}}
           style={[styles.buttonStyle, customeStyle]}>
@@ -67,14 +69,14 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
 
 const styles = StyleSheet.create({
   buttonParentView: {
-    width: '47%',
+    width: '49%',
     // alignSelf: 'center',
     // padding: 1.5,
     elevation: 5,
     // justifyContent: 'center',
   },
   buttonStyle: {
-    width: '95%',
+    width: '97%',
     // padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
