@@ -38,7 +38,6 @@ const ProductCard = props => {
         onPress={onPressImage}
         style={{
           flex: 0.3,
-
           width: '100%',
           // borderRadius:100,
           backgroundColor: color.primaryBlue,

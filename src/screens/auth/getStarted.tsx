@@ -1,5 +1,16 @@
 import React from 'react';
+<<<<<<< HEAD
 import {StyleSheet, View, Text, Image, TouchableOpacity, StatusBar} from 'react-native';
+=======
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StatusBar,
+} from 'react-native';
+>>>>>>> eace942672974fefe3c0f52a420c50b4d966ec76
 import style from '../../constants/theme/Style';
 import {color} from '../../constants/theme/Color';
 import {image} from '../../constants/theme/Image';
@@ -43,7 +54,11 @@ export default class GetStarted extends React.Component {
       <View style={{flex: 1, backgroundColor: color.white}}>
         <StatusBar
           // barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+<<<<<<< HEAD
           translucent={true}
+=======
+          // translucent={true}
+>>>>>>> eace942672974fefe3c0f52a420c50b4d966ec76
           backgroundColor={color.transparent}
         />
         <View style={{height: '45%', width: '100%'}}>
@@ -75,7 +90,11 @@ export default class GetStarted extends React.Component {
         <View style={{marginTop: 48, marginLeft: 20, marginRight: 20}}>
           <TouchableOpacity
             activeOpacity={0.8}
+<<<<<<< HEAD
             onPress={()=> navigation.navigate('OtpMpin')}
+=======
+            onPress={() => navigation.navigate('OtpMpin')}
+>>>>>>> eace942672974fefe3c0f52a420c50b4d966ec76
             style={style.defaultButton}>
             <Text style={[style.buttonTitle]}>Sign In</Text>
           </TouchableOpacity>

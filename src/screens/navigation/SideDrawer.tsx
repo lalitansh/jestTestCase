@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
-    backgroundColor: color.black,
+    backgroundColor: color.white,
   },
   flex1: {
     flex: 1,

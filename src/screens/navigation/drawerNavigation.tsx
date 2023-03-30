@@ -27,7 +27,6 @@ export default function DrawerDemo() {
   return (
     <Drawer.Navigator
       screenOptions={{
-        drawerType: 'slide',
         headerShown: false,
       }}
       drawerContent={props => <SideDrawer {...props} />}>

@@ -45,13 +45,25 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
           ]
         }
         onPress={onPress}>
+<<<<<<< HEAD
         <LinearGradient
           colors={[color.transparent, color.transparent]}
+=======
+        <View
+          // colors={[color.primaryOff, color.primaryMiddle, color.primary]}
+>>>>>>> eace942672974fefe3c0f52a420c50b4d966ec76
           // start={{x: 0, y: 1}}
           // end={{x: 1, y: 1}}
-          style={[styles.buttonStyle, customeStyle]}>
-          <View style={{paddingVertical: 5}}>{iconComponent}</View>
-          <View>
+          style={[styles.rowStyle, styles.buttonStyle, customeStyle]}>
+          <View
+            style={{
+              flex: 0.3,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            {iconComponent}
+          </View>
+          <View style={{flex: 0.7}}>
             <Text
               style={[
                 styles.buttonTextStyle,
@@ -61,7 +73,7 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
               {title}
             </Text>
           </View>
-        </LinearGradient>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -69,20 +81,34 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
 
 const styles = StyleSheet.create({
   buttonParentView: {
+<<<<<<< HEAD
     width: '49%',
+=======
+    width: '50%',
+    paddingHorizontal: 14,
+>>>>>>> eace942672974fefe3c0f52a420c50b4d966ec76
     // alignSelf: 'center',
     // padding: 1.5,
-    elevation: 5,
+    //elevation: 5,
     // justifyContent: 'center',
   },
+  rowStyle: {
+    flexDirection: 'row',
+  },
   buttonStyle: {
+<<<<<<< HEAD
     width: '97%',
+=======
+    width: '100%',
+>>>>>>> eace942672974fefe3c0f52a420c50b4d966ec76
     // padding: 10,
-    justifyContent: 'center',
+    // justifyContent: ,
     alignItems: 'center',
-    backgroundColor: color.themeGrey,
-    borderRadius: 10,
-    alignSelf: 'center',
+    backgroundColor: color.white,
+    borderRadius: 50,
+    // alignSelf: 'center',
+    paddingVertical: 10,
+    elevation: 2,
     // height: '100%',
   },
   ButtonStyle: {
@@ -112,7 +138,8 @@ const styles = StyleSheet.create({
     ...CommonFontFamily.regular,
     color: color.subtile,
     fontWeight: '500',
-    fontSize: 20,
+    fontSize: 18,
+    // paddingLeft: 16,
   },
 });
 

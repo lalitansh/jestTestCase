@@ -10,6 +10,7 @@ import {
 import MI from 'react-native-vector-icons/MaterialIcons';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import ProductCard from '../../components/common/ProductCard';
+import CardOne from '../../components/common/Card/CardOne';
 import {color} from '../../constants/theme/Color';
 import {image} from '../../constants/theme/Image';
 import {SellerData} from '../../utils/data';
@@ -19,8 +20,11 @@ const Buyers: React.FC<PropType> = props => {
   const {navigation = {}} = props || {};
 
   return (
-    <ScrollView
-      contentContainerStyle={{flexGrow: 1, backgroundColor: color.white}}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: color.defaultBackGrey,
+      }}>
       <CommonHeader
         backIcon
         title="Buyers"
@@ -36,10 +40,14 @@ const Buyers: React.FC<PropType> = props => {
           //horizontal={false}
           data={SellerData}
           //horizontal={true}
-          contentContainerStyle={{paddingBottom: 100}}
+          contentContainerStyle={{
+            paddingBottom: 200,
+            marginTop: 20,
+            flexGrow: 1,
+          }}
           renderItem={({item, index}) => {
             return (
-              <ProductCard
+              <CardOne
                 navigation={navigation}
                 // onPressImage = {()=> this.props.navigation.navigate("AstroItemDetails", {item : item})}
                 item={item}
@@ -48,7 +56,7 @@ const Buyers: React.FC<PropType> = props => {
           }}
         />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
