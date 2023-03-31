@@ -3,19 +3,19 @@ import {image} from '../constants/theme/Image';
 const sliderData = [
   {
     id: 1,
-    image: image.splash,
+    image: image.Granules3,
   },
   {
     id: 2,
-    image: image.splash,
+    image: image.Granules1,
   },
   {
     id: 3,
-    image: image.splash,
+    image: image.Granules2,
   },
   {
     id: 3,
-    image: image.splash,
+    image: image.Granules3,
   },
   {
     id: 5,
@@ -26,19 +26,19 @@ const sliderData = [
 const RecentPostData = [
   {
     id: 1,
-    image: image.splash,
+    image: image.Granules1,
     location: 'Mumbai',
     stone: 'PP - GRANULES',
   },
   {
     id: 2,
-    image: image.splash,
+    image: image.Granules2,
     location: 'Morvi',
     stone: 'PET - SCRAP',
   },
   {
     id: 3,
-    image: image.splash,
+    image: image.Granules3,
     location: 'Jodhpur',
     stone: 'PBT - GRANULES',
   },
@@ -50,7 +50,7 @@ const RecentPostData = [
   },
   {
     id: 5,
-    image: image.splash,
+    image: image.Granules3,
     location: 'Ahmedabad',
     stone: 'PP - GRANULES',
   },

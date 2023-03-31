@@ -15,6 +15,9 @@ import DrawerDemo from './navigation/drawerNavigation';
 import OilImports from './OilImports';
 import Sellers from './Sellers';
 import Buyers from './Buyers';
+import UserProfile from './Form/FormOne';
+import BuyPost from './BuyPost';
+import JobPost from './Form/FormThree';
 
 const Stack = createStackNavigator();
 export const navigationRef = React.createRef();
@@ -53,6 +56,9 @@ const Container: React.FC<PropType> = props => {
         <Stack.Screen name="OilImports" component={OilImports} />
         <Stack.Screen name="Sellers" component={Sellers} />
         <Stack.Screen name="Buyers" component={Buyers} />
+        <Stack.Screen name="Profile" component={UserProfile} />
+        <Stack.Screen name="Buy Post" component={BuyPost} />
+        <Stack.Screen name="Job Post" component={JobPost} />
         {/* {!user ? (
           <Stack.Screen name="Login" component={Login} />
         ) : (

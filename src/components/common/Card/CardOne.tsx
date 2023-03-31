@@ -8,11 +8,7 @@ import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
-import MI from 'react-native-vector-icons/MaterialIcons';
-import CommonHeader from '../Header/commonHeader';
 import {color} from '../../../constants/theme/Color';
-import {image} from '../../../constants/theme/Image';
-import {SellerData} from '../../../utils/data';
 import {CommonFontFamily} from '../styles/commonStyles';
 
 const CardOne = props => {

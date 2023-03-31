@@ -14,6 +14,7 @@ import {
   CommonActions,
   StackActions,
   DrawerActions,
+  useNavigation,
 } from '@react-navigation/native';
 import {
   DrawerContentScrollView,
@@ -27,6 +28,11 @@ import {image} from '../../constants/theme/Image';
 import {CommonFontFamily} from '../../components/common/styles/commonStyles';
 
 const DrawerContent = props => {
+  const verifyAndNavigate = screen => {
+    props.navigation.toggleDrawer();
+    props.navigation.navigate(screen);
+  };
+
   return (
     <ImageBackground style={styles.container}>
       <DrawerContentScrollView showsVerticalScrollIndicator={false} {...props}>
@@ -34,7 +40,7 @@ const DrawerContent = props => {
           <View style={styles.userInfo}>
             <View style={styles.rowDirection}>
               <TouchableNativeFeedback
-                onPress={() => props.navigation.navigate('Profile')}>
+                onPress={() => verifyAndNavigate('Profile')}>
                 <Image style={styles.normalImage} source={image.splash} />
               </TouchableNativeFeedback>
 
@@ -60,9 +66,9 @@ const DrawerContent = props => {
               )}
               labelStyle={styles.labelStyle}
               inactiveTintColor="white"
-              label="Home"
+              label="Profile"
               onPress={() => {
-                //  props.navigation.navigate('DrawerIndex');
+                verifyAndNavigate('Profile');
               }}
             />
 

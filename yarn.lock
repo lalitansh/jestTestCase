@@ -1157,9 +1157,9 @@
   "version" "1.0.0"
 
 "@firebase/app@0.x":
-  "integrity" "sha512-mXO9hrygxCohD8Qy0z8p9ZtuQirmjkjSTuQghH05/kLG1UJqP0TQZBlhP5qwzMTKuu2YpIn3kX2PZoSWti8LDA=="
-  "resolved" "https://registry.npmjs.org/@firebase/app/-/app-0.9.5.tgz"
-  "version" "0.9.5"
+  "integrity" "sha512-gE9j59beal/H6cCAxibluUTUqjRRebJQxX39AV7nSt8OYyDmCrC50HyzOYRM7P6YGhIpCt3j719kboexko40cA=="
+  "resolved" "https://registry.npmjs.org/@firebase/app/-/app-0.9.6.tgz"
+  "version" "0.9.6"
   dependencies:
     "@firebase/component" "0.6.4"
     "@firebase/logger" "0.4.0"
@@ -1826,7 +1826,7 @@
   "resolved" "https://registry.npmjs.org/@react-native/assets/-/assets-1.0.0.tgz"
   "version" "1.0.0"
 
-"@react-native/normalize-color@^2.0.0", "@react-native/normalize-color@2.0.0":
+"@react-native/normalize-color@*", "@react-native/normalize-color@^2.0.0", "@react-native/normalize-color@2.0.0":
   "integrity" "sha512-Wip/xsc5lw8vsBlmY2MO/gFLp3MvuZ2baBZjDeTjjndMgM0h5sxz7AZR62RDPGgstp8Np7JzjvVqVT7tpFZqsw=="
   "resolved" "https://registry.npmjs.org/@react-native/normalize-color/-/normalize-color-2.0.0.tgz"
   "version" "2.0.0"
@@ -1940,6 +1940,13 @@
   "version" "6.0.1"
   dependencies:
     "@sinonjs/commons" "^1.7.0"
+
+"@softmedialab/react-native-material-textfield@^0.16.24":
+  "integrity" "sha512-c2kFmlVR3NZY+sCy2bj1p1mpYA+j837xX/JVcd0o+0hfOBCObSPb2J+NKcVFaQISU5BdKSvm1Jgh/vq/+MzAhw=="
+  "resolved" "https://registry.npmjs.org/@softmedialab/react-native-material-textfield/-/react-native-material-textfield-0.16.24.tgz"
+  "version" "0.16.24"
+  dependencies:
+    "prop-types" "^15.5.9"
 
 "@testing-library/jest-native@^5.1.0":
   "integrity" "sha512-SV7+wcUWXeAV0EGxbDqMizgI7mi2L94iCvx/b9GUS87lxwt9U94CO7vEWiAu6sSPH8aEl0XYMjj+utTrTPtE+A=="
@@ -3486,6 +3493,15 @@
   "resolved" "https://registry.npmjs.org/depd/-/depd-2.0.0.tgz"
   "version" "2.0.0"
 
+"deprecated-react-native-prop-types@^2.3.0":
+  "integrity" "sha512-pWD0voFtNYxrVqvBMYf5gq3NA2GCpfodS1yNynTPc93AYA/KEMGeWDqqeUB6R2Z9ZofVhks2aeJXiuQqKNpesA=="
+  "resolved" "https://registry.npmjs.org/deprecated-react-native-prop-types/-/deprecated-react-native-prop-types-2.3.0.tgz"
+  "version" "2.3.0"
+  dependencies:
+    "@react-native/normalize-color" "*"
+    "invariant" "*"
+    "prop-types" "*"
+
 "destroy@1.2.0":
   "integrity" "sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg=="
   "resolved" "https://registry.npmjs.org/destroy/-/destroy-1.2.0.tgz"
@@ -4747,7 +4763,7 @@
     "has" "^1.0.3"
     "side-channel" "^1.0.4"
 
-"invariant@^2.2.4":
+"invariant@*", "invariant@^2.2.4":
   "integrity" "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA=="
   "resolved" "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
   "version" "2.2.4"
@@ -7103,7 +7119,7 @@
     "object.assign" "^4.1.0"
     "reflect.ownkeys" "^0.2.0"
 
-"prop-types@^15.5.10", "prop-types@^15.5.7", "prop-types@^15.5.9", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
+"prop-types@*", "prop-types@^15.5.10", "prop-types@^15.5.7", "prop-types@^15.5.9", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -7405,6 +7421,16 @@
   dependencies:
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
+
+"react-native-searchable-dropdown@^1.1.3":
+  "integrity" "sha512-ip6YwjKED/h27oRQGN3f62usFMj5IfS6tr/zZWfQItCAV/XAq5E9P0Exvg/86gSlcGJnnZdoixK+PS1sElxcyA=="
+  "resolved" "https://registry.npmjs.org/react-native-searchable-dropdown/-/react-native-searchable-dropdown-1.1.3.tgz"
+  "version" "1.1.3"
+
+"react-native-segmented-control-tab@^4.0.0":
+  "integrity" "sha512-Iyxabn5T7HGFGjLAvOWUL6K/o0r+UglAUDDQzMgqlHcz3tCnK9C6QUgZaAkzMTSgB/2JO9yLgk3XROPmb8064A=="
+  "resolved" "https://registry.npmjs.org/react-native-segmented-control-tab/-/react-native-segmented-control-tab-4.0.0.tgz"
+  "version" "4.0.0"
 
 "react-native-simple-dialogs@^1.5.0":
   "integrity" "sha512-GwnnrAx99yeJEeEKyWPVBU1V2nmxH9JFfVbD4YvBeeiczqOzdY0i0vG5yUulomdOpl1ZrZJW6RnLw3GEkrGT0g=="
@@ -7814,6 +7840,14 @@
   "version" "2.6.3"
   dependencies:
     "glob" "^7.1.3"
+
+"rn-material-ui-textfield@^1.0.9":
+  "integrity" "sha512-t8OXLs+7/MlwsG1LprEALVzo6aHpZ+uMsvm7Q0ZGKvyrzmPHV6558LQzEqViuqkrjwWlxuslpSuck1eHtlZ3Sw=="
+  "resolved" "https://registry.npmjs.org/rn-material-ui-textfield/-/rn-material-ui-textfield-1.0.9.tgz"
+  "version" "1.0.9"
+  dependencies:
+    "deprecated-react-native-prop-types" "^2.3.0"
+    "prop-types" "^15.5.9"
 
 "rst-selector-parser@^2.2.3":
   "integrity" "sha512-nDG1rZeP6oFTLN6yNDV/uiAvs1+FS/KlrEwh7+y7dpuApDBy6bI2HTBcc0/V8lv9OTqfyD34eF7au2pm8aBbhA=="

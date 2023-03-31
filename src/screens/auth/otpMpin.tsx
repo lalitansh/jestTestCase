@@ -163,11 +163,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingBottom: 30,
-<<<<<<< HEAD
-    backgroundColor: color.white
-=======
     backgroundColor: color.white,
->>>>>>> eace942672974fefe3c0f52a420c50b4d966ec76
   },
   text1: {
     alignItems: 'center',

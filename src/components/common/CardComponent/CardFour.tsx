@@ -14,10 +14,13 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import {screenWidth} from '../../../constants/appConstant';
+import {color} from '../../../constants/theme/Color';
 import {image} from '../../../constants/theme/Image';
 
-const CardThree: React.FC = props => {
+const CardFour: React.FC = props => {
   const {item = ''} = props || {};
+  const {id, location, image: imageTemp, stone} = item || {};
   const arr = new Array(30).fill({
     name: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
   });
@@ -30,17 +33,21 @@ const CardThree: React.FC = props => {
       <ImageBackground
         source={image.whiteDesign3}
         style={{width: screenWidth / 1.8, padding: 16}}>
-        <Image source={item} style={styles.imgStyles} />
-        <View style={styles.marginTop5}>
-          <Text style={styles.textStyles}>Title</Text>
-          <Text style={styles.textStyles1}>Subtitle</Text>
+        <Image source={imageTemp} style={styles.imgStyles} />
+        <View style={styles.marginAbsolute}>
+          <Text numberOfLines={1} style={styles.textStyles}>
+            {stone}
+          </Text>
+          <Text numberOfLines={1} style={styles.textStyles1}>
+            {location}
+          </Text>
         </View>
       </ImageBackground>
     </View>
   );
 };
 
-export default CardThree;
+export default CardFour;
 
 const styles = StyleSheet.create({
   box: {
@@ -50,11 +57,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     marginBottom: 20,
   },
-  marginTop5: {
-    marginTop: 5,
+  marginAbsolute: {
+    bottom: 20,
+    width: screenWidth / 3,
+    borderRadius: 10,
+    alignSelf: 'center',
+    backgroundColor: color.primary,
+    opacity: 0.8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 8,
   },
   textStyles: {
-    fontSize: 18,
+    fontSize: 16,
     color: 'black',
   },
   textStyles1: {

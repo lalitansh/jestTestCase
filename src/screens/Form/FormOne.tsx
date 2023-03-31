@@ -11,18 +11,18 @@ import {
   FlatList,
   ScrollView,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import {
   TextField,
   FilledTextField,
   OutlinedTextField,
-} from '@softmedialab/react-native-material-textfield';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {images} from '../assets/image';
-import {restData} from '../helper/sampleData';
+} from 'rn-material-ui-textfield';
+import {image} from '../../constants/theme/Image';
+import CommonHeader from '../../components/common/Header/commonHeader';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
-const FormOne: React.FC = () => {
+const UserProfile: React.FC = () => {
   const arr = new Array(30).fill({
     name: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
   });
@@ -30,130 +30,112 @@ const FormOne: React.FC = () => {
   const navigation = useNavigation();
   const [form, setForm] = useState({});
 
-  const onSubmit = () => {
-    let {current: field} = fieldRef;
-
-    console.log(field.value());
-  };
-
   const handleChange = (key, value) => {
     console.log('key value', key, value);
     setForm({...form, [key]: value});
     // console.log(`name = ${form.key}, value = ${form.value}`)
   };
 
-  const formatText = text => {
-    return text.replace(/[^+\d]/g, '');
-  };
-
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        // hitSlop={{top: 30,
-        // bottom: 30,
-        // left: 30,
-        // right: 30}
-        // }
-        onPress={() => navigation.goBack()}
-        style={styles.touchableBack}
-        activeOpacity={0.8}>
-        <Image
-          resizeMode={'contain'}
-          source={images.backIcon}
-          style={[styles.imgSize]}
+      <CommonHeader
+        backIcon
+        title="Profile"
+        titleBottomBack
+        navigation={navigation}
+      />
+      <KeyboardAwareScrollView style={[styles.container, styles.paddingBottom]}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={{alignSelf: 'center', marginTop: 20}}
+          onPress={() => alert('ok')}>
+          <Image
+            source={image.Granules1}
+            style={{height: 100, width: 100, borderRadius: 50}}
+          />
+        </TouchableOpacity>
+
+        <TextField
+          label="Company"
+          keyboardType="email-address"
+          // formatText={formatText}
+          // onSubmitEditing={onSubmit}
+          // ref={fieldRef=>fieldRef}
+          value={form.company}
+          onChangeText={(value: string) => handleChange('company', value)}
+          inputContainerStyle={styles.textInputContainer}
         />
-      </TouchableOpacity>
 
-    <TouchableOpacity 
-    activeOpacity={0.8}
-    style={{alignSelf: 'center', marginTop: 20}}
-    onPress={()=>alert('ok')}>
-      <Image 
-      source={images.menWallpaper}
-      style={{height: 100, width: 100, borderRadius: 50}}
-      />
-    </TouchableOpacity>
+        <TextField
+          label="Name"
+          keyboardType="email-address"
+          // formatText={formatText}
+          // onSubmitEditing={onSubmit}
+          // ref={fieldRef=>fieldRef}
+          value={form.name}
+          onChangeText={(value: string) => handleChange('name', value)}
+          inputContainerStyle={styles.textInputContainer}
+        />
+        <TextField
+          label="Phone"
+          keyboardType="phone-pad"
+          // formatText={formatText}
+          // onSubmitEditing={onSubmit}
+          // ref={fieldRef=>fieldRef}
+          value={form.phone}
+          onChangeText={(value: string) => handleChange('phone', value)}
+          inputContainerStyle={styles.textInputContainer}
+        />
 
-      <TextField
-        label="Company"
-        keyboardType="email-address"
-        // formatText={formatText}
-        // onSubmitEditing={onSubmit}
-        // ref={fieldRef=>fieldRef}
-        value={form.company}
-        onChangeText={(value: string) => handleChange('company', value)}
-        inputContainerStyle={styles.textInputContainer}
-      />
+        <TextField
+          label="Place"
+          keyboardType="email-address"
+          // formatText={formatText}
+          // onSubmitEditing={onSubmit}
+          // ref={fieldRef=>fieldRef}
+          value={form.place}
+          onChangeText={(value: string) => handleChange('place', value)}
+          inputContainerStyle={styles.textInputContainer}
+        />
 
-      <TextField
-        label="Name"
-        keyboardType="email-address"
-        // formatText={formatText}
-        // onSubmitEditing={onSubmit}
-        // ref={fieldRef=>fieldRef}
-        value={form.name}
-        onChangeText={(value: string) => handleChange('name', value)}
-        inputContainerStyle={styles.textInputContainer}
-      />
-      <TextField
-        label="Phone"
-        keyboardType="phone-pad"
-        // formatText={formatText}
-        // onSubmitEditing={onSubmit}
-        // ref={fieldRef=>fieldRef}
-        value={form.phone}
-        onChangeText={(value: string) => handleChange('phone', value)}
-        inputContainerStyle={styles.textInputContainer}
-      />
+        <TextField
+          label="Email"
+          keyboardType="email-address"
+          // formatText={formatText}
+          // onSubmitEditing={onSubmit}
+          // ref={fieldRef=>fieldRef}
+          value={form.email}
+          onChangeText={(value: string) => handleChange('email', value)}
+          inputContainerStyle={styles.textInputContainer}
+        />
 
-      <TextField
-        label="Place"
-        keyboardType="email-address"
-        // formatText={formatText}
-        // onSubmitEditing={onSubmit}
-        // ref={fieldRef=>fieldRef}
-        value={form.place}
-        onChangeText={(value: string) => handleChange('place', value)}
-        inputContainerStyle={styles.textInputContainer}
-      />
+        <TextField
+          label="GST"
+          keyboardType="email-address"
+          // formatText={formatText}
+          // onSubmitEditing={onSubmit}
+          // ref={fieldRef=>fieldRef}
+          value={form.gst}
+          onChangeText={(value: string) => handleChange('gst', value)}
+          inputContainerStyle={styles.textInputContainer}
+        />
 
-      <TextField
-        label="Email"
-        keyboardType="email-address"
-        // formatText={formatText}
-        // onSubmitEditing={onSubmit}
-        // ref={fieldRef=>fieldRef}
-        value={form.email}
-        onChangeText={(value: string) => handleChange('email', value)}
-        inputContainerStyle={styles.textInputContainer}
-      />
-
-      <TextField
-        label="GST"
-        keyboardType="email-address"
-        // formatText={formatText}
-        // onSubmitEditing={onSubmit}
-        // ref={fieldRef=>fieldRef}
-        value={form.gst}
-        onChangeText={(value: string) => handleChange('gst', value)}
-        inputContainerStyle={styles.textInputContainer}
-      />
-
-      <TextField
-        label="Working"
-        keyboardType="email-address"
-        // formatText={formatText}
-        // onSubmitEditing={onSubmit}
-        // ref={fieldRef=>fieldRef}
-        value={form.working}
-        onChangeText={(value: string) => handleChange('working', value)}
-        inputContainerStyle={styles.textInputContainer}
-      />
+        <TextField
+          label="Working"
+          keyboardType="email-address"
+          // formatText={formatText}
+          // onSubmitEditing={onSubmit}
+          // ref={fieldRef=>fieldRef}
+          value={form.working}
+          onChangeText={(value: string) => handleChange('working', value)}
+          inputContainerStyle={styles.textInputContainer}
+        />
+      </KeyboardAwareScrollView>
     </View>
   );
 };
 
-export default FormOne;
+export default UserProfile;
 
 const styles = StyleSheet.create({
   box: {
@@ -162,6 +144,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: 'red',
     marginBottom: 20,
+  },
+  paddingBottom: {
+    paddingBottom: 100,
   },
   textInputContainer: {
     marginTop: 10,

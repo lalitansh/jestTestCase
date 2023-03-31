@@ -7,13 +7,14 @@ import {color} from '../../constants/theme/Color';
 import BuyPost from '../BuyPost';
 import Dashboard from '../Dashboard';
 import SellPost from '../SellPost';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import FormTwo from '../Form/FormTwo';
+import JobPost from '../Form/FormThree';
 
 const Tab = createBottomTabNavigator();
 
 function MyTabBar({state, descriptors, navigation}) {
+  const [currentRoute, setCurrentRoute] = useState('Dashboard');
   const _renderIcon = (routeName, selectedTab) => {
     let icon = '';
 
@@ -34,7 +35,7 @@ function MyTabBar({state, descriptors, navigation}) {
         <MCI
           name={icon}
           size={routeName === 'Dashboard' ? 32 : 28}
-          color={routeName === selectedTab ? color.primary : color.black}
+          color={routeName === currentRoute ? color.primary : 'grey'}
         />
         {/* <Text
           style={{
@@ -60,6 +61,7 @@ function MyTabBar({state, descriptors, navigation}) {
         const isFocused = state.index === index;
 
         const onPress = () => {
+          setCurrentRoute(route.name);
           const event = navigation.emit({
             type: 'tabPress',
             target: route.key,
@@ -102,8 +104,8 @@ export default function MyTabs() {
       screenOptions={{headerShown: false}}
       tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen name="Dashboard" component={Dashboard} />
-      <Tab.Screen name="Buy Post" component={BuyPost} />
-      <Tab.Screen name="Sell Post" component={SellPost} />
+      <Tab.Screen name="Buy Post" component={FormTwo} />
+      <Tab.Screen name="Sell Post" component={JobPost} />
     </Tab.Navigator>
   );
 }
@@ -201,75 +203,6 @@ function TabNavigator(props) {
         position="RIGHT"
       />
     </CurvedBottomBar.Navigator>
-  );
-}
-
-
-const Tab = createBottomTabNavigator();
-
-function MyTabBar({ state, descriptors, navigation }) {
-  return (
-    <View style={{ flexDirection: 'row' }}>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
-
-        const isFocused = state.index === index;
-
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
-
-          if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
-          }
-        };
-
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
-
-        return (
-          <TouchableOpacity
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ flex: 1 }}
-          >
-            <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
-              {label}
-            </Text>
-          </TouchableOpacity>
-        );
-      })}
-    </View>
-  );
-}
-
-export default function MyTabs() {
-  return (
-    <Tab.Navigator screenOptions={{
-      headerShown: false
-    }} tabBar={props => <MyTabBar {...props} />}>
-      <Tab.Screen name="Dashboard" component={Dashboard} />
-      <Tab.Screen name="Buy Post" component={BuyPost} />
-      <Tab.Screen name="Sell Post" component={SellPost} />
-    </Tab.Navigator>
   );
 }
 

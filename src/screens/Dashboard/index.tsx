@@ -40,7 +40,9 @@ import {RecentPostData, sliderData} from '../../utils/data';
 import CellComponent from '../../components/common/CellComponent';
 import BlinkingDot from '../../components/common/BlinkingDot';
 import LabelWithIcon from '../../components/common/LabelWithIcon';
-import { getRandomItem } from '../../utils/functions/getters';
+import {getRandomItem} from '../../utils/functions/getters';
+import CardThree from '../../components/common/CardComponent/CardThree';
+import CardFour from '../../components/common/CardComponent/CardFour';
 const {height} = Dimensions.get('window');
 
 export type PropType = {
@@ -52,16 +54,13 @@ const SliderBox = ({key, image}) => {
   return (
     <View
       style={{
-        width: screenWidth / 1.2,
-        borderRadius: 5,
-        height: screenHeight / 4.5,
-        marginHorizontal: 14,
+        width: screenWidth,
+        height: screenHeight / 4.8,
         // paddingHorizontal: 20,
       }}>
       <Image
         key={`title${key}`}
-        imageStyle={{borderRadius: 5}}
-        resizeMode={'cover'}
+        resizeMode={'stretch'}
         style={{height: '100%', width: '100%'}}
         source={image}
       />
@@ -76,31 +75,19 @@ const Dashboard: React.FC<PropType> = props => {
   const [posts, setPosts] = useState([]);
   const [errors, setErrors] = useState({});
 
-  const lightColors = [color.AntiqueWhite, color.CornSilk, color.LemonChiffon, color.LightGolder]
+  const lightColors = [
+    color.AntiqueWhite,
+    color.CornSilk,
+    color.LemonChiffon,
+    color.LightGolder,
+  ];
 
   useEffect(() => {
-    getAllPosts();
-  }, []);
-
-  const getAllPosts = () => {
     setIsProgress(true);
-    callGetApi(`${url.posts}`)
-      .then(response => {
-        setIsProgress(false);
-        console.log('response in screen--', response);
-        if (response.valid) {
-          const newArr = [...response.value].slice(0, 10);
-          setPosts(newArr);
-        } else {
-          if (response.value.errors) {
-            setErrors(response.value.errors);
-          }
-        }
-      })
-      .catch(() => {
-        setIsProgress(false);
-      });
-  };
+    setTimeout(() => {
+      setIsProgress(false);
+    }, 300);
+  }, []);
 
   const onPressPost = (item: PostDetailType) => {
     const {navigation} = props || {};
@@ -142,45 +129,49 @@ const Dashboard: React.FC<PropType> = props => {
 
   const LatestNews = (
     <>
-      <LabelWithIcon
-        // iconComponent={
-        //   <Ionicons
-        //     name="megaphone-outline"
-        //     onPress={() => {}}
-        //     color={color.black}
-        //     size={32}
-        //   />
-        // }
-        leftText="Latest News"
-        rightText="View all"
-      />
-      <FlatList
-        nestedScrollEnabled={true}
-        showsHorizontalScrollIndicator={false}
-        testID="FlatList1"
-        horizontal
-        // numColumns={2}
-        // columnWrapperStyle={{
-        //   justifyContent: 'space-around',
-        //   paddingHorizontal: 8,
-        // }}
-        contentContainerStyle={{
-          paddingBottom: 16,
-          paddingLeft: 16,
-        }}
-        extraData={posts}
-        data={posts}
-        initialNumToRender={15}
-        keyExtractor={(item, i) => i.toString()}
-        renderItem={({item}) => {
-          const {id, location, image, title} = item || {};
-          return (
-            <View style={{paddingRight: 16}}>
-              <ListComponent id={id} onPress={() => {}} title={title} />
-            </View>
-          );
-        }}
-      />
+      <View style={{backgroundColor: color.white}}>
+        <LabelWithIcon
+          // iconComponent={
+          //   <Ionicons
+          //     name="megaphone-outline"
+          //     onPress={() => {}}
+          //     color={color.black}
+          //     size={32}
+          //   />
+          // }
+          leftText="Latest News"
+          rightText="View all"
+        />
+        <FlatList
+          nestedScrollEnabled={true}
+          showsHorizontalScrollIndicator={false}
+          testID="FlatList1"
+          horizontal
+          // numColumns={2}
+          // columnWrapperStyle={{
+          //   justifyContent: 'space-around',
+          //   paddingHorizontal: 8,
+          // }}
+          contentContainerStyle={{
+            paddingBottom: 16,
+            paddingLeft: 16,
+            backgroundColor: color.white,
+          }}
+          extraData={sliderData}
+          data={sliderData}
+          initialNumToRender={15}
+          keyExtractor={(item, i) => i.toString()}
+          renderItem={({item}) => {
+            const {id, image} = item || {};
+            return (
+              <View key={id} style={{}}>
+                <CardThree item={image} />
+                {/* <ListComponent id={id} onPress={() => {}} title={title} /> */}
+              </View>
+            );
+          }}
+        />
+      </View>
     </>
   );
 
@@ -237,18 +228,36 @@ const Dashboard: React.FC<PropType> = props => {
               industry and typesetting industry.
             </MarqueeText>
           </View>
-          <SwiperFlatList
-            autoplay
-            autoplayDelay={2.5}
-            autoplayLoop
-            autoplayLoopKeepAnimation={true}
-            data={sliderData}
-            renderItem={({item, i}) => <SliderBox id={i} image={item.image} />}
-          />
+          <View
+            style={{
+              paddingHorizontal: 16,
+              backgroundColor: color.white,
+              paddingBottom: 20,
+            }}>
+            <SwiperFlatList
+              autoplay
+              autoplayDelay={2.5}
+              autoplayLoop
+              showPagination
+              paginationStyleItem={{
+                marginTop: 16,
+                width: 5,
+                height: 5,
+                marginHorizontal: 5,
+              }}
+              autoplayLoopKeepAnimation={true}
+              paginationActiveColor={color.primary}
+              data={sliderData}
+              style={{backgroundColor: color.white}}
+              renderItem={({item, i}) => (
+                <SliderBox id={i} image={item.image} />
+              )}
+            />
+          </View>
 
           <View
             style={{
-              backgroundColor: color.white,
+              backgroundColor: color.GhostWhite,
               paddingBottom: 16,
             }}>
             <View style={styles.rowStyle}>
@@ -314,53 +323,38 @@ const Dashboard: React.FC<PropType> = props => {
           </View>
           {LatestNews}
 
-          <LabelWithIcon
-            iconComponent={
-              <MCI
-                name="image-edit-outline"
-                onPress={() => {}}
-                color={color.black}
-                size={32}
-              />
-            }
-            customButtonParentStyle={{marginTop: 16}}
-            leftText="Recent Post"
-          />
+          <View style={{backgroundColor: color.white}}>
+            <LabelWithIcon
+              // iconComponent={
+              //   <MCI
+              //     name="image-edit-outline"
+              //     onPress={() => {}}
+              //     color={color.black}
+              //     size={32}
+              //   />
+              // }
+              customButtonParentStyle={{marginTop: 16}}
+              leftText="Recent Post"
+            />
 
-          <FlatList
-            nestedScrollEnabled={true}
-            showsHorizontalScrollIndicator={false}
-            testID="FlatList1"
-            contentContainerStyle={{
-              paddingBottom: 100,
-            }}
-            extraData={RecentPostData}
-            data={RecentPostData}
-            horizontal
-            initialNumToRender={15}
-            keyExtractor={(item, i) => i.toString()}
-            renderItem={({item}) => {
-              const {id, location, image, stone} = item || {};
-              return (
-                <TouchableOpacity
-                  onPress={() => {}}
-                  activeOpacity={0.8}
-                  style={styles.mainCard2}>
-                  <ImageBackground
-                    source={image}
-                    resizeMode="stretch"
-                    style={styles.stoneView}>
-                    <View style={styles.stoneSubView}>
-                      <Text style={[styles.textStyle2]}>{stone}</Text>
-                      <Text style={[styles.textStyle2, {marginTop: 4}]}>
-                        {location}
-                      </Text>
-                    </View>
-                  </ImageBackground>
-                </TouchableOpacity>
-              );
-            }}
-          />
+            <FlatList
+              nestedScrollEnabled={true}
+              showsHorizontalScrollIndicator={false}
+              testID="FlatList1"
+              contentContainerStyle={{
+                paddingBottom: 100,
+              }}
+              extraData={RecentPostData}
+              data={RecentPostData}
+              horizontal
+              initialNumToRender={15}
+              keyExtractor={(item, i) => i.toString()}
+              renderItem={({item}) => {
+                const {id, location, image, stone} = item || {};
+                return <CardFour item={item} />;
+              }}
+            />
+          </View>
         </KeyboardAwareScrollView>
       )}
 

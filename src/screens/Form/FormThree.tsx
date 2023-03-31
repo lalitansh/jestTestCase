@@ -7,7 +7,7 @@ import {
   FilledTextField,
   OutlinedTextField,
   TextField,
-} from '@softmedialab/react-native-material-textfield';
+} from 'rn-material-ui-textfield';
 import React, {useState, useEffect} from 'react';
 
 // import all the components we are going to use
@@ -19,9 +19,10 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import SegmentedControlTab from "react-native-segmented-control-tab";
+import SegmentedControlTab from 'react-native-segmented-control-tab';
 import SearchableDropdown from 'react-native-searchable-dropdown';
-import {images} from '../assets/image';
+import CommonHeader from '../../components/common/Header/commonHeader';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 // Item array for the dropdown
 const items = [
@@ -51,7 +52,7 @@ const colors = [
   {id: 8, name: 'lightgreen'},
 ];
 
-const FormThree = () => {
+const JobPost = () => {
   // Data Source for the SearchableDropdown
   const [serverData, setServerData] = useState([]);
   const [selectedItem, setSelectedItem] = useState('');
@@ -63,35 +64,25 @@ const FormThree = () => {
   useEffect(() => {}, []);
 
   const handleIndexChange = index => {
-    setSelectedIndex(index)
+    setSelectedIndex(index);
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <TouchableOpacity
-          // hitSlop={{top: 30,
-          // bottom: 30,
-          // left: 30,
-          // right: 30}
-          // }
-          onPress={() => navigation.goBack()}
-          style={styles.touchableBack}
-          activeOpacity={0.8}>
-          <Image
-            resizeMode={'contain'}
-            source={images.backIcon}
-            style={[styles.imgSize]}
-          />
-        </TouchableOpacity>
+    <View style={styles.container}>
+      <CommonHeader
+        backIcon
+        title="Job Post"
+        titleBottomBack
+        navigation={navigation}
+      />
+      <KeyboardAwareScrollView style={styles.container}>
         <View style={{paddingHorizontal: 16}}>
-
-        <SegmentedControlTab
-          values={["First", "Second"]}
-          selectedIndex={selectedIndex}
-          onTabPress={handleIndexChange}
-          tabStyle={{paddingVertical: 10, marginBottom: 16}}
-        />
+          <SegmentedControlTab
+            values={['First', 'Second']}
+            selectedIndex={selectedIndex}
+            onTabPress={handleIndexChange}
+            tabStyle={{paddingVertical: 10, marginVertical: 16}}
+          />
 
           <Text style={styles.textStyle}>Searchable1</Text>
           <SearchableDropdown
@@ -151,12 +142,12 @@ const FormThree = () => {
             inputContainerStyle={styles.textInputContainer1}
           />
         </View>
-      </View>
-    </SafeAreaView>
+      </KeyboardAwareScrollView>
+    </View>
   );
 };
 
-export default FormThree;
+export default JobPost;
 
 const styles = StyleSheet.create({
   container: {

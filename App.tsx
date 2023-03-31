@@ -39,7 +39,7 @@ const App: React.FC = () => {
         <StatusBar
           barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           translucent={true}
-          backgroundColor={color.primaryDark}
+          backgroundColor={color.primary}
         />
       ) : (
         <SafeAreaView

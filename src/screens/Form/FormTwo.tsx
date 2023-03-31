@@ -7,7 +7,7 @@ import {
   FilledTextField,
   OutlinedTextField,
   TextField,
-} from '@softmedialab/react-native-material-textfield';
+} from 'rn-material-ui-textfield';
 import React, {useState, useEffect} from 'react';
 
 // import all the components we are going to use
@@ -20,7 +20,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import SearchableDropdown from 'react-native-searchable-dropdown';
-import {images} from '../assets/image';
+import CommonHeader from '../../components/common/Header/commonHeader';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 // Item array for the dropdown
 const items = [
@@ -68,24 +69,15 @@ const FormTwo = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <TouchableOpacity
-          // hitSlop={{top: 30,
-          // bottom: 30,
-          // left: 30,
-          // right: 30}
-          // }
-          onPress={() => navigation.goBack()}
-          style={styles.touchableBack}
-          activeOpacity={0.8}>
-          <Image
-            resizeMode={'contain'}
-            source={images.backIcon}
-            style={[styles.imgSize]}
-          />
-        </TouchableOpacity>
-        <View style={{paddingHorizontal: 16}}>
+    <View style={styles.container}>
+      <CommonHeader
+        backIcon
+        title="Buy Post"
+        titleBottomBack
+        navigation={navigation}
+      />
+      <KeyboardAwareScrollView style={styles.container}>
+        <View style={{paddingHorizontal: 16, marginTop: 16}}>
           <Text style={styles.textStyle}>Searchable1</Text>
           <SearchableDropdown
             onTextChange={text => console.log(text)}
@@ -246,8 +238,8 @@ const FormTwo = () => {
             inputContainerStyle={styles.textInputContainer1}
           />
         </View>
-      </View>
-    </SafeAreaView>
+      </KeyboardAwareScrollView>
+    </View>
   );
 };
 

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {color} from '../../../constants/theme/Color';
-import { getRandomItem } from '../../../utils/functions/getters';
+import {getRandomItem} from '../../../utils/functions/getters';
 import {CommonFontFamily} from '../styles/commonStyles';
 
 type propsType = {
@@ -45,13 +45,8 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
           ]
         }
         onPress={onPress}>
-<<<<<<< HEAD
-        <LinearGradient
-          colors={[color.transparent, color.transparent]}
-=======
         <View
           // colors={[color.primaryOff, color.primaryMiddle, color.primary]}
->>>>>>> eace942672974fefe3c0f52a420c50b4d966ec76
           // start={{x: 0, y: 1}}
           // end={{x: 1, y: 1}}
           style={[styles.rowStyle, styles.buttonStyle, customeStyle]}>
@@ -81,12 +76,8 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
 
 const styles = StyleSheet.create({
   buttonParentView: {
-<<<<<<< HEAD
-    width: '49%',
-=======
     width: '50%',
     paddingHorizontal: 14,
->>>>>>> eace942672974fefe3c0f52a420c50b4d966ec76
     // alignSelf: 'center',
     // padding: 1.5,
     //elevation: 5,
@@ -96,11 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   buttonStyle: {
-<<<<<<< HEAD
-    width: '97%',
-=======
     width: '100%',
->>>>>>> eace942672974fefe3c0f52a420c50b4d966ec76
     // padding: 10,
     // justifyContent: ,
     alignItems: 'center',
