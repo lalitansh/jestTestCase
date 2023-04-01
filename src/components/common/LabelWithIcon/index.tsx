@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   iswhiteTextStyle: {
     color: color.white,
   },
-  isGreenBackStyle: {
+  isPrimaryBackStyle: {
     backgroundColor: color.black,
   },
   isErrorStyle: {

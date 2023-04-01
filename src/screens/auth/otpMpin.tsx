@@ -1,6 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {Text, View, ScrollView, StyleSheet, Alert} from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  StyleSheet,
+  Alert,
+  StatusBar,
+} from 'react-native';
 import CustomButton from '../../components/common/Button/button';
 import TextField from '../../components/common/EditTextInput';
 import isEmpty from 'lodash/isEmpty';
@@ -23,6 +30,21 @@ const OtpMpin: React.FC<PropType> = props => {
   const [errors, setErrors] = useState({});
   const [isProgress, setIsProgress] = useState(false);
   const [code, setCode] = useState('0000');
+
+  useEffect(() => {
+    receivedProps();
+  }, []);
+
+  const receivedProps = () => {
+    const {phone = 0} = props?.route?.params || {};
+    if (phone) {
+      const star = '*******';
+      let str = phone.toString();
+      let lastThree = str.substr(str.length - 3);
+      lastThree = star + lastThree;
+      setForm({phone: lastThree});
+    }
+  };
 
   const handleSetForm = (key, value) => {
     console.log('value, key', value, key);
@@ -95,67 +117,72 @@ const OtpMpin: React.FC<PropType> = props => {
     //   });
   };
   return (
-    <KeyboardAwareScrollView
-      enableOnAndroid
-      keyboardShouldPersistTaps="handled"
-      contentContainerStyle={styles.container}
-      testID="KeyboardAwareScrollView2">
+    <View style={styles.flex1}>
+      <StatusBar
+        // barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        // translucent={true}
+        backgroundColor={color.primary}
+      />
       <CommonHeader
-        // title={'Posts'}
-        backgroundClean
         backIcon
+        title="Verify Otp"
+        titleBottomBack
         navigation={props.navigation}
-        // logOutIcon
-        // onPressLogout={logOutConfirmation}
       />
 
-      <View style={styles.mrVer50} />
+      <KeyboardAwareScrollView
+        enableOnAndroid
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={styles.container}
+        testID="KeyboardAwareScrollView2">
+        <View style={styles.mrVer50} />
 
-      <View style={{flex: 0.7}}>
-        <View style={styles.headerTextView}>
-          <Text style={styles.headerText}>Verification code</Text>
-          <Text style={styles.headerText1}>
-            We have sent the code verification to
-            <Text style={styles.headerText2}>{' 98*****789 '}</Text>
-          </Text>
-        </View>
+        <View style={{flex: 0.7}}>
+          <View style={styles.headerTextView}>
+            <Text style={styles.headerText}>Verification code</Text>
+            <Text style={styles.headerText1}>
+              We have sent the code verification to
+              <Text style={styles.headerText2}>{` ${form.phone}`}</Text>
+            </Text>
+          </View>
 
-        <OTPInputView
-          style={styles.otpParentView}
-          pinCount={4}
-          code={code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
-          onCodeChanged={code => {
-            setCode(code);
-          }}
-          autoFocusOnLoad
-          codeInputFieldStyle={styles.underlineStyleBase}
-          codeInputHighlightStyle={styles.underlineStyleHighLighted}
-          placeholderTextColor={color.black}
-          selectionColor={color.black}
-          // onCodeFilled={code => {
-          //   console.log(`Code is ${code}, you are good to go!`);
-          // }}
-        />
-
-        <View style={styles.customButton}>
-          <CustomButton
-            isGreenBack
-            isWhiteText
-            title={'Resend'}
-            onPress={() => onResend()}
-            customeStyle={{borderRadius: 0, backgroundColor: color.themeGrey}}
+          <OTPInputView
+            style={styles.otpParentView}
+            pinCount={4}
+            code={code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
+            onCodeChanged={code => {
+              setCode(code);
+            }}
+            autoFocusOnLoad
+            codeInputFieldStyle={styles.underlineStyleBase}
+            codeInputHighlightStyle={styles.underlineStyleHighLighted}
+            placeholderTextColor={color.black}
+            selectionColor={color.black}
+            // onCodeFilled={code => {
+            //   console.log(`Code is ${code}, you are good to go!`);
+            // }}
           />
-          <CustomButton
-            isGreenBack
-            isWhiteText
-            title={'Confirm'}
-            onPress={() => onConfirm()}
-            customeStyle={{borderRadius: 0, backgroundColor: color.primary}}
-          />
+
+          <View style={styles.customButton}>
+            <CustomButton
+              isPrimaryBack
+              isWhiteText
+              title={'Resend'}
+              onPress={() => onResend()}
+              customeStyle={{borderRadius: 0, backgroundColor: color.themeGrey}}
+            />
+            <CustomButton
+              isPrimaryBack
+              isWhiteText
+              title={'Confirm'}
+              onPress={() => onConfirm()}
+              customeStyle={{borderRadius: 0, backgroundColor: color.primary}}
+            />
+          </View>
         </View>
-      </View>
-      <ProgressBarView visible={isProgress} />
-    </KeyboardAwareScrollView>
+        <ProgressBarView visible={isProgress} />
+      </KeyboardAwareScrollView>
+    </View>
   );
 };
 
@@ -164,6 +191,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingBottom: 30,
     backgroundColor: color.white,
+  },
+  flex1: {
+    flex: 1,
   },
   text1: {
     alignItems: 'center',

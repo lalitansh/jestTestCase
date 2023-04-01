@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import SideDrawer from './SideDrawer';
 import {
@@ -12,6 +12,7 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import TabNavigator from './tabNavigation';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
@@ -23,7 +24,7 @@ const Screen2 = () => {
   return <View style={styles.screen2} />;
 };
 
-export default function DrawerDemo() {
+export default function DrawerDemo(props) {
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -49,11 +50,6 @@ const drawerStack = () => {
       <Stack.Screen
         name="Home"
         component={TabNavigator}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Screen2}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

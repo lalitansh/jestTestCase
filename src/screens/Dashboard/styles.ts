@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 16,
     justifyContent: 'space-evenly',
-    alignSelf: 'center',
+    // alignSelf: 'center',
   },
   marginTop12: {
     marginTop: 12,
@@ -156,6 +156,10 @@ const styles = StyleSheet.create({
     width: screenWidth / 2.2,
     aspectRatio: 1,
     justifyContent: 'flex-start',
+  },
+  ghostWhiteBg: {
+    backgroundColor: color.GhostWhite,
+    height: 24,
   },
   stoneSubView: {
     height: screenWidth / 5.5,

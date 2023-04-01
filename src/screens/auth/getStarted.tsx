@@ -12,26 +12,11 @@ import {color} from '../../constants/theme/Color';
 import {image} from '../../constants/theme/Image';
 import {font} from '../../constants/theme/Size';
 import {Message} from '../../constants/appConstant';
-import SmsRetriever from 'react-native-sms-retriever';
 
 export default class GetStarted extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  // Get the phone number (first gif)
-  _onPhoneNumberPressed = async () => {
-    const {navigation} = this.props;
-    const navigates = navigation.navigate('OtpMpin');
-    try {
-      const phoneNumber = await SmsRetriever.requestPhoneNumber();
-      console.log('phonenumber::', phoneNumber);
-      navigates();
-    } catch (error) {
-      console.log('err', JSON.stringify(error));
-      navigates();
-    }
-  };
 
   goToLogin = () => {
     const {navigation} = this.props;
@@ -52,7 +37,7 @@ export default class GetStarted extends React.Component {
           // translucent={true}
           backgroundColor={color.transparent}
         />
-        <View style={{height: '45%', width: '100%'}}>
+        <View style={{height: '55%', width: '100%'}}>
           <Image
             style={{height: '100%', width: '100%'}}
             source={image.splash}
@@ -60,7 +45,7 @@ export default class GetStarted extends React.Component {
         </View>
         <View
           style={{
-            height: '45%',
+            height: '55%',
             width: '100%',
             position: 'absolute',
             backgroundColor: 'rgba(32, 32, 32, 0.8)',
@@ -81,27 +66,27 @@ export default class GetStarted extends React.Component {
         <View style={{marginTop: 48, marginLeft: 20, marginRight: 20}}>
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => navigation.navigate('OtpMpin')}
+            onPress={() => navigation.navigate('Login')}
             style={style.defaultButton}>
             <Text style={[style.buttonTitle]}>Sign In</Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             activeOpacity={0.8}
             onPress={this.goToSignUp.bind(this)}
             style={[style.secButton, {marginTop: 12}]}>
             <Text style={[style.secButtonTitle]}>Sign Up</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View style={[style.bottomView, {alignItems: 'center'}]}>
           <View style={{flexDirection: 'row'}}>
-            <Text
+            {/* <Text
               style={[
                 style.subtitle,
                 {fontSize: 12, fontWeight: '400', textAlign: 'center'},
               ]}>
               {Message.dontHaveAccount}
-            </Text>
-            <TouchableOpacity
+            </Text> */}
+            {/* <TouchableOpacity
               activeOpacity={0.8}
               onPress={this.goToSignUp.bind(this)}>
               <Text
@@ -116,7 +101,7 @@ export default class GetStarted extends React.Component {
                 ]}>
                 {Message.requestAnInvite}
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </View>

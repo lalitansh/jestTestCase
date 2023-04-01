@@ -1,5 +1,5 @@
 const color = {
-  primary: '#7f95e8',//'#6887ff', //'#167351',
+  primary: '#464fb2', //'#6571ff', //'#7f95e8',//'#6887ff', //'#167351',
   primaryDark: '#5f80ff',
   primaryOff: '#b9c7fe',
   primaryMiddle: '#809aff',
@@ -19,11 +19,19 @@ const color = {
   themeGrey: '#cecece', //disabled button
   defaultBackGrey: '#f2f2f2',
   dullPlaceholder: '#ACACAC',
-  CornSilk: "	#FFF8DC",
-  LightGolder: "#FAFAD2",
-  GhostWhite: "#F8F8FF",
-  LemonChiffon: "#FFFACD",
-  AntiqueWhite: "#FAEBD7"
+  CornSilk: '	#FFF8DC',
+  LightGolder: '#FAFAD2',
+  GhostWhite: '#F8F8FF',
+  LemonChiffon: '#FFFACD',
+  AntiqueWhite: '#FAEBD7',
+  purple1: '#A093F3',
+  LightPurple: '#EBE8FC',
+  pink1: '#E599E5',
+  LightPink: '#FAEBFA',
+  green1: '#90B76D',
+  LightGreen: '#F2FCE9',
+  orange1: '#FFA477',
+  LightOrange: '#FEEEE6',
 };
 
 export {color};

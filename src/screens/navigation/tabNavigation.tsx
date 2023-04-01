@@ -1,4 +1,4 @@
-import React, {lazy, useState} from 'react';
+import React, {lazy, useLayoutEffect, useState} from 'react';
 import {Animated, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -10,6 +10,7 @@ import SellPost from '../SellPost';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FormTwo from '../Form/FormTwo';
 import JobPost from '../Form/FormThree';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -98,14 +99,23 @@ function MyTabBar({state, descriptors, navigation}) {
   );
 }
 
-export default function MyTabs() {
+export default function MyTabs(props) {
+  const {route, navigation} = props || {};
+  useLayoutEffect(() => {
+    const routeName = getFocusedRouteNameFromRoute(route);
+    if (routeName === 'Buy Post' || routeName === 'Sell Post') {
+      navigation.setOptions({tabBarVisible: false});
+    } else {
+      navigation.setOptions({tabBarVisible: true});
+    }
+  }, [navigation, route]);
   return (
     <Tab.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{headerShown: false, tabBarHideOnKeyboard: true}}
       tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen name="Dashboard" component={Dashboard} />
       <Tab.Screen name="Buy Post" component={FormTwo} />
-      <Tab.Screen name="Sell Post" component={JobPost} />
+      <Tab.Screen name="Sell Post" component={FormTwo} />
     </Tab.Navigator>
   );
 }

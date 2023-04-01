@@ -124,7 +124,7 @@ const Signup: React.FC<PropType> = props => {
 
         <View style={styles.customButton}>
           <CustomButton
-            isGreenBack
+            isPrimaryBack
             isWhiteText
             title={'Signup'}
             onPress={() => onSave()}

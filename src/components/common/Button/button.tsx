@@ -9,7 +9,7 @@ type propsType = {
   customeStyle?: any;
   customButtonParentStyle?: any;
   customButtonTextStyle?: any;
-  isGreenBack?: boolean;
+  isPrimaryBack?: boolean;
   isErrorStyle?: boolean;
   isWhiteText?: boolean;
   isDisabled?: boolean;
@@ -24,7 +24,7 @@ const CustomButton: React.FC<propsType> = (props: propsType) => {
     customButtonParentStyle,
     customButtonTextStyle,
     isWhiteText,
-    isGreenBack,
+    isPrimaryBack,
     isErrorStyle,
     isDisabled,
     buttonRef,
@@ -38,7 +38,7 @@ const CustomButton: React.FC<propsType> = (props: propsType) => {
           disabled={isDisabled}
           style={[
             styles.buttonStyle,
-            isGreenBack ? styles.isGreenBackStyle : null,
+            isPrimaryBack ? styles.isPrimaryBackStyle : null,
             isErrorStyle ? styles.isErrorStyle : null,
             customeStyle,
           ]}
@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
   iswhiteTextStyle: {
     color: color.white,
   },
-  isGreenBackStyle: {
-    backgroundColor: color.black,
+  isPrimaryBackStyle: {
+    backgroundColor: color.primary,
   },
   isErrorStyle: {
     backgroundColor: color.red,

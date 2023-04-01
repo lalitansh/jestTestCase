@@ -1,6 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {Text, View, ScrollView, StyleSheet} from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  StyleSheet,
+  Alert,
+  StatusBar,
+} from 'react-native';
 import CustomButton from '../../components/common/Button/button';
 import TextField from '../../components/common/EditTextInput';
 import isEmpty from 'lodash/isEmpty';
@@ -10,6 +17,10 @@ import {color} from '../../constants/theme/Color';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
 import ProgressBarView from '../../components/ProgressBarView';
+import SmsRetriever from 'react-native-sms-retriever';
+import {CommonStyles} from '../../components/common/styles/commonStyles';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import CommonHeader from '../../components/common/Header/commonHeader';
 
 export type PropType = {
   navigation?: any;
@@ -29,111 +40,111 @@ const Login: React.FC<PropType> = props => {
 
   const validate = () => {
     let errors = {};
-    const {email, password} = form;
+    const {phone} = form;
 
-    let expInvailid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
-    let emailEmptyCheck = isEmpty(email);
-
-    if (emailEmptyCheck) {
-      set(errors, 'email', ['email is required']);
-    } else if (!expInvailid) {
-      set(errors, 'email', ['Invalid email format']);
+    if (isEmpty(phone)) {
+      set(errors, 'phone', ['phone is required']);
+    } else if (phone.length !== 10) {
+      set(errors, 'phone', ['phone should be 10 digit.']);
     }
-
-    if (isEmpty(password)) {
-      set(errors, 'password', ['password is required']);
-    }
-
     return errors;
   };
 
   const onSave = () => {
+    const {navigation} = props || {};
     let errors = validate();
     console.log('errors', errors);
     if (!isEmpty(errors)) {
       return setErrors(errors);
     }
-    setIsProgress(true);
-    auth()
-      .signInWithEmailAndPassword(form.email, form.password)
-      .then(() => {
-        setIsProgress(false);
-        props.navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{name: 'Chat'}],
-          }),
-        );
-        console.log('User account created & signed in!');
-      })
-      .catch(error => {
-        setIsProgress(false);
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
+    navigation.navigate('OtpMpin', {phone: form.phone});
+    // setIsProgress(true);
+    // auth()
+    //   .signInWithEmailAndPassword(form.email, form.password)
+    //   .then(() => {
+    //     setIsProgress(false);
+    //     props.navigation.dispatch(
+    //       CommonActions.reset({
+    //         index: 0,
+    //         routes: [{name: 'Chat'}],
+    //       }),
+    //     );
+    //     console.log('User account created & signed in!');
+    //   })
+    //   .catch(error => {
+    //     setIsProgress(false);
+    //     if (error.code === 'auth/email-already-in-use') {
+    //       console.log('That email address is already in use!');
+    //     }
 
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
+    //     if (error.code === 'auth/invalid-email') {
+    //       console.log('That email address is invalid!');
+    //     }
 
-        console.error(error);
-      });
+    //     console.error(error);
+    //   });
   };
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.mrVer50} />
+    <View style={styles.flex1}>
+      <StatusBar
+        // barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        // translucent={true}
+        backgroundColor={color.primary}
+      />
+      <CommonHeader
+        backIcon
+        title="Login"
+        titleBottomBack
+        navigation={props.navigation}
+      />
+      <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+        <View style={styles.mrVer50} />
 
-      <View style={{flex: 0.7}}>
-        <View style={styles.headerTextView}>
-          <Text style={styles.headerText}>Login</Text>
+        <View style={CommonStyles.headerTextView}>
+          <Text style={{fontSize: 20}}>👋</Text>
+          <Text style={CommonStyles.welcomeText}>Welcome Back</Text>
         </View>
 
-        <TextField
-          label={'EMAIL:'}
-          placeholder={'Enter your email'}
-          value={form.email}
-          name={'email'}
-          errors={!isEmpty(errors) && errors}
-          onChange={(value: string) => handleSetForm('email', value)}
-        />
+        <View style={{flex: 0.7}}>
+          <View style={styles.headerTextView}>
+            <Text style={styles.headerText}>Login</Text>
+          </View>
 
-        <TextField
-          label={'PASSWORD:'}
-          placeholder={'Enter your password'}
-          value={form.password}
-          secureTextEntry={true}
-          name={'password'}
-          errors={!isEmpty(errors) && errors}
-          onChange={(value: string) => handleSetForm('password', value)}
-        />
-
-        <View style={styles.customButton}>
-          <CustomButton
-            isGreenBack
-            isWhiteText
-            title={'Login'}
-            onPress={() => onSave()}
+          <TextField
+            label={'Phone'}
+            // placeholder={'Enter your email'}
+            value={form.phone}
+            keyboardType="phone-pad"
+            name={'phone'}
+            maxLength={10}
+            errors={!isEmpty(errors) && errors}
+            onChange={(value: string) => handleSetForm('phone', value)}
           />
-          <Text style={styles.text1}>
-            Don't have account?
-            <Text
-              style={styles.text2}
-              onPress={() => props.navigation.navigate('Signup')}>
-              {' '}
-              Signup
-            </Text>
-          </Text>
+
+          <View style={styles.customButton}>
+            <CustomButton
+              isPrimaryBack
+              isWhiteText
+              title={'Login'}
+              onPress={() => onSave()}
+            />
+          </View>
         </View>
-      </View>
-      <ProgressBarView visible={isProgress} />
-    </ScrollView>
+        <ProgressBarView visible={isProgress} />
+      </KeyboardAwareScrollView>
+    </View>
   );
 };
+
+export default Login;
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingBottom: 30,
+  },
+  flex1: {
+    flex: 1,
   },
   text1: {
     alignItems: 'center',
@@ -146,7 +157,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   mrVer50: {
-    marginVertical: 50,
+    marginVertical: 20,
   },
   headerText: {
     top: 10,
@@ -165,5 +176,3 @@ const styles = StyleSheet.create({
     paddingTop: 60,
   },
 });
-
-export default Login;

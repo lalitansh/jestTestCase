@@ -56,12 +56,12 @@ const SliderBox = ({key, image}) => {
       style={{
         width: screenWidth,
         height: screenHeight / 4.8,
-        // paddingHorizontal: 20,
+        borderRadius: 8,
       }}>
       <Image
         key={`title${key}`}
         resizeMode={'stretch'}
-        style={{height: '100%', width: '100%'}}
+        style={{height: '100%', width: screenWidth, borderRadius: 8}}
         source={image}
       />
     </View>
@@ -201,10 +201,6 @@ const Dashboard: React.FC<PropType> = props => {
         drawerIcon
         navigation={navigation}
       />
-      <View
-        style={{height: 50, backgroundColor: color.primary, paddingLeft: 16}}>
-        <Text style={styles.textStyle1}>Home</Text>
-      </View>
 
       {/* <BlinkingDot /> */}
 
@@ -230,9 +226,9 @@ const Dashboard: React.FC<PropType> = props => {
           </View>
           <View
             style={{
-              paddingHorizontal: 16,
               backgroundColor: color.white,
-              paddingBottom: 20,
+              paddingBottom: 30,
+              alignItems: 'center',
             }}>
             <SwiperFlatList
               autoplay
@@ -240,29 +236,36 @@ const Dashboard: React.FC<PropType> = props => {
               autoplayLoop
               showPagination
               paginationStyleItem={{
-                marginTop: 16,
-                width: 5,
-                height: 5,
-                marginHorizontal: 5,
+                marginTop: 12,
+                width: 8,
+                height: 8,
+                borderRadius: 4,
+                marginHorizontal: 3,
               }}
               autoplayLoopKeepAnimation={true}
               paginationActiveColor={color.primary}
               data={sliderData}
-              style={{backgroundColor: color.white}}
+              index={2}
+              contentContainerStyle={{
+                width: screenWidth,
+                alignItems: 'center',
+              }}
               renderItem={({item, i}) => (
                 <SliderBox id={i} image={item.image} />
               )}
             />
           </View>
 
+          <View style={styles.ghostWhiteBg} />
+
           <View
             style={{
-              backgroundColor: color.GhostWhite,
+              backgroundColor: color.white,
               paddingBottom: 16,
             }}>
             <View style={styles.rowStyle}>
               <CellComponent
-                // isGreenBack
+                // isPrimaryBack
                 // isWhiteText
                 title={'Buyers'}
                 onPress={() => navigation.navigate('Buyers')}
@@ -270,13 +273,15 @@ const Dashboard: React.FC<PropType> = props => {
                   <Ionicons
                     name="enter-outline"
                     onPress={() => {}}
-                    color={color.black}
-                    size={25}
+                    color={color.themeGrey}
+                    size={30}
                   />
                 }
+                customeStyle={{backgroundColor: color.LightPurple}}
+                customButtonTextStyle={{color: color.purple1}}
               />
               <CellComponent
-                // isGreenBack
+                // isPrimaryBack
                 // isWhiteText
                 title={'Sellers'}
                 onPress={() => navigation.navigate('Sellers')}
@@ -284,10 +289,12 @@ const Dashboard: React.FC<PropType> = props => {
                   <Ionicons
                     name="exit-outline"
                     onPress={() => {}}
-                    color={color.black}
-                    size={25}
+                    color={color.themeGrey}
+                    size={30}
                   />
                 }
+                customeStyle={{backgroundColor: color.LightPink}}
+                customButtonTextStyle={{color: color.pink1}}
               />
             </View>
             <View style={[styles.rowStyle, styles.marginTop12]}>
@@ -300,10 +307,12 @@ const Dashboard: React.FC<PropType> = props => {
                   <MCI
                     name="bookmark-plus-outline"
                     onPress={() => {}}
-                    color={color.black}
-                    size={25}
+                    color={color.themeGrey}
+                    size={30}
                   />
                 }
+                customeStyle={{backgroundColor: color.LightGreen}}
+                customButtonTextStyle={{color: color.green1}}
               />
               <CellComponent
                 // isWhiteText
@@ -314,15 +323,18 @@ const Dashboard: React.FC<PropType> = props => {
                   <MCI
                     name="shopping-outline"
                     onPress={() => {}}
-                    color={color.black}
-                    size={25}
+                    color={color.themeGrey}
+                    size={30}
                   />
                 }
+                customeStyle={{backgroundColor: color.LightOrange}}
+                customButtonTextStyle={{color: color.orange1}}
               />
             </View>
           </View>
+          <View style={styles.ghostWhiteBg} />
           {LatestNews}
-
+          <View style={styles.ghostWhiteBg} />
           <View style={{backgroundColor: color.white}}>
             <LabelWithIcon
               // iconComponent={
@@ -342,7 +354,7 @@ const Dashboard: React.FC<PropType> = props => {
               showsHorizontalScrollIndicator={false}
               testID="FlatList1"
               contentContainerStyle={{
-                paddingBottom: 100,
+                paddingBottom: 30,
               }}
               extraData={RecentPostData}
               data={RecentPostData}

@@ -13,10 +13,9 @@ const styles = StyleSheet.create({
     color: color.black,
   },
   textStyle1: {
-    ...CommonFontFamily.medium,
+    ...CommonFontFamily.regular,
     color: 'white',
-    fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 20,
     alignItems: 'center',
   },
   marginTop8: {

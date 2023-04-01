@@ -79,9 +79,9 @@ const DrawerContent = props => {
                 <Ionicons name={'apps-sharp'} color="gray" size={25} />
               )}
               inactiveTintColor="white"
-              label={'Language'}
+              label={'Buy Post'}
               onPress={() => {
-                //openLanguageModal(true);
+                verifyAndNavigate('Buy Post');
               }}
             />
           </Drawer.Section>

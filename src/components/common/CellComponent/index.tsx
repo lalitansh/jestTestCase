@@ -39,7 +39,7 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
         style={
           [
             // styles.buttonStyle,
-            // isGreenBack ? styles.isGreenBackStyle : null,
+            // isPrimaryBack ? styles.isPrimaryBackStyle : null,
             // isErrorStyle ? styles.isErrorStyle : null,
             // customeStyle,
           ]
@@ -49,16 +49,17 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
           // colors={[color.primaryOff, color.primaryMiddle, color.primary]}
           // start={{x: 0, y: 1}}
           // end={{x: 1, y: 1}}
-          style={[styles.rowStyle, styles.buttonStyle, customeStyle]}>
+          style={[styles.buttonStyle, customeStyle]}>
           <View
             style={{
               flex: 0.3,
-              justifyContent: 'center',
-              alignItems: 'center',
+              justifyContent: 'flex-start',
+              paddingTop: 4,
+              // alignItems: 'center',
             }}>
             {iconComponent}
           </View>
-          <View style={{flex: 0.7}}>
+          <View style={{flex: 0.7, paddingTop: 30}}>
             <Text
               style={[
                 styles.buttonTextStyle,
@@ -76,9 +77,10 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
 
 const styles = StyleSheet.create({
   buttonParentView: {
-    width: '50%',
-    paddingHorizontal: 14,
-    // alignSelf: 'center',
+    width: '46%',
+    // paddingHorizontal: 16,
+    borderRadius: 4,
+    alignSelf: 'center',
     // padding: 1.5,
     //elevation: 5,
     // justifyContent: 'center',
@@ -90,12 +92,13 @@ const styles = StyleSheet.create({
     width: '100%',
     // padding: 10,
     // justifyContent: ,
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: color.white,
-    borderRadius: 50,
+    // borderRadius: 50,
     // alignSelf: 'center',
     paddingVertical: 10,
-    elevation: 2,
+    paddingLeft: 8,
+    // elevation: 1,
     // height: '100%',
   },
   ButtonStyle: {
@@ -115,17 +118,17 @@ const styles = StyleSheet.create({
   iswhiteTextStyle: {
     color: color.white,
   },
-  isGreenBackStyle: {
+  isPrimaryBackStyle: {
     backgroundColor: color.black,
   },
   isErrorStyle: {
     backgroundColor: color.red,
   },
   buttonTextStyle: {
-    ...CommonFontFamily.regular,
+    ...CommonFontFamily.semibold,
     color: color.subtile,
     fontWeight: '500',
-    fontSize: 18,
+    fontSize: 13.5,
     // paddingLeft: 16,
   },
 });

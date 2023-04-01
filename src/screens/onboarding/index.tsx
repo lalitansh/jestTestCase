@@ -119,7 +119,7 @@ export default class onboarding extends React.Component {
         </View>
         <CustomeButton
           isWhiteText
-          isGreenBack
+          isPrimaryBack
           title={index === 2 ? 'Get Started' : 'Next'}
           onPress={() => (index === 2 ? this._onDone() : this._onNext(index))}
           customeStyle={{marginTop: 45}}

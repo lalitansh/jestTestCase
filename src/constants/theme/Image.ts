@@ -7,6 +7,7 @@ const image = {
   Granules1: require('../../assets/image/Granules1.jpg'),
   Granules2: require('../../assets/image/Granules2.jpg'),
   Granules3: require('../../assets/image/Granules3.jpg'),
+  polytrendLogo: require('../../assets/image/polytrendLogo.png'),
   //   back: require('../../../assets/image/back.png'),
   //   upload_image: require('../../../assets/image/upload-document.png'),
   //   cancel: require('../../../assets/image/cancel.png'),
