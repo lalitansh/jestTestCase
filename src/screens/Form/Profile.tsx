@@ -21,6 +21,7 @@ import {
 import {image} from '../../constants/theme/Image';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import CustomButton from '../../components/common/Button/button';
 
 const UserProfile: React.FC = () => {
   const arr = new Array(30).fill({
@@ -41,10 +42,12 @@ const UserProfile: React.FC = () => {
       <CommonHeader
         backIcon
         title="Profile"
-        titleBottomBack
+        titleAlign="left"
+        // titleBottomBack
         navigation={navigation}
       />
-      <KeyboardAwareScrollView style={[styles.container, styles.paddingBottom]}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={[styles.container, styles.paddingBottom]}>
         <TouchableOpacity
           activeOpacity={0.8}
           style={{alignSelf: 'center', marginTop: 20}}
@@ -130,6 +133,22 @@ const UserProfile: React.FC = () => {
           onChangeText={(value: string) => handleChange('working', value)}
           inputContainerStyle={styles.textInputContainer}
         />
+
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            paddingBottom: 50,
+            marginVertical: 16,
+          }}>
+          <CustomButton
+            isPrimaryBack
+            isWhiteText
+            title={'Submit'}
+            onPress={() => {}}
+            customeStyle={{}}
+          />
+        </View>
       </KeyboardAwareScrollView>
     </View>
   );
@@ -147,11 +166,12 @@ const styles = StyleSheet.create({
   },
   paddingBottom: {
     paddingBottom: 100,
+    paddingTop: 24,
   },
   textInputContainer: {
     marginTop: 10,
     alignSelf: 'center',
-    marginHorizontal: 16,
+    marginHorizontal: 20,
   },
   marginTop5: {
     marginTop: 5,
@@ -216,7 +236,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: 'white',
   },
   justifyCenter: {

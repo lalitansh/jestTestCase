@@ -11,71 +11,43 @@ import {
   FlatList,
   ScrollView,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
-import {image} from '../../../constants/theme/Image';
-import {restData} from '../helper/sampleData';
 
-const CardOne: React.FC = () => {
+const CardOne: React.FC = props => {
+  const {item = {}, navigation = {}} = props || {};
   const arr = new Array(30).fill({
     name: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
   });
 
-  const navigation = useNavigation();
-
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        // hitSlop={{top: 30,
-        // bottom: 30,
-        // left: 30,
-        // right: 30}
-        // }
-        onPress={() => navigation.goBack()}
-        style={styles.touchableBack}
-        activeOpacity={0.8}>
-        <Image
-          resizeMode={'contain'}
-          source={image.backIcon}
-          style={[styles.imgSize]}
-        />
-      </TouchableOpacity>
-
-      <FlatList
-        data={restData}
-        scrollEventThrottle={16}
-        contentContainerStyle={{backgroundColor: 'white'}}
-        renderItem={({item, index}: any) => {
-          return (
-            <View key={index} style={styles.scrollContent}>
-              <View style={styles.rowStyle}>
-                <View style={styles.flex3}>
-                  <Image source={item.image} style={styles.imgStyles} />
-                </View>
-                <View style={styles.flex6}>
-                  <Text style={styles.textStyles}>{item.title}</Text>
-                  <View style={[styles.rowStyle1, styles.marginTop5]}>
-                    <Image source={item.image} style={styles.imgStyles1} />
-                    <Text style={styles.textStyles1}>1000-5000</Text>
-                  </View>
-                  <View style={styles.rowStyle1}>
-                    <Image source={item.image} style={styles.imgStyles1} />
-                    <Text style={styles.textStyles1}>Mumbai</Text>
-                  </View>
-                  <View style={styles.rowStyle1}>
-                    <Image source={item.image} style={styles.imgStyles1} />
-                    <Text style={styles.textStyles1}>Grilled</Text>
-                  </View>
-                  <View style={styles.rowStyle1}>
-                    <Image source={item.image} style={styles.imgStyles1} />
-                    <Text style={styles.textStyles1}>Black</Text>
-                  </View>
-                </View>
-              </View>
+      <View style={styles.scrollContent}>
+        <View style={styles.rowStyle}>
+          <View style={styles.flex3}>
+            <Image source={item.image} style={styles.imgStyles} />
+          </View>
+          <View style={styles.flex6}>
+            <Text style={styles.textStyles}>{item.stone}</Text>
+            <View style={[styles.rowStyle1, styles.marginTop5]}>
+              <Image source={item.image} style={styles.imgStyles1} />
+              <Text style={styles.textStyles1}>{item.Quantity}</Text>
             </View>
-          );
-        }}
-      />
+            <View style={styles.rowStyle1}>
+              <Image source={item.image} style={styles.imgStyles1} />
+              <Text style={styles.textStyles1}>{item.location}</Text>
+            </View>
+            <View style={styles.rowStyle1}>
+              <Image source={item.image} style={styles.imgStyles1} />
+              <Text style={styles.textStyles1}>{item.material}</Text>
+            </View>
+            <View style={styles.rowStyle1}>
+              <Image source={item.image} style={styles.imgStyles1} />
+              <Text style={styles.textStyles1}>{item.condition}</Text>
+            </View>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
@@ -127,7 +99,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingTop: 8,
   },
- 
+
   imgSize: {
     height: 20,
     width: 20,
@@ -143,7 +115,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   scrollContent: {
-    marginTop: 16,
+    marginVertical: 16,
     backgroundColor: 'white', //"#F2F1EC",
     paddingHorizontal: 16,
   },
@@ -154,7 +126,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   justifyCenter: {
     justifyContent: 'center',

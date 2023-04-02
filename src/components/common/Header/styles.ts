@@ -7,10 +7,14 @@ const styles = StyleSheet.create({
   commonFont: {
     ...CommonFontFamily.medium,
     color: color.white,
-    fontSize: 20,
+    fontSize: 18,
   },
   blackColor: {
     color: color.black,
+  },
+  noBorder: {
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
   },
   textStyle1: {
     ...CommonFontFamily.regular,
@@ -26,11 +30,13 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: 16,
     paddingHorizontal: 16,
-    backgroundColor: color.primary,
+    backgroundColor: color.headerColor,
     marginTop: Platform.OS === 'android' ? getStatusBarHeight() : undefined,
     // justifyContent: 'space-between',
     alignItems: 'center',
     height: 65,
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
   },
   mainView1: {
     width: '100%',

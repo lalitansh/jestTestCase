@@ -16,7 +16,6 @@ const CardOne = props => {
   const {
     image,
     id,
-
     location,
     stone,
     materialLocation,

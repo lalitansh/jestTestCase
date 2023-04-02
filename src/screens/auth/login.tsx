@@ -89,12 +89,13 @@ const Login: React.FC<PropType> = props => {
       <StatusBar
         // barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         // translucent={true}
-        backgroundColor={color.primary}
+        backgroundColor={color.headerColor}
       />
       <CommonHeader
         backIcon
         title="Login"
-        titleBottomBack
+        titleAlign="left"
+        // titleBottomBack
         navigation={props.navigation}
       />
       <KeyboardAwareScrollView contentContainerStyle={styles.container}>

@@ -1,5 +1,12 @@
-import React, { useRef } from 'react';
-import {Button, Text, View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import React, {useRef} from 'react';
+import {
+  Button,
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -9,7 +16,7 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import {useNavigation} from '@react-navigation/native';
-import { cardListScreen, listScreen } from "../helper/sampleData"
+import {cardListScreen, listScreen} from '../helper/sampleData';
 
 const CardHome: React.FC = props => {
   const offset = useRef(new Animated.Value(0)).current;
@@ -34,23 +41,25 @@ const CardHome: React.FC = props => {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={{flexGrow: 0.3, justifyContent:'center'}}>
-        {cardListScreen.map(item=> {
-          return(
-      <TouchableOpacity
-        activeOpacity={0.9}
-        onPress={() => navigation.navigate(item.screen)}
-        style={[
-          styles.touchableStyle,
-          styles.alignCenter,
-          styles.justifyCenter,
-        ]}>
-        <Text style={[styles.textStyle, styles.whiteColorText]}>{item.text}</Text>
-      </TouchableOpacity>
-          )
+      <ScrollView
+        contentContainerStyle={{flexGrow: 0.3, justifyContent: 'center'}}>
+        {cardListScreen.map(item => {
+          return (
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={() => navigation.navigate(item.screen)}
+              style={[
+                styles.touchableStyle,
+                styles.alignCenter,
+                styles.justifyCenter,
+              ]}>
+              <Text style={[styles.textStyle, styles.whiteColorText]}>
+                {item.text}
+              </Text>
+            </TouchableOpacity>
+          );
         })}
       </ScrollView>
-      
     </View>
   );
 };

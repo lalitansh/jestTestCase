@@ -121,12 +121,13 @@ const OtpMpin: React.FC<PropType> = props => {
       <StatusBar
         // barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         // translucent={true}
-        backgroundColor={color.primary}
+        backgroundColor={color.headerColor}
       />
       <CommonHeader
         backIcon
         title="Verify Otp"
-        titleBottomBack
+        titleAlign="left"
+        // titleBottomBack
         navigation={props.navigation}
       />
 

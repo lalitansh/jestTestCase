@@ -1,18 +1,18 @@
 const size = {
   title: 20,
-  bigTitle: 28,
-  subtile: 14,
+  bigTitle: 24,
+  subtile: 12,
 };
 
 const font = {
-  default: 'Poppins-Regular',
-  bold: 'Poppins-Bold',
-  light: 'Poppins-Light',
-  regular: 'Poppins-Regular',
-  medium: 'Poppins-Medium',
-  extrabold: 'Poppins-ExtraBold',
-  black: 'Poppins-Black',
-  semibold: 'Poppins-SemiBold',
+  default: 'Montserrat-Regular',
+  bold: 'Montserrat-Bold',
+  light: 'Montserrat-Light',
+  regular: 'Montserrat-Regular', // 'Poppins-Regular',
+  medium: 'Montserrat-Medium', //'Poppins-Medium',
+  extrabold: 'Montserrat-ExtraBold',
+  black: 'Montserrat-Black',
+  semibold: 'Montserrat-SemiBold',
 };
 
 export {size, font};

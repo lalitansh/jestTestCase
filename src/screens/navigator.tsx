@@ -16,13 +16,14 @@ import OtpMpin from './auth/otpMpin';
 import TabNavigator from './navigation/tabNavigation';
 import DrawerDemo from './navigation/drawerNavigation';
 import OilImports from './OilImports';
-import Sellers from './Sellers';
 import Buyers from './Buyers';
 import UserProfile from './Form/Profile';
 import BuyPost from './BuyPost';
 import JobPost from './Form/FormThree';
 import MyTabs from './navigation/tabNavigation';
 import SellPost from './SellPost';
+import FormTwo from './Form/FormTwo';
+import Sellers from './Sellers';
 
 const Stack = createStackNavigator();
 export const navigationRef = React.createRef();

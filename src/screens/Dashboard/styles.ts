@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingBottom: 100,
-    backgroundColor: color.GhostWhite,
+    backgroundColor: color.white,
   },
   mainCard: {
     flexDirection: 'row',

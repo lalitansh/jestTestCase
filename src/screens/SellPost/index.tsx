@@ -11,7 +11,8 @@ const SellPost: React.FC<PropType> = props => {
       <CommonHeader
         backIcon
         title="Sell Post"
-        titleBottomBack
+        titleAlign="left"
+        // titleBottomBack
         navigation={navigation}
       />
 

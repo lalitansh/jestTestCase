@@ -1,8 +1,18 @@
 import React, {lazy, useLayoutEffect, useState} from 'react';
-import {Animated, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Animated,
+  Platform,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
+import Feather from 'react-native-vector-icons/Feather';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {color} from '../../constants/theme/Color';
 import BuyPost from '../BuyPost';
 import Dashboard from '../Dashboard';
@@ -11,6 +21,114 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FormTwo from '../Form/FormTwo';
 import JobPost from '../Form/FormThree';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+import UserProfile from '../Form/Profile';
+import {CommonFontFamily} from '../../components/common/styles/commonStyles';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {getStatusBarHeight} from 'react-native-status-bar-height';
+import {screenWidth} from '../../constants/appConstant';
+import News from '../News';
+
+const TopTabM = createMaterialTopTabNavigator();
+
+function MyTopTabBar({state, descriptors, navigation, position}) {
+  return (
+    <>
+      <View
+        style={{
+          flexDirection: 'row',
+          marginTop:
+            Platform.OS === 'android' ? getStatusBarHeight() : undefined,
+        }}>
+        {state.routes.map((route, index) => {
+          const {options} = descriptors[route.key];
+          const label =
+            options.tabBarLabel !== undefined
+              ? options.tabBarLabel
+              : options.title !== undefined
+              ? options.title
+              : route.name;
+
+          const isFocused = state.index === index;
+
+          const onPress = () => {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+              canPreventDefault: true,
+            });
+
+            if (!isFocused && !event.defaultPrevented) {
+              // The `merge: true` option makes sure that the params inside the tab screen are preserved
+              navigation.navigate({name: route.name, merge: true});
+            }
+          };
+
+          const onLongPress = () => {
+            navigation.emit({
+              type: 'tabLongPress',
+              target: route.key,
+            });
+          };
+
+          const inputRange = state.routes.map((_, i) => i);
+          const opacity = position.interpolate({
+            inputRange,
+            outputRange: inputRange.map(i => (i === index ? 1 : 0)),
+          });
+
+          console.log('label--', label);
+
+          return (
+            <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityState={isFocused ? {selected: true} : {}}
+              accessibilityLabel={options.tabBarAccessibilityLabel}
+              testID={options.tabBarTestID}
+              onPress={onPress}
+              onLongPress={onLongPress}
+              style={{
+                flex: 1,
+                height: 80,
+                width: '100%',
+                backgroundColor: color.white,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Animated.Text
+                style={[styles.titleStyle, {fontSize: 14, color: color.black}]}>
+                {label}
+              </Animated.Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </>
+  );
+}
+
+function ToPTabNav() {
+  return (
+    <>
+      <TopTabM.Navigator
+        screenOptions={{
+          tabBarLabelStyle: {color: color.headerColor},
+          tabBarItemStyle: {width: screenWidth / 2},
+          tabBarStyle: {
+            marginTop:
+              Platform.OS === 'android' ? getStatusBarHeight() : undefined,
+            justifyContent: 'space-around',
+          },
+          tabBarIndicatorStyle: {
+            backgroundColor: color.headerColor,
+            height: 3,
+          },
+        }}>
+        <TopTabM.Screen name="Buy Post" component={FormTwo} />
+        <TopTabM.Screen name="Sell Post" component={FormTwo} />
+      </TopTabM.Navigator>
+    </>
+  );
+}
 
 const Tab = createBottomTabNavigator();
 
@@ -18,26 +136,93 @@ function MyTabBar({state, descriptors, navigation}) {
   const [currentRoute, setCurrentRoute] = useState('Dashboard');
   const _renderIcon = (routeName, selectedTab) => {
     let icon = '';
-
+    let size = null;
     switch (routeName) {
       case 'Dashboard':
         icon = 'home-outline';
         break;
-      case 'Buy Post':
-        icon = 'cart-arrow-down';
+      case 'Post':
+        icon = 'shoppingcart';
+        if (routeName === currentRoute) {
+          return (
+            <>
+              <View style={styles.iconWrapperView}>
+                <AntDesign
+                  name={icon}
+                  size={20}
+                  color={routeName === currentRoute ? color.white : color.white}
+                />
+              </View>
+              <Text style={styles.titleStyle}>{routeName}</Text>
+            </>
+          );
+        } else {
+          return (
+            <AntDesign
+              name={icon}
+              size={25}
+              color={routeName === currentRoute ? color.white : color.white}
+            />
+          );
+        }
+
+      case 'News':
+        icon = 'page-previous-outline';
+        size = 18;
         break;
-      case 'Sell Post':
+      case 'Job Post':
+        icon = 'briefcase-search-outline';
+        size = 18;
+        break;
+      case 'Profile':
+        icon = 'smile';
+
+        if (routeName === currentRoute) {
+          return (
+            <>
+              <View style={styles.iconWrapperView}>
+                <Feather
+                  name={icon}
+                  size={20}
+                  color={routeName === currentRoute ? color.white : color.white}
+                />
+              </View>
+              <Text style={styles.titleStyle}>{routeName}</Text>
+            </>
+          );
+        } else {
+          return (
+            <Feather
+              name={icon}
+              size={25}
+              color={routeName === currentRoute ? color.white : color.white}
+            />
+          );
+        }
+      default:
         icon = 'cart-arrow-up';
         break;
     }
 
     return (
       <>
-        <MCI
-          name={icon}
-          size={routeName === 'Dashboard' ? 32 : 28}
-          color={routeName === currentRoute ? color.primary : 'grey'}
-        />
+        {routeName === currentRoute ? (
+          <>
+            <View style={styles.iconWrapperView}>
+              <MCI name={icon} size={size ? size : 25} color={color.white} />
+            </View>
+            <Text style={styles.titleStyle}>
+              {routeName === 'Dashboard' ? 'Home' : routeName}
+            </Text>
+          </>
+        ) : (
+          <MCI
+            name={icon}
+            size={routeName === 'Dashboard' ? 30 : 23}
+            color={color.white}
+          />
+        )}
+
         {/* <Text
           style={{
             color: routeName === selectedTab ? color.primary : color.black,
@@ -101,118 +286,24 @@ function MyTabBar({state, descriptors, navigation}) {
 
 export default function MyTabs(props) {
   const {route, navigation} = props || {};
-  useLayoutEffect(() => {
-    const routeName = getFocusedRouteNameFromRoute(route);
-    if (routeName === 'Buy Post' || routeName === 'Sell Post') {
-      navigation.setOptions({tabBarVisible: false});
-    } else {
-      navigation.setOptions({tabBarVisible: true});
-    }
-  }, [navigation, route]);
+  // useLayoutEffect(() => {
+  //   const routeName = getFocusedRouteNameFromRoute(route);
+  //   if (routeName === 'Buy Post' || routeName === 'Sell Post') {
+  //     navigation.setOptions({tabBarVisible: false});
+  //   } else {
+  //     navigation.setOptions({tabBarVisible: true});
+  //   }
+  // }, [navigation, route]);
   return (
     <Tab.Navigator
       screenOptions={{headerShown: false, tabBarHideOnKeyboard: true}}
       tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen name="Dashboard" component={Dashboard} />
-      <Tab.Screen name="Buy Post" component={FormTwo} />
-      <Tab.Screen name="Sell Post" component={FormTwo} />
+      <Tab.Screen name="Post" component={ToPTabNav} />
+      <Tab.Screen name="News" component={News} />
+      <Tab.Screen name="Job Post" component={JobPost} />
+      <Tab.Screen name="Profile" component={UserProfile} />
     </Tab.Navigator>
-  );
-}
-
-function TabNavigator(props) {
-  const {navigation} = props;
-  const [currentRoute, setCurrentRoute] = useState('Dashboard');
-  const _renderIcon = (routeName, selectedTab) => {
-    let icon = '';
-
-    switch (routeName) {
-      case 'Dashboard':
-        icon = 'home-outline';
-        break;
-      case 'Buy Post':
-        icon = 'cart-arrow-down';
-        break;
-      case 'Sell Post':
-        icon = 'cart-arrow-up';
-        break;
-    }
-
-    return (
-      <>
-        <MCI
-          name={icon}
-          size={30}
-          color={routeName === selectedTab ? color.primary : color.white}
-        />
-        <Text
-          style={{
-            color: routeName === selectedTab ? color.primary : color.white,
-          }}>
-          {routeName}
-        </Text>
-      </>
-    );
-  };
-  const renderTabBar = ({routeName, selectedTab, navigate}) => {
-    return (
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => {
-          setCurrentRoute(routeName);
-          navigate(routeName);
-        }}
-        style={styles.tabbarItem}>
-        {_renderIcon(routeName, selectedTab)}
-      </TouchableOpacity>
-    );
-  };
-
-  return (
-    <CurvedBottomBar.Navigator
-      type={'UP'}
-      // style={styles.bottomBar}
-      screenOptions={{headerShown: false, lazy: true}}
-      shadowStyle={styles.shawdow}
-      height={55}
-      circleWidth={50}
-      bgColor={color.primaryBlue}
-      initialRouteName={currentRoute}
-      borderTopLeftRight
-      renderCircle={({selectedTab, navigate}) => (
-        <Animated.View style={styles.btnCircleUp}>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={styles.button}
-            onPress={() => {
-              setCurrentRoute('Dashboard');
-              navigate('Dashboard');
-            }}>
-            <Ionicons
-              name={'ios-home-outline'}
-              color={currentRoute === 'Dashboard' ? color.primary : color.white}
-              size={25}
-            />
-          </TouchableOpacity>
-        </Animated.View>
-      )}
-      tabBar={renderTabBar}>
-      <CurvedBottomBar.Screen
-        name="Dashboard"
-        position="CIRCLE"
-        component={() => <Dashboard navigation={navigation} />}
-      />
-      <CurvedBottomBar.Screen
-        name="Buy Post"
-        component={() => <BuyPost navigation={navigation} />}
-        position="LEFT"
-      />
-      <CurvedBottomBar.Screen
-        name="Sell Post"
-        component={() => <SellPost navigation={navigation} />}
-        position="RIGHT"
-      />
-    </CurvedBottomBar.Navigator>
   );
 }
 
@@ -220,6 +311,20 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+  },
+  iconWrapperView: {
+    bottom: 23,
+    padding: 10,
+    borderRadius: 100,
+    backgroundColor: color.headerColor,
+    borderWidth: 3,
+    borderColor: color.white,
+  },
+  titleStyle: {
+    color: color.white,
+    bottom: 18,
+    fontSize: 12,
+    ...CommonFontFamily.regular,
   },
   shawdow: {
     shadowColor: color.white,
@@ -276,16 +381,16 @@ export const styles = StyleSheet.create({
   },
   cardElevation: {
     elevation: 3,
-    shadowColor: '#000',
+    shadowColor: 'black',
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    backgroundColor: color.white,
+    backgroundColor: color.headerColor,
     height: 50,
-    borderTopWidth: 2,
-    borderTopColor: color.defaultBackGrey,
+    // borderTopWidth: 2,
+    // borderTopColor: color.defaultBackGrey,
   },
 });

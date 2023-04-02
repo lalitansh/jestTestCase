@@ -32,6 +32,7 @@ const color = {
   LightGreen: '#F2FCE9',
   orange1: '#FFA477',
   LightOrange: '#FEEEE6',
+  headerColor: '#0c1427',
 };
 
 export {color};

@@ -28,6 +28,7 @@
     "@react-native-masked-view/masked-view": "^0.2.8",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/drawer": "^6.6.2",
+    "@react-navigation/material-top-tabs": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.2.3",
     "@softmedialab/react-native-material-textfield": "^0.16.24",
@@ -47,6 +48,7 @@
     "react-native-linear-gradient": "^2.6.2",
     "react-native-marquee": "^0.5.0",
     "react-native-material-textfield": "^0.16.1",
+    "react-native-pager-view": "^6.2.0",
     "react-native-paper": "^5.4.0",
     "react-native-reanimated": "^2.14.4",
     "react-native-redash": "^18.1.0",
@@ -61,6 +63,7 @@
     "react-native-status-bar-height": "^2.6.0",
     "react-native-svg": "^13.8.0",
     "react-native-swiper-flatlist": "^3.0.18",
+    "react-native-tab-view": "^3.5.1",
     "react-native-table-component": "^1.2.2",
     "react-native-vector-icons": "^9.2.0",
     "rn-material-ui-textfield": "^1.0.9"

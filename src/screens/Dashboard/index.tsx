@@ -83,10 +83,10 @@ const Dashboard: React.FC<PropType> = props => {
   ];
 
   useEffect(() => {
-    setIsProgress(true);
-    setTimeout(() => {
-      setIsProgress(false);
-    }, 300);
+    // setIsProgress(true);
+    // setTimeout(() => {
+    //   setIsProgress(false);
+    // }, 300);
   }, []);
 
   const onPressPost = (item: PostDetailType) => {
@@ -178,7 +178,9 @@ const Dashboard: React.FC<PropType> = props => {
   return (
     <View style={[CommonStyles.mainContainer, CommonStyles.backWhite]}>
       <CommonHeader
-        title={'Polytrend'}
+        noBorder
+        appLogo={image.polytrendLogo}
+        //customStyle={{borderRadius: 0}}
         // logOutIcon
         // onPressLogout={logOutConfirmation}
         customRightComponent={
@@ -211,11 +213,15 @@ const Dashboard: React.FC<PropType> = props => {
           nestedScrollEnabled={true}
           enableOnAndroid
           keyboardShouldPersistTaps="handled"
-          contentContainerStyle={styles.container}
+          contentContainerStyle={[styles.container, {paddingBottom: 42}]}
           testID="KeyboardAwareScrollView2">
           <View style={{backgroundColor: color.black, paddingVertical: 12}}>
             <MarqueeText
-              style={{fontSize: 18, color: color.white}}
+              style={{
+                fontSize: 12,
+                color: color.white,
+                ...CommonFontFamily.medium,
+              }}
               speed={0.3}
               marqueeOnStart={true}
               loop={true}
@@ -236,7 +242,7 @@ const Dashboard: React.FC<PropType> = props => {
               autoplayLoop
               showPagination
               paginationStyleItem={{
-                marginTop: 12,
+                marginTop: 6,
                 width: 8,
                 height: 8,
                 borderRadius: 4,
@@ -354,7 +360,7 @@ const Dashboard: React.FC<PropType> = props => {
               showsHorizontalScrollIndicator={false}
               testID="FlatList1"
               contentContainerStyle={{
-                paddingBottom: 30,
+                paddingBottom: 16,
               }}
               extraData={RecentPostData}
               data={RecentPostData}

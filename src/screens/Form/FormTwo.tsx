@@ -85,12 +85,6 @@ const FormTwo = () => {
 
   return (
     <View style={styles.flex1}>
-      <CommonHeader
-        backIcon
-        title="Buy Post"
-        titleBottomBack
-        navigation={navigation}
-      />
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.container}>
@@ -190,21 +184,22 @@ const FormTwo = () => {
             // ref={fieldRef=>fieldRef}
             value={form.description}
             multiline={true}
-            numberOfLines={3}
-            maxLength={300}
+            maxLength={100}
             errors={!isEmpty(errors) && errors}
             onChange={(value: string) => handleChange('description', value)}
             inputContainerStyle={styles.textInputContainer1}
           />
         </View>
 
-        <CustomButton
-          isPrimaryBack
-          isWhiteText
-          title={'Submit'}
-          onPress={() => {}}
-          customeStyle={{marginTop: 24}}
-        />
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          <CustomButton
+            isPrimaryBack
+            isWhiteText
+            title={'Submit'}
+            onPress={() => {}}
+            customeStyle={{}}
+          />
+        </View>
       </KeyboardAwareScrollView>
     </View>
   );

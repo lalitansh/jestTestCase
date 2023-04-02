@@ -112,10 +112,10 @@ const styles = StyleSheet.create({
     backgroundColor: color.red,
   },
   buttonTextStyle: {
-    ...CommonFontFamily.regular,
+    ...CommonFontFamily.medium,
     color: color.black,
     fontWeight: '500',
-    fontSize: 20,
+    fontSize: 16,
     marginLeft: 8,
   },
 });

@@ -6,9 +6,11 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
+  StyleSheet,
 } from 'react-native';
 import MI from 'react-native-vector-icons/MaterialIcons';
 import CardOne from '../../components/common/Card/CardOne';
+import CardTwo from '../../components/common/CardComponent/CardTwo';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import ProductCard from '../../components/common/ProductCard';
 import {CommonFontFamily} from '../../components/common/styles/commonStyles';
@@ -19,7 +21,7 @@ import {PropType} from '../Dashboard';
 
 const Sellers: React.FC<PropType> = props => {
   const {navigation = {}} = props || {};
-
+  const ItemSeparator = <View style={styles.ghostWhiteBg} />;
   return (
     <View
       style={{
@@ -29,13 +31,15 @@ const Sellers: React.FC<PropType> = props => {
       <CommonHeader
         backIcon
         title="Sellers"
-        titleBottomBack
+        titleAlign="left"
+        // titleBottomBack
         navigation={navigation}
       />
       <View>
         <FlatList
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, i) => i.toString()}
+          ItemSeparatorComponent={ItemSeparator}
           // numColumns={2}
           key={'h'}
           //horizontal={false}
@@ -48,7 +52,7 @@ const Sellers: React.FC<PropType> = props => {
           }}
           renderItem={({item, index}) => {
             return (
-              <CardOne
+              <CardTwo
                 navigation={navigation}
                 // onPressImage = {()=> this.props.navigation.navigate("AstroItemDetails", {item : item})}
                 item={item}
@@ -60,5 +64,12 @@ const Sellers: React.FC<PropType> = props => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  ghostWhiteBg: {
+    backgroundColor: color.GhostWhite,
+    height: 16,
+  },
+});
 
 export default Sellers;

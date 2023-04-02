@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   scrollContent: {
-    marginTop: 16,
+    marginVertical: 16,
     backgroundColor: 'white', //"#F2F1EC",
     paddingHorizontal: 8,
 

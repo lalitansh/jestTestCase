@@ -30,6 +30,9 @@ type PropsType = {
   titleAlign?: string;
   drawerIcon?: boolean;
   customRightComponent?: JSX.Element;
+  noBorder?: boolean;
+  customStyle?: {};
+  appLogo?: any;
 };
 
 const CommonHeader: React.FC<PropsType> = (props: any) => {
@@ -44,6 +47,9 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
     backgroundClean = false,
     titleAlign = 'center',
     drawerIcon = false,
+    noBorder = false,
+    customStyle = {},
+    appLogo,
     customRightComponent,
   } = props;
 
@@ -53,7 +59,7 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
         <AntDesign
           name="arrowleft"
           onPress={() => navigation.goBack()}
-          color={titleBottomBack ? color.white : color.black}
+          color={color.white}
           size={22}
         />
       );
@@ -61,7 +67,9 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
       return (
         <Ionicons
           name="ios-menu-sharp"
-          onPress={() => navigation.toggleDrawer()}
+          onPress={
+            () => {} // navigation.toggleDrawer()
+          }
           color={color.white}
           size={35}
         />
@@ -90,29 +98,52 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
     }
   };
 
+  const titleComponent = () => {
+    if (appLogo) {
+      return (
+        <Image
+          resizeMode="cover"
+          source={appLogo}
+          style={{height: 30, width: 100}}
+        />
+      );
+    } else if (title) {
+      return (
+        <Text
+          style={[
+            styles.commonFont,
+            backgroundClean ? styles.blackColor : null,
+            {textAlign: titleAlign ? titleAlign : 'center'},
+          ]}>
+          {title}
+        </Text>
+      );
+    }
+  };
+
   return (
     <>
       {!titleBottomBack ? (
         <View
-          style={[styles.mainView, backgroundClean ? styles.backClean : null]}>
+          style={[
+            styles.mainView,
+            backgroundClean ? styles.backClean : null,
+            noBorder ? styles.noBorder : null,
+            customStyle,
+          ]}>
           <View style={styles.view1}>{backOperation()}</View>
-          <View style={styles.view2}>
-            <Text
-              style={[
-                styles.commonFont,
-                backgroundClean ? styles.blackColor : null,
-                {textAlign: titleAlign ? titleAlign : 'center'},
-              ]}>
-              {title}
-            </Text>
-          </View>
+          <View style={styles.view2}>{titleComponent()}</View>
           <View style={[styles.view1, {alignItems: 'flex-end'}]}>
             {rightComponent()}
           </View>
         </View>
       ) : (
         <View
-          style={[styles.mainView1, backgroundClean ? styles.backClean : null]}>
+          style={[
+            styles.mainView1,
+            backgroundClean ? styles.backClean : null,
+            noBorder ? styles.noBorder : null,
+          ]}>
           <View style={{}}>{backOperation()}</View>
           <View style={[styles.marginTop8]}>
             <Text

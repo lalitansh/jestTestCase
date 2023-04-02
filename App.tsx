@@ -37,9 +37,9 @@ const App: React.FC = () => {
     <>
       {Platform.OS === 'android' ? (
         <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          // barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           translucent={true}
-          backgroundColor={color.primary}
+          backgroundColor={color.headerColor}
         />
       ) : (
         <SafeAreaView

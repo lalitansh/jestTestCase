@@ -19,10 +19,14 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import isEmpty from 'lodash/isEmpty';
+import set from 'lodash/set';
+import unset from 'lodash/unset';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import CustomButton from '../../components/common/Button/button';
 
 // Item array for the dropdown
 const items = [
@@ -59,6 +63,7 @@ const JobPost = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [colorItem, setColorItem] = useState('white');
   const [form, setForm] = useState({});
+  const [errors, setErrors] = useState({});
   const navigation = useNavigation();
 
   useEffect(() => {}, []);
@@ -67,21 +72,31 @@ const JobPost = () => {
     setSelectedIndex(index);
   };
 
+  const handleChange = (key, value) => {
+    console.log('value, key', value, key);
+    setForm({...form, [key]: value});
+    unset(errors, key);
+    // console.log(`name = ${form.key}, value = ${form.value}`)
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={styles.flex1}>
       <CommonHeader
         backIcon
         title="Job Post"
-        titleBottomBack
+        titleAlign="left"
+        // titleBottomBack
         navigation={navigation}
       />
-      <KeyboardAwareScrollView style={styles.container}>
-        <View style={{paddingHorizontal: 16}}>
+      <KeyboardAwareScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={styles.container}>
+        <View style={{paddingHorizontal: 16, paddingTop: 32}}>
           <SegmentedControlTab
             values={['First', 'Second']}
             selectedIndex={selectedIndex}
             onTabPress={handleIndexChange}
-            tabStyle={{paddingVertical: 10, marginVertical: 16}}
+            tabStyle={{paddingVertical: 10, marginBottom: 24}}
           />
 
           <Text style={styles.textStyle}>Searchable1</Text>
@@ -92,30 +107,10 @@ const JobPost = () => {
             // Called after the selection
             //containerStyle={{padding: 5}}
             // Suggestion container style
-            textInputStyle={{
-              // Inserted text style
-              padding: 12,
-              borderWidth: 1,
-              borderColor: '#ccc',
-              backgroundColor: 'white', //'#FAF7F6',
-            }}
-            itemStyle={{
-              // Single dropdown item style
-              padding: 10,
-              marginTop: 2,
-              backgroundColor: 'white', //'#FAF9F8',
-              borderColor: '#bbb',
-              borderWidth: 1,
-            }}
-            itemTextStyle={{
-              // Text style of a single dropdown item
-              color: '#222',
-            }}
-            itemsContainerStyle={{
-              // Items container style you can pass maxHeight
-              // To restrict the items dropdown hieght
-              maxHeight: '100%',
-            }}
+            textInputStyle={styles.tiStyle}
+            itemStyle={styles.itemStyle}
+            itemTextStyle={styles.ittStyle}
+            itemsContainerStyle={styles.itCStyle}
             items={items}
             // Mapping of item array
             defaultIndex={null}
@@ -135,11 +130,20 @@ const JobPost = () => {
             // onSubmitEditing={onSubmit}
             // ref={fieldRef=>fieldRef}
             value={form.description}
-            multiline={true}
-            numberOfLines={3}
-            maxLength={300}
+            multiline
+            maxLength={100}
             onChangeText={(value: string) => handleChange('description', value)}
             inputContainerStyle={styles.textInputContainer1}
+          />
+        </View>
+
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          <CustomButton
+            isPrimaryBack
+            isWhiteText
+            title={'Submit'}
+            onPress={() => {}}
+            customeStyle={{}}
           />
         </View>
       </KeyboardAwareScrollView>
@@ -151,8 +155,11 @@ export default JobPost;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: 'white',
+  },
+  flex1: {
+    flex: 1,
   },
   titleText: {
     padding: 8,
@@ -165,6 +172,26 @@ const styles = StyleSheet.create({
     width: 30,
     borderRadius: 15,
     marginTop: 16,
+  },
+  tiStyle: {
+    // Inserted text style
+    padding: 5,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    backgroundColor: 'white', //'#FAF7F6',
+  },
+  itemStyle: {
+    padding: 10,
+    marginTop: 2,
+    backgroundColor: 'white', //'#FAF9F8',
+    borderColor: '#bbb',
+    borderWidth: 1,
+  },
+  ittStyle: {
+    color: '#222',
+  },
+  itCStyle: {
+    maxHeight: '100%',
   },
   headingText: {
     padding: 8,
@@ -186,6 +213,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     maxHeight: 100,
     marginHorizontal: 2,
+    marginBottom: 24,
   },
   marginTop5: {
     marginTop: 16,

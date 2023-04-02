@@ -37,7 +37,7 @@ export default class GetStarted extends React.Component {
           // translucent={true}
           backgroundColor={color.transparent}
         />
-        <View style={{height: '55%', width: '100%'}}>
+        <View style={{height: '65%', width: '100%'}}>
           <Image
             style={{height: '100%', width: '100%'}}
             source={image.splash}
@@ -45,7 +45,7 @@ export default class GetStarted extends React.Component {
         </View>
         <View
           style={{
-            height: '55%',
+            height: '65%',
             width: '100%',
             position: 'absolute',
             backgroundColor: 'rgba(32, 32, 32, 0.8)',
@@ -57,51 +57,27 @@ export default class GetStarted extends React.Component {
             {Message.Polytrend}
           </Text>
         </View>
-        <View style={{marginTop: 48, alignItems: 'center', width: '100%'}}>
-          <Text style={style.bigTitle}>{Message.letGetStarted}</Text>
-          <Text style={[style.subtitle, {marginTop: 12, textAlign: 'center'}]}>
-            {Message.toBegin}
-          </Text>
-        </View>
-        <View style={{marginTop: 48, marginLeft: 20, marginRight: 20}}>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => navigation.navigate('Login')}
-            style={style.defaultButton}>
-            <Text style={[style.buttonTitle]}>Sign In</Text>
-          </TouchableOpacity>
-          {/* <TouchableOpacity
+        <View style={[style.bottomView]}>
+          <View style={{marginBottom: 48, alignItems: 'center', width: '100%'}}>
+            <Text style={style.bigTitle}>{Message.letGetStarted}</Text>
+            <Text
+              style={[style.subtitle, {marginTop: 12, textAlign: 'center'}]}>
+              {Message.toBegin}
+            </Text>
+          </View>
+          <View style={{marginHorizontal: 20, paddingBottom: 16}}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => navigation.navigate('Login')}
+              style={style.defaultButton}>
+              <Text style={[style.buttonTitle]}>Sign In</Text>
+            </TouchableOpacity>
+            {/* <TouchableOpacity
             activeOpacity={0.8}
             onPress={this.goToSignUp.bind(this)}
             style={[style.secButton, {marginTop: 12}]}>
             <Text style={[style.secButtonTitle]}>Sign Up</Text>
           </TouchableOpacity> */}
-        </View>
-        <View style={[style.bottomView, {alignItems: 'center'}]}>
-          <View style={{flexDirection: 'row'}}>
-            {/* <Text
-              style={[
-                style.subtitle,
-                {fontSize: 12, fontWeight: '400', textAlign: 'center'},
-              ]}>
-              {Message.dontHaveAccount}
-            </Text> */}
-            {/* <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={this.goToSignUp.bind(this)}>
-              <Text
-                style={[
-                  style.subtitle,
-                  {
-                    fontSize: 12,
-                    fontWeight: '400',
-                    textAlign: 'center',
-                    color: color.primary,
-                  },
-                ]}>
-                {Message.requestAnInvite}
-              </Text>
-            </TouchableOpacity> */}
           </View>
         </View>
       </View>
