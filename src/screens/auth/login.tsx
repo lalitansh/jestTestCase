@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Alert,
   StatusBar,
+  Image,
 } from 'react-native';
 import CustomButton from '../../components/common/Button/button';
 import TextField from '../../components/common/EditTextInput';
@@ -21,6 +22,7 @@ import SmsRetriever from 'react-native-sms-retriever';
 import {CommonStyles} from '../../components/common/styles/commonStyles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CommonHeader from '../../components/common/Header/commonHeader';
+import {image} from '../../constants/theme/Image';
 
 export type PropType = {
   navigation?: any;
@@ -31,11 +33,27 @@ const Login: React.FC<PropType> = props => {
   const [errors, setErrors] = useState({});
   const [isProgress, setIsProgress] = useState(false);
 
+  useEffect(() => {
+    getPhoneNumber();
+  }, []);
+
   const handleSetForm = (key, value) => {
     console.log('value, key', value, key);
     setForm({...form, [key]: value});
     unset(errors, key);
     // console.log(`name = ${form.key}, value = ${form.value}`)
+  };
+
+  // Get the phone number (first gif)
+  const getPhoneNumber = async () => {
+    try {
+      const phoneNumber = await SmsRetriever.requestPhoneNumber();
+      if (phoneNumber) {
+        setForm({...form, phone: phoneNumber});
+      }
+    } catch (error) {
+      console.log('error--', JSON.stringify(error));
+    }
   };
 
   const validate = () => {
@@ -94,16 +112,27 @@ const Login: React.FC<PropType> = props => {
       <CommonHeader
         backIcon
         title="Login"
-        titleAlign="left"
+        // titleAlign="left"
+        backgroundClean
         // titleBottomBack
         navigation={props.navigation}
       />
-      <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+      <KeyboardAwareScrollView
+        nestedScrollEnabled={true}
+        enableOnAndroid
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={styles.container}>
         <View style={styles.mrVer50} />
 
         <View style={CommonStyles.headerTextView}>
           <Text style={{fontSize: 20}}>👋</Text>
           <Text style={CommonStyles.welcomeText}>Welcome Back</Text>
+
+          {/* <Image
+            resizeMode="contain"
+            source={image.logoDark}
+            style={{height: 50, width: 200}}
+          /> */}
         </View>
 
         <View style={{flex: 0.7}}>
@@ -146,6 +175,7 @@ const styles = StyleSheet.create({
   },
   flex1: {
     flex: 1,
+    backgroundColor: color.white,
   },
   text1: {
     alignItems: 'center',

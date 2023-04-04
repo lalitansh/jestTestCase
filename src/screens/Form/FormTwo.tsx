@@ -51,7 +51,7 @@ const colors = [
   {id: 8, name: 'lightgreen'},
 ];
 
-const FormTwo = () => {
+const BuyPost = () => {
   // Data Source for the SearchableDropdown
   const [serverData, setServerData] = useState([]);
   const [selectedItem, setSelectedItem] = useState('');
@@ -205,7 +205,7 @@ const FormTwo = () => {
   );
 };
 
-export default FormTwo;
+export default BuyPost;
 
 const styles = StyleSheet.create({
   container: {

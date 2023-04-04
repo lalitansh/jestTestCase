@@ -269,10 +269,11 @@ export default class Splash extends React.Component {
     return (
       <View style={styles.container}>
         <Image
-          style={{height: 80, width: 80, borderRadius: 40}}
-          source={image.splash}
+          resizeMode="contain"
+          style={{height: 80, width: 200, borderRadius: 40}}
+          source={image.polytrendLogo}
         />
-        <Text style={[style.navigationTitle, {marginTop: 27}]}>Polytrend</Text>
+        {/* <Text style={[style.navigationTitle, {marginTop: 27}]}>Polytrend</Text> */}
 
         <ProgressBarView visible={this.state.isProgress} />
       </View>
@@ -283,7 +284,7 @@ export default class Splash extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.primary,
+    backgroundColor: color.headerColor,
     alignItems: 'center',
     justifyContent: 'center',
   },

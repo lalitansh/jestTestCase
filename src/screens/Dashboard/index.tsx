@@ -12,6 +12,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ProgressBarView from '../../components/ProgressBarView';
 import {color} from '../../constants/theme/Color';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Octicons from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import FA5 from 'react-native-vector-icons/FontAwesome5';
@@ -43,6 +44,7 @@ import LabelWithIcon from '../../components/common/LabelWithIcon';
 import {getRandomItem} from '../../utils/functions/getters';
 import CardThree from '../../components/common/CardComponent/CardThree';
 import CardFour from '../../components/common/CardComponent/CardFour';
+import {Menu, MenuDivider, MenuItem} from 'react-native-material-menu';
 const {height} = Dimensions.get('window');
 
 export type PropType = {
@@ -72,8 +74,17 @@ const Dashboard: React.FC<PropType> = props => {
   const {navigation} = props || {};
   console.log('navigation--', navigation);
   const [isProgress, setIsProgress] = useState(false);
+  const [menuItem, setMenuItem] = useState('Mumbai');
   const [posts, setPosts] = useState([]);
   const [errors, setErrors] = useState({});
+  const [visible, setVisible] = useState(false);
+
+  const setMenuValue = item => {
+    setMenuItem(item);
+    hideMenu();
+  };
+  const hideMenu = () => setVisible(false);
+  const showMenu = () => setVisible(true);
 
   const lightColors = [
     color.AntiqueWhite,
@@ -186,21 +197,55 @@ const Dashboard: React.FC<PropType> = props => {
         customRightComponent={
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <FA5
-              name="hand-holding-water"
+              name="map-marker-alt"
               onPress={() => {}}
               color={color.white}
-              size={18}
-              style={{marginRight: 4}}
+              size={14}
+              style={{marginRight: 8}}
             />
-            <TouchableOpacity
+            {/* <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => navigation.navigate('OilImports')}>
               <Text style={styles.customRightText}>Oil-inr</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+
+            <View
+              style={{
+                height: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Menu
+                visible={visible}
+                anchor={
+                  <Text style={styles.textStyle2} onPress={showMenu}>
+                    {menuItem}
+                  </Text>
+                }
+                onRequestClose={hideMenu}>
+                <MenuItem onPress={() => setMenuValue('Delhi')}>Delhi</MenuItem>
+                <MenuDivider />
+                <MenuItem onPress={() => setMenuValue('Mumbai')}>
+                  Mumbai
+                </MenuItem>
+                <MenuDivider />
+                <MenuItem onPress={() => setMenuValue('Baroda')}>
+                  Baroda
+                </MenuItem>
+                <MenuDivider />
+                <MenuItem onPress={() => setMenuValue('Ahmedabad')}>
+                  Ahmedabad
+                </MenuItem>
+                <MenuDivider />
+                <MenuItem onPress={() => setMenuValue('Kolkata')}>
+                  Kolkata
+                </MenuItem>
+              </Menu>
+            </View>
           </View>
         }
         titleAlign="left"
-        drawerIcon
+        // drawerIcon
         navigation={navigation}
       />
 
@@ -269,6 +314,37 @@ const Dashboard: React.FC<PropType> = props => {
               backgroundColor: color.white,
               paddingBottom: 16,
             }}>
+            <TouchableOpacity
+              style={{
+                paddingVertical: 12,
+                width: '95%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#E7E6DD',
+                flexDirection: 'row',
+                // marginHorizontal: 50,
+                alignSelf: 'center',
+                borderRadius: 2,
+              }}>
+              <View style={{flex: 0.2, alignItems: 'flex-end'}}>
+                <MCI name="chart-bar-stacked" size={25} color={'grey'} />
+              </View>
+              <View style={{flex: 0.05}} />
+              <View style={{flex: 0.6, alignItems: 'flex-start'}}>
+                <Text
+                  style={[
+                    styles.textStyle,
+                    {
+                      color: '#8B8970', //color.white,
+                      fontSize: 18,
+                      ...CommonFontFamily.regular,
+                      fontWeight: '400',
+                    },
+                  ]}>
+                  Latest Polymer Price
+                </Text>
+              </View>
+            </TouchableOpacity>
             <View style={styles.rowStyle}>
               <CellComponent
                 // isPrimaryBack

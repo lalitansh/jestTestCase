@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     // justifyContent: 'space-between',
     alignItems: 'center',
     height: 65,
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
+    // borderBottomLeftRadius: 24,
+    // borderBottomRightRadius: 24,
   },
   mainView1: {
     width: '100%',
@@ -51,6 +51,12 @@ const styles = StyleSheet.create({
   },
   view1: {
     flex: 0.2,
+  },
+  flex4: {
+    flex: 0.4,
+  },
+  view0: {
+    flex: 0,
   },
   view2: {
     flex: 0.8,

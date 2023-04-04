@@ -40,13 +40,16 @@ const UserProfile: React.FC = () => {
   return (
     <View style={styles.container}>
       <CommonHeader
-        backIcon
+        // backIcon
         title="Profile"
-        titleAlign="left"
+        // titleAlign="left"
         // titleBottomBack
         navigation={navigation}
       />
       <KeyboardAwareScrollView
+        nestedScrollEnabled={true}
+        enableOnAndroid
+        keyboardShouldPersistTaps="handled"
         contentContainerStyle={[styles.container, styles.paddingBottom]}>
         <TouchableOpacity
           activeOpacity={0.8}

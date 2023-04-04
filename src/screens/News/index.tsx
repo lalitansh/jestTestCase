@@ -29,9 +29,9 @@ const News: React.FC<PropType> = props => {
         backgroundColor: color.white,
       }}>
       <CommonHeader
-        backIcon
+        // backIcon
         title="News"
-        titleAlign="left"
+        // titleAlign="left"
         // titleBottomBack
         navigation={navigation}
       />

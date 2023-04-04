@@ -80,10 +80,10 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
   imgStyles: {
-    height: 150,
+    height: 100,
     width: '100%',
     margin: 5,
-    borderRadius: 16,
+    // borderRadius: 16,
   },
   imgStyles1: {
     height: 10,
@@ -92,11 +92,11 @@ const styles = StyleSheet.create({
     borderRadius: 1,
   },
   flex3: {
-    flex: 0.3,
+    flex: 0.32,
   },
   flex6: {
     flex: 0.6,
-    paddingLeft: 16,
+    paddingLeft: 20,
     paddingTop: 8,
   },
 

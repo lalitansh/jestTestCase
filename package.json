@@ -47,6 +47,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-marquee": "^0.5.0",
+    "react-native-material-menu": "^2.0.0",
     "react-native-material-textfield": "^0.16.1",
     "react-native-pager-view": "^6.2.0",
     "react-native-paper": "^5.4.0",

@@ -27,6 +27,7 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CustomButton from '../../components/common/Button/button';
+import {color} from '../../constants/theme/Color';
 
 // Item array for the dropdown
 const items = [
@@ -82,21 +83,29 @@ const JobPost = () => {
   return (
     <View style={styles.flex1}>
       <CommonHeader
-        backIcon
+        // backIcon
         title="Job Post"
-        titleAlign="left"
+        // titleAlign="left"
         // titleBottomBack
         navigation={navigation}
       />
       <KeyboardAwareScrollView
+        nestedScrollEnabled={true}
+        enableOnAndroid
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.container}>
         <View style={{paddingHorizontal: 16, paddingTop: 32}}>
           <SegmentedControlTab
-            values={['First', 'Second']}
+            values={['Give', 'Take']}
             selectedIndex={selectedIndex}
             onTabPress={handleIndexChange}
-            tabStyle={{paddingVertical: 10, marginBottom: 24}}
+            tabStyle={{
+              paddingVertical: 10,
+              marginBottom: 24,
+              borderColor: color.primary,
+            }}
+            tabTextStyle={{color: color.primary}}
+            activeTabStyle={{backgroundColor: color.primary}}
           />
 
           <Text style={styles.textStyle}>Searchable1</Text>
@@ -125,7 +134,7 @@ const JobPost = () => {
 
           <TextField
             label="Description"
-            keyboardType="phone-pad"
+            keyboardType="email-address"
             // formatText={formatText}
             // onSubmitEditing={onSubmit}
             // ref={fieldRef=>fieldRef}

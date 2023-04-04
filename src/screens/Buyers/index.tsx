@@ -30,7 +30,7 @@ const Buyers: React.FC<PropType> = props => {
       <CommonHeader
         backIcon
         title="Buyers"
-        titleAlign="left"
+        // titleAlign="left"
         // titleBottomBack
         navigation={navigation}
       />

@@ -29,15 +29,15 @@ const NewsCard: React.FC = props => {
     <View style={styles.container}>
       <View style={styles.scrollContent}>
         <View style={styles.rowStyle}>
+          <View style={styles.flex3}>
+            <Image source={item.image} style={styles.imgStyles} />
+          </View>
+          <View style={styles.flex05} />
           <View style={styles.flex6}>
             <Text style={styles.textStyles}>{item.title}</Text>
             <View style={[styles.rowStyle1, styles.marginTop5]}>
               <Text style={styles.textStyles1}>{item.description}</Text>
             </View>
-          </View>
-          <View style={styles.flex05} />
-          <View style={styles.flex3}>
-            <Image source={item.image} style={styles.imgStyles} />
           </View>
         </View>
       </View>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   textStyles: {
     fontSize: 14,
-    color: color.red,
+    color: color.headerColor,
     ...CommonFontFamily.medium,
   },
   textStyles1: {
@@ -70,16 +70,17 @@ const styles = StyleSheet.create({
   },
   rowStyle: {
     flexDirection: 'row',
+    paddingHorizontal: 16,
   },
   rowStyle1: {
     flexDirection: 'row',
     paddingTop: 2,
   },
   imgStyles: {
-    height: 130,
+    height: 100,
     width: '100%',
     // margin: 5,
-    borderRadius: 4,
+    // borderRadius: 4,
   },
   ghostWhiteBg: {
     backgroundColor: color.GhostWhite,
@@ -100,8 +101,8 @@ const styles = StyleSheet.create({
   },
   flex6: {
     flex: 0.6,
-    paddingLeft: 16,
-    paddingTop: 8,
+    // paddingLeft: 16,
+    // paddingTop: 8,
   },
 
   imgSize: {

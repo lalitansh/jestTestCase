@@ -19,7 +19,7 @@ import Dashboard from '../Dashboard';
 import SellPost from '../SellPost';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FormTwo from '../Form/FormTwo';
-import JobPost from '../Form/FormThree';
+import JobPost from '../Form/JobPost';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import UserProfile from '../Form/Profile';
 import {CommonFontFamily} from '../../components/common/styles/commonStyles';

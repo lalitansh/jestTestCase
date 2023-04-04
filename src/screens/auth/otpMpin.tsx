@@ -126,12 +126,14 @@ const OtpMpin: React.FC<PropType> = props => {
       <CommonHeader
         backIcon
         title="Verify Otp"
-        titleAlign="left"
+        // titleAlign="left"
+        backgroundClean
         // titleBottomBack
         navigation={props.navigation}
       />
 
       <KeyboardAwareScrollView
+        nestedScrollEnabled={true}
         enableOnAndroid
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.container}
@@ -170,14 +172,14 @@ const OtpMpin: React.FC<PropType> = props => {
               isWhiteText
               title={'Resend'}
               onPress={() => onResend()}
-              customeStyle={{borderRadius: 0, backgroundColor: color.themeGrey}}
+              customeStyle={{borderRadius: 5, backgroundColor: color.themeGrey}}
             />
             <CustomButton
               isPrimaryBack
               isWhiteText
               title={'Confirm'}
               onPress={() => onConfirm()}
-              customeStyle={{borderRadius: 0, backgroundColor: color.primary}}
+              customeStyle={{borderRadius: 5, backgroundColor: color.primary}}
             />
           </View>
         </View>
@@ -191,10 +193,10 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingBottom: 30,
-    backgroundColor: color.white,
   },
   flex1: {
     flex: 1,
+    backgroundColor: color.white,
   },
   text1: {
     alignItems: 'center',

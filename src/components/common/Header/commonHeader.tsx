@@ -59,7 +59,7 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
         <AntDesign
           name="arrowleft"
           onPress={() => navigation.goBack()}
-          color={color.white}
+          color={backgroundClean ? color.black : color.white}
           size={22}
         />
       );
@@ -121,6 +121,14 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
     }
   };
 
+  let backStyle = {};
+
+  if (!backIcon && !drawerIcon) {
+    backStyle = styles.view0;
+  } else {
+    backStyle = styles.view1;
+  }
+
   return (
     <>
       {!titleBottomBack ? (
@@ -131,9 +139,9 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
             noBorder ? styles.noBorder : null,
             customStyle,
           ]}>
-          <View style={styles.view1}>{backOperation()}</View>
+          <View style={backStyle}>{backOperation()}</View>
           <View style={styles.view2}>{titleComponent()}</View>
-          <View style={[styles.view1, {alignItems: 'flex-end'}]}>
+          <View style={[styles.flex4, {alignItems: 'flex-end'}]}>
             {rightComponent()}
           </View>
         </View>

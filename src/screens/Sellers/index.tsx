@@ -9,7 +9,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import MI from 'react-native-vector-icons/MaterialIcons';
-import CardOne from '../../components/common/Card/CardOne';
+import CardOne from '../../components/common/CardComponent/CardOne';
 import CardTwo from '../../components/common/CardComponent/CardTwo';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import ProductCard from '../../components/common/ProductCard';
@@ -31,7 +31,7 @@ const Sellers: React.FC<PropType> = props => {
       <CommonHeader
         backIcon
         title="Sellers"
-        titleAlign="left"
+        // titleAlign="left"
         // titleBottomBack
         navigation={navigation}
       />
@@ -52,7 +52,7 @@ const Sellers: React.FC<PropType> = props => {
           }}
           renderItem={({item, index}) => {
             return (
-              <CardTwo
+              <CardOne
                 navigation={navigation}
                 // onPressImage = {()=> this.props.navigation.navigate("AstroItemDetails", {item : item})}
                 item={item}

@@ -28,7 +28,7 @@ export default class ExampleOne extends Component {
         <CommonHeader
           backIcon
           title="Oil imports"
-          titleAlign="left"
+          // titleAlign="left"
           // titleBottomBack
           navigation={navigation}
         />

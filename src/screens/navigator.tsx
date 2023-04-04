@@ -19,10 +19,9 @@ import OilImports from './OilImports';
 import Buyers from './Buyers';
 import UserProfile from './Form/Profile';
 import BuyPost from './BuyPost';
-import JobPost from './Form/FormThree';
+import JobPost from './Form/JobPost';
 import MyTabs from './navigation/tabNavigation';
 import SellPost from './SellPost';
-import FormTwo from './Form/FormTwo';
 import Sellers from './Sellers';
 
 const Stack = createStackNavigator();
