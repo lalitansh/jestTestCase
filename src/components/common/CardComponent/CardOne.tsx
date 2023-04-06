@@ -13,15 +13,18 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import { image } from '../../../constants/theme/Image';
+import { color } from '../../../constants/theme/Color';
+import FA5 from 'react-native-vector-icons/FontAwesome5'
 
 const CardOne: React.FC = props => {
-  const {item = {}, navigation = {}} = props || {};
+  const {item = {}, navigation = {}, onPress} = props || {};
   const arr = new Array(30).fill({
     name: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
   });
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={styles.container}>
       <View style={styles.scrollContent}>
         <View style={styles.rowStyle}>
           <View style={styles.flex3}>
@@ -30,11 +33,18 @@ const CardOne: React.FC = props => {
           <View style={styles.flex6}>
             <Text style={styles.textStyles}>{item.stone}</Text>
             <View style={[styles.rowStyle1, styles.marginTop5]}>
-              <Image source={item.image} style={styles.imgStyles1} />
+              <Image source={image.bag} style={styles.imgStyles1} />
               <Text style={styles.textStyles1}>{item.Quantity}</Text>
             </View>
             <View style={styles.rowStyle1}>
-              <Image source={item.image} style={styles.imgStyles1} />
+            <FA5
+              name="map-marker-alt"
+              onPress={() => {}}
+              color={color.black}
+              size={10}
+              style={{margin : 5}}
+            />
+              {/* <Image source={item.image} style={styles.imgStyles1} /> */}
               <Text style={styles.textStyles1}>{item.location}</Text>
             </View>
             <View style={styles.rowStyle1}>
@@ -42,13 +52,13 @@ const CardOne: React.FC = props => {
               <Text style={styles.textStyles1}>{item.material}</Text>
             </View>
             <View style={styles.rowStyle1}>
-              <Image source={item.image} style={styles.imgStyles1} />
+              <Image source={image.condition} style={styles.imgStyles1} />
               <Text style={styles.textStyles1}>{item.condition}</Text>
             </View>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

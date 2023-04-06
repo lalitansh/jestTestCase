@@ -1,15 +1,25 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Image, Dimensions, Platform, ScrollView } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import React, {useState, useEffect} from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+  Platform,
+  ScrollView,
+} from 'react-native';
 import CommonHeader from '../../components/common/Header/commonHeader';
-import { CommonStyles } from '../../components/common/styles/commonStyles';
-import { url } from '../../constants/apiConstant';
-import { callGetApi } from '../../network/api';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {CommonStyles} from '../../components/common/styles/commonStyles';
+import {url} from '../../constants/apiConstant';
+import {callGetApi} from '../../network/api';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ProgressBarView from '../../components/ProgressBarView';
-import { color } from '../../constants/theme/Color';
-import { image } from '../../constants/theme/Image';
-const { height } = Dimensions.get('window');
+import {color} from '../../constants/theme/Color';
+import {image} from '../../constants/theme/Image';
+import CardTwo from '../../components/common/CardComponent/CardTwo';
+import CardFive from '../../components/common/CardComponent/CardFive';
+const {height} = Dimensions.get('window');
 
 type PropTypes = {};
 
@@ -17,45 +27,20 @@ export type PostDetailType = {
   id: number;
   title: string;
   body: string;
-}
+};
 
-const PostDetail: React.FC<PropTypes> = (props: any) => {
+const PostDetail: React.FC = (props: any) => {
   const [isProgress, setIsProgress] = useState(false);
   const [postData, setPostData] = useState({});
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    getPost();
-  }, []);
+  useEffect(() => {}, []);
 
-  const getPost = () => {
-    const { item } = props.route.params || {};
-    const { id } = item || {};
-    setIsProgress(true);
-    callGetApi(`${url.postDetails}/${id}`)
-      .then(response => {
-        console.log('res------- 123', response);
-        if (response.valid) {
-          setPostData(response.value);
-        } else {
-          if (response.value.errors) {
-            setErrors(response.value.errors);
-          }
-        }
-        setIsProgress(false);
-      })
-      .catch(err => {
-        setIsProgress(false);
-        console.log('errorInspection1', err);
-      });
-  };
-
-  const { id = 0, title = '', body = '' } =
-    postData || {};
+  const {title = '', body = '', item = {}} = props.route.params || {};
   return (
     <View style={CommonStyles.mainContainer}>
       <CommonHeader
-        back
+        backIcon
         navigation={props.navigation}
         title={'Post Detail'}
       />
@@ -65,68 +50,37 @@ const PostDetail: React.FC<PropTypes> = (props: any) => {
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}
-        testID='KeyboardAwareScrollView3'
-      >
-        <View style={{ flex: 1 }}>
-          <View
-            style={[styles.container1, {flex: 0.3}]}
-          >
+        testID="KeyboardAwareScrollView3">
+        <View style={{flex: 1}}>
+          <View style={[styles.container1, {flex: 0.3}]}>
             <Image
-              resizeMode='contain'
-              source={image.userImg}
+              resizeMode="contain"
+              source={item.image}
               style={styles.fullImg}
             />
 
-<View style={styles.subRightView}>
-                  <Text
-                    style={{ color: 'white', fontWeight: 'bold', fontSize: 20 }}
-                  >
-                    {id}
-                  </Text>
-                </View>
+            {/* <View style={styles.subRightView}>
+              <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
+                {item?.id}
+              </Text>
+            </View> */}
           </View>
 
-            <ScrollView 
+          <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ flexGrow: 1, flex:0.7, paddingBottom: 100, backgroundColor: 'black', }}>
+            contentContainerStyle={{
+              flexGrow: 1,
+              flex: 0.7,
+              paddingBottom: 100,
+              backgroundColor: color.white,
+            }}>
+            <CardTwo item={item} navigation={props.navigation} />
 
+            <View style={styles.ghostWhiteBg} />
 
-              <View
-                style={{
-                  backgroundColor: 'black',
-                  paddingHorizontal: 20,
-                  marginTop: -30
-                }}
-              >
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    marginTop: 35,
-                  }}
-                >
-
-                  <Text
-                    style={styles.text1}
-                  >
-                    {title}
-                  </Text>
-                </View>
-
-                <Text style={styles.text2}>
-                  {body}
-                </Text>
-
-                
-              </View>
-
-            </ScrollView>
-            
-
-          
-          
+            <CardFive item={item}/>
+          </ScrollView>
         </View>
-        
       </KeyboardAwareScrollView>
       <ProgressBarView visible={isProgress} />
     </View>
@@ -136,17 +90,22 @@ const PostDetail: React.FC<PropTypes> = (props: any) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: color.white
+    backgroundColor: color.white,
   },
   fullImg: {
-    height: '100%', width: '100%'
+    height: '100%',
+    width: '100%',
+  },
+  ghostWhiteBg: {
+    height: 24,
+    backgroundColor: color.GhostWhite,
   },
   container1: {
     height: height / 3,
     width: '100%',
     backgroundColor: color.defaultBackGrey,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   alignRight: {
     alignItems: 'flex-end',
@@ -156,7 +115,7 @@ const styles = StyleSheet.create({
   text1: {
     color: 'white',
     fontWeight: Platform.OS === 'ios' ? '500' : 'bold',
-    fontSize: 30
+    fontSize: 30,
   },
   text2: {
     color: 'white',

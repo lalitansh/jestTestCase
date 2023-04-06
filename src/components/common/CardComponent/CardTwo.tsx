@@ -1,55 +1,100 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useRef} from 'react';
+import React from 'react';
 import {
-  SafeAreaView,
-  Dimensions,
-  NativeScrollEvent,
-  Button,
-  Text,
   View,
-  StyleSheet,
   FlatList,
-  ScrollView,
   Image,
   TouchableOpacity,
+  Text,
+  ScrollView,
+  StyleSheet,
 } from 'react-native';
 import {color} from '../../../constants/theme/Color';
-import {RecentPostData, SellerData} from '../../../utils/data';
-import CommonHeader from '../Header/commonHeader';
+import {CommonFontFamily} from '../styles/commonStyles';
 
-const CardTwo: React.FC = props => {
-  const {item = {}, navigation = {}} = props || {};
-
-  const arr = new Array(30).fill({
-    name: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-  });
-
+const CardTwo = props => {
+  const {item, navigation, onPressImage, onPressDescription} = props || {};
+  const {
+    image,
+    id,
+    location,
+    stone,
+    materialLocation,
+    material,
+    Quantity,
+    condition,
+  } = item || {};
+  console.log('item', item);
   return (
-    <View style={styles.container}>
-      <View style={styles.scrollContent}>
-        <View style={styles.rowStyle}>
-          <View style={styles.flex6}>
-            <Text style={styles.textStyles}>{item.stone}</Text>
-            <View style={[styles.rowStyle1, styles.marginTop5]}>
-              <Image source={item.image} style={styles.imgStyles1} />
-              <Text style={styles.textStyles1}>{item.Quantity}</Text>
-            </View>
-            <View style={styles.rowStyle1}>
-              <Image source={item.image} style={styles.imgStyles1} />
-              <Text style={styles.textStyles1}>{item.location}</Text>
-            </View>
-            <View style={styles.rowStyle1}>
-              <Image source={item.image} style={styles.imgStyles1} />
-              <Text style={styles.textStyles1}>{item.material}</Text>
-            </View>
-            <View style={styles.rowStyle1}>
-              <Image source={item.image} style={styles.imgStyles1} />
-              <Text style={styles.textStyles1}>{item.condition}</Text>
-            </View>
-          </View>
+    <View
+      style={[
+        styles.container,
+        //styles.marginTop10,
+        styles.marginBottom16,
+        styles.cardElevation,
+      ]}>
 
-          <View style={styles.flex3}>
-            <Image source={item.image} style={styles.imgStyles} />
+<View style={styles.labelView}>
+<Text style={styles.thirdPart}>{material}</Text>
+<Text style={styles.textStyle1}>{item.description}</Text>
+</View>
+      {/* <View style={styles.rowStyle}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={onPressImage}
+          style={styles.firstPart}>
+          <Image resizeMode="cover" source={image} style={styles.imgStyle} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={onPressImage}
+          style={styles.secondPart}>
+          <Text style={styles.thirdPart}>{material}</Text>
+        </TouchableOpacity>
+      </View> */}
+
+      <View style={[styles.rowStyle, styles.marginTop10]}>
+        <View style={styles.flex5Center}>
+          <View>
+            <Text style={[styles.forthPart, styles.boldStyle]}>Material</Text>
+          </View>
+          <View style={styles.bottomBorder}>
+            <Text style={styles.forthPart}>{material}</Text>
+          </View>
+        </View>
+
+        <View style={styles.flex2} />
+
+        <View style={styles.flex5Center}>
+          <View>
+            <Text style={[styles.forthPart, styles.boldStyle]}>Quantity </Text>
+          </View>
+          <View style={styles.bottomBorder}>
+            <Text style={styles.forthPart}>{Quantity}</Text>
+          </View>
+        </View>
+      </View>
+
+      <View style={[styles.rowStyle, styles.marginTop10]}>
+        <View style={styles.flex5Center}>
+          <View>
+            <Text style={[styles.forthPart, styles.boldStyle]}>Condition </Text>
+          </View>
+          <View style={styles.bottomBorder}>
+            <Text style={styles.forthPart}>{condition}</Text>
+          </View>
+        </View>
+
+        <View style={styles.flex2} />
+
+        <View style={styles.flex5Center}>
+          <View>
+            <Text style={[styles.forthPart, styles.boldStyle]}>
+              Material location
+            </Text>
+          </View>
+          <View style={styles.bottomBorder}>
+            <Text style={styles.forthPart}>{materialLocation}</Text>
           </View>
         </View>
       </View>
@@ -60,90 +105,188 @@ const CardTwo: React.FC = props => {
 export default CardTwo;
 
 const styles = StyleSheet.create({
-  box: {
-    height: 100,
-    width: 100,
-    borderRadius: 20,
-    backgroundColor: 'red',
-    marginBottom: 20,
-  },
-  marginTop5: {
-    marginTop: 5,
-  },
-  textStyles: {
-    fontSize: 18,
-    color: 'black',
-  },
-  textStyles1: {
-    fontSize: 12,
+  container: {
+    flex: 1,
   },
   rowStyle: {
     flexDirection: 'row',
   },
-  rowStyle1: {
-    flexDirection: 'row',
-    paddingTop: 2,
+  textStyle1: {
+    fontSize: 12,
+    ...CommonFontFamily.regular,
+    color: color.headerColor,
+    marginTop: 5,
   },
-  imgStyles: {
-    height: 130,
-    width: '100%',
-    margin: 5,
-    borderRadius: 16,
+  cardElevation: {
+    elevation: 0.2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    backgroundColor: color.white,
+    // marginHorizontal: 16,
+    paddingBottom: 16,
+    // borderRadius: 16,
+    paddingHorizontal: 8,
   },
-  ghostWhiteBg: {
-    backgroundColor: color.GhostWhite,
-    height: 16,
-  },
-  imgStyles1: {
-    height: 10,
-    width: 10,
-    margin: 5,
-    borderRadius: 1,
-  },
-  flex3: {
-    flex: 0.3,
-  },
-  flex6: {
-    flex: 0.6,
-    paddingLeft: 16,
-    paddingTop: 8,
-  },
-
-  imgSize: {
-    height: 20,
-    width: 20,
-  },
-  touchableBack: {
-    left: 25,
-    height: 50,
-    width: 100,
-    top: 16,
-  },
-  name: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  scrollContent: {
-    marginVertical: 16,
-    backgroundColor: 'white', //"#F2F1EC",
-    paddingHorizontal: 16,
-  },
-  textStyle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  container: {
-    flex: 1,
+  imgStyle: {
     backgroundColor: 'white',
+    height: 80,
+    width: 80,
+    aspectRatio: 1,
+    borderRadius: 100,
   },
-  justifyCenter: {
+  boldStyle: {
+    fontWeight: 'bold',
+  },
+  marginTop10: {
+    marginTop: 10,
+  },
+  marginBottom16: {
+    marginBottom: 16,
+  },
+  flex2: {
+    flex: 0.1,
+  },
+  firstPart: {
+    flex: 0.3,
+    width: '100%',
+    // borderRadius:100,
+
     justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingLeft: 10,
+    paddingTop: 16,
   },
-  alignCenter: {
-    alignItems: 'center',
+  secondPart: {
+    flex: 0.5,
+    justifyContent: 'space-evenly',
+    paddingVertical: 10,
+
+    flexDirection: 'column',
   },
-  whiteColorText: {
-    color: 'white',
+  thirdPart: {
+    color: color.subtile,
+    textTransform: 'capitalize',
+
+    fontWeight: '400',
+
+    fontSize: 24,
+    ...CommonFontFamily.bold,
+  },
+  flex5Center: {
+    flex: 0.4,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginTop: 10,
+    paddingLeft: 16,
+  },
+  labelView: {
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 8,
+  },
+  forthPart: {
+    color: color.black,
+    textTransform: 'capitalize',
+
+    fontWeight: '400',
+
+    fontSize: 15,
+    ...CommonFontFamily.regular,
+  },
+  bottomBorder: {
+    borderBottomWidth: 0.4,
+    borderBottomColor: 'grey',
+    // paddingHorizontal: 5,
+    width: '100%',
+    paddingBottom: 8,
   },
 });
+
+//{
+/* <View
+            style={{
+              flex: 0.3,
+              justifyContent: 'center',
+              marginVertical: 2,
+              paddingHorizontal: 2,
+            }}
+          >
+            <Text
+              style={{
+                color: color.black,
+                textTransform: 'capitalize',
+
+                fontWeight: '400',
+
+                fontSize: 24,
+                ...CommonFontFamily.bold,
+              }}
+            >
+              {material}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              justifyContent: 'flex-end',
+              marginTop: 2,
+            }}
+          >
+            <Text style={{color: color.black, ...CommonFontFamily.regular}}>
+              Quantity: {Quantity}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              justifyContent: 'flex-end',
+              marginTop: 2,
+            }}
+          >
+            <Text style={{color: color.black, ...CommonFontFamily.regular}}>
+              {'Condition:'} {condition}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              justifyContent: 'flex-end',
+              marginTop: 2,
+            }}
+          >
+            <Text style={{color: color.black, ...CommonFontFamily.regular}}>
+              {'Material Location:'} {materialLocation}
+            </Text>
+          </View>
+          <View
+            style={{
+              justifyContent: 'flex-end',
+              marginTop: 2,
+            }}
+          >
+            <Text style={{color: color.black, ...CommonFontFamily.regular}}>
+              {location}
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {}}
+          activeOpacity={1}
+          style={{
+            flex: 0.2,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: color.white,
+            borderBottomColor: 'white',
+            borderBottomWidth: 0.6,
+          }}
+        >
+          <MI name="keyboard-arrow-right" color={color.white} size={30} />
+        </TouchableOpacity> */
+//}

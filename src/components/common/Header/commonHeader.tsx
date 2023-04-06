@@ -122,11 +122,25 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
   };
 
   let backStyle = {};
+  let centerStyle = {};
+  let rightStyle = {};
 
-  if (!backIcon && !drawerIcon) {
+  if (!backIcon && !drawerIcon && !back) {
     backStyle = styles.view0;
   } else {
     backStyle = styles.view1;
+  }
+
+  if (!backIcon && !drawerIcon && !back && !customRightComponent) {
+    centerStyle = {flex: 1};
+  } else {
+    centerStyle = styles.flex7;
+  }
+
+  if (!backIcon && !drawerIcon && !back && !customRightComponent) {
+    rightStyle = styles.view0;
+  } else {
+    rightStyle = styles.view1;
   }
 
   return (
@@ -139,9 +153,16 @@ const CommonHeader: React.FC<PropsType> = (props: any) => {
             noBorder ? styles.noBorder : null,
             customStyle,
           ]}>
-          <View style={backStyle}>{backOperation()}</View>
-          <View style={styles.view2}>{titleComponent()}</View>
-          <View style={[styles.flex4, {alignItems: 'flex-end'}]}>
+          <View style={[backStyle]}>
+            {backOperation()}
+          </View>
+          <View style={[styles.view2, centerStyle]}>{titleComponent()}</View>
+          <View
+            style={[
+              styles.flex4,
+              rightStyle,
+              {alignItems: 'flex-end'},
+            ]}>
             {rightComponent()}
           </View>
         </View>

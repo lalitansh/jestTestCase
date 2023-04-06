@@ -104,7 +104,13 @@ const SellerData = [
     material: 'PP',
     condition: 'Granules',
     Quantity: 500,
-  },
+    description:
+      'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
+  company: 'sharma and sharma',
+  sellerName: 'vivek shashtri',
+  phone: '9412345678',
+  mail: 'abc@abc.com'
+    },
   {
     id: 2,
     image: image.Granules2,
@@ -114,7 +120,13 @@ const SellerData = [
     material: 'ABS',
     condition: 'Granules',
     Quantity: 600,
-  },
+    description:
+      'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
+      company: 'ranka materials',
+      sellerName: 'rahul agrawal',
+      phone: '9412345876',
+      mail: 'abc@abc.com'
+    },
   {
     id: 3,
     image: image.Granules1,
@@ -124,7 +136,13 @@ const SellerData = [
     material: 'HDPE',
     condition: 'Grinding',
     Quantity: 700,
-  },
+    description:
+      'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
+      company: 'manik shah co.',
+      sellerName: 'manik lal shah',
+      phone: '9412347689',
+      mail: 'abc@abc.com'
+    },
   {
     id: 3,
     image: image.splash,
@@ -134,7 +152,13 @@ const SellerData = [
     material: 'PP',
     condition: 'Grinding',
     Quantity: 500,
-  },
+    description:
+      'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
+      company: 'babel ceramic',
+      sellerName: 'rahul babel',
+      phone: '9432145678',
+      mail: 'abc@abc.com'
+    },
   {
     id: 5,
     image: image.Granules2,
@@ -144,7 +168,13 @@ const SellerData = [
     material: 'ABS',
     condition: 'Grinding',
     Quantity: 400,
-  },
+    description:
+      'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
+      company: 'udaipur plactic',
+      sellerName: 'sanjay gandhi',
+      phone: '9412345678',
+      mail: 'abc@abc.com'
+    },
 ];
 
 export {sliderData, RecentPostData, SellerData, NewsData};

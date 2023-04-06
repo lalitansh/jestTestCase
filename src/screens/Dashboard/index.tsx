@@ -195,7 +195,7 @@ const Dashboard: React.FC<PropType> = props => {
         // logOutIcon
         // onPressLogout={logOutConfirmation}
         customRightComponent={
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end'}}>
             <FA5
               name="map-marker-alt"
               onPress={() => {}}
@@ -212,7 +212,7 @@ const Dashboard: React.FC<PropType> = props => {
             <View
               style={{
                 height: '100%',
-                alignItems: 'center',
+                alignItems: 'flex-end',
                 justifyContent: 'center',
               }}>
               <Menu

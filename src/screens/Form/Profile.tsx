@@ -1,22 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useRef, useState} from 'react';
 import {
-  SafeAreaView,
-  Dimensions,
-  NativeScrollEvent,
-  Button,
-  Text,
   View,
   StyleSheet,
-  FlatList,
-  ScrollView,
   Image,
   TouchableOpacity,
 } from 'react-native';
 import {
   TextField,
-  FilledTextField,
-  OutlinedTextField,
 } from 'rn-material-ui-textfield';
 import {image} from '../../constants/theme/Image';
 import CommonHeader from '../../components/common/Header/commonHeader';
@@ -50,6 +41,7 @@ const UserProfile: React.FC = () => {
         nestedScrollEnabled={true}
         enableOnAndroid
         keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={[styles.container, styles.paddingBottom]}>
         <TouchableOpacity
           activeOpacity={0.8}
@@ -168,7 +160,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   paddingBottom: {
-    paddingBottom: 100,
+    paddingBottom: 130,
     paddingTop: 24,
   },
   textInputContainer: {

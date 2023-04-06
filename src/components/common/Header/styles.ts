@@ -1,7 +1,7 @@
-import {Platform, StyleSheet} from 'react-native';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
-import {color} from '../../../constants/theme/Color';
-import {CommonFontFamily} from '../styles/commonStyles';
+import { Platform, StyleSheet } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { color } from '../../../constants/theme/Color';
+import { CommonFontFamily } from '../styles/commonStyles';
 
 const styles = StyleSheet.create({
   commonFont: {
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 30,
   },
   view1: {
-    flex: 0.2,
+    flex: 0.3,
   },
   flex4: {
     flex: 0.4,
@@ -59,7 +59,10 @@ const styles = StyleSheet.create({
     flex: 0,
   },
   view2: {
-    flex: 0.8,
+    flex: 0.6,
+  },
+  flex7: {
+    flex: 0.7
   },
   backClean: {
     backgroundColor: color.white,
