@@ -78,7 +78,7 @@ const PostDetail: React.FC = (props: any) => {
 
             <View style={styles.ghostWhiteBg} />
 
-            <CardFive item={item}/>
+            <CardFive item={item} />
           </ScrollView>
         </View>
       </KeyboardAwareScrollView>
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.defaultBackGrey,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 5,
   },
   alignRight: {
     alignItems: 'flex-end',

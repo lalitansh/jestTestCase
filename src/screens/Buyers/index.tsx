@@ -53,7 +53,7 @@ const Buyers: React.FC<PropType> = props => {
             return (
               <CardOne
                 navigation={navigation}
-                // onPressImage = {()=> this.props.navigation.navigate("AstroItemDetails", {item : item})}
+                onPress={() => navigation.navigate('PostDetail', {item: item})}
                 item={item}
               />
             );

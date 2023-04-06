@@ -1,14 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useRef, useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-import {
-  TextField,
-} from 'rn-material-ui-textfield';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {TextField} from 'rn-material-ui-textfield';
 import {image} from '../../constants/theme/Image';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -132,8 +125,8 @@ const UserProfile: React.FC = () => {
         <View
           style={{
             flex: 1,
-            justifyContent: 'center',
-            paddingBottom: 50,
+            // justifyContent: 'center',
+            paddingBottom: 150,
             marginVertical: 16,
           }}>
           <CustomButton

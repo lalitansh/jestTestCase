@@ -32,16 +32,15 @@ const CardFour: React.FC = props => {
     <View style={styles.scrollContent}>
       <ImageBackground
         source={image.whiteDesign3}
-        style={{width: screenWidth / 1.8, padding: 16}}>
+        style={{width: screenWidth / 3.5, padding: 2}}>
         <Image source={imageTemp} style={styles.imgStyles} />
-        <View style={styles.marginAbsolute}>
-          <Text numberOfLines={1} style={styles.textStyles}>
-            {stone}
-          </Text>
-          <Text numberOfLines={1} style={styles.textStyles1}>
-            {location}
-          </Text>
-        </View>
+
+        <Text numberOfLines={1} style={styles.textStyles}>
+          {stone}
+        </Text>
+        <Text numberOfLines={1} style={styles.textStyles1}>
+          {location}
+        </Text>
       </ImageBackground>
     </View>
   );
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
   },
   marginAbsolute: {
     bottom: 20,
-    width: screenWidth / 3,
+    width: screenWidth / 5,
     borderRadius: 10,
     alignSelf: 'center',
     backgroundColor: color.primary,
@@ -69,11 +68,12 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   textStyles: {
-    fontSize: 16,
+    fontSize: 12,
     color: 'black',
+    marginTop: 8,
   },
   textStyles1: {
-    fontSize: 12,
+    fontSize: 10,
   },
   rowStyle: {
     flexDirection: 'row',
@@ -83,8 +83,9 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
   imgStyles: {
-    width: '100%',
-    height: 200,
+    width: screenWidth / 3.5,
+    height: screenWidth / 3.5,
+    alignSelf: 'center',
     // borderRadius: 8,
   },
   imgStyles1: {
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     marginTop: 16,
     backgroundColor: 'white', //"#F2F1EC",
-    paddingHorizontal: 8,
+    // paddingHorizontal: 8,
 
     //
     elevation: 2,

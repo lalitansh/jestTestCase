@@ -14,6 +14,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import {screenWidth} from '../../../constants/appConstant';
 import {image} from '../../../constants/theme/Image';
 
 const CardThree: React.FC = props => {
@@ -29,7 +30,7 @@ const CardThree: React.FC = props => {
     <View style={styles.scrollContent}>
       <ImageBackground
         source={image.whiteDesign3}
-        style={{width: screenWidth / 1.8, padding: 16}}>
+        style={{width: screenWidth / 2, padding: 16}}>
         <Image source={item} style={styles.imgStyles} />
         <View style={styles.marginTop5}>
           <Text style={styles.textStyles}>Title</Text>
@@ -68,8 +69,9 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
   imgStyles: {
-    width: '100%',
-    height: 200,
+    width: screenWidth / 2.4,
+    height: screenWidth / 2.3,
+    alignSelf: 'center',
     // borderRadius: 8,
   },
   imgStyles1: {

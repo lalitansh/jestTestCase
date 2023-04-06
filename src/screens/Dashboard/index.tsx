@@ -195,7 +195,12 @@ const Dashboard: React.FC<PropType> = props => {
         // logOutIcon
         // onPressLogout={logOutConfirmation}
         customRightComponent={
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+            }}>
             <FA5
               name="map-marker-alt"
               onPress={() => {}}
@@ -298,7 +303,7 @@ const Dashboard: React.FC<PropType> = props => {
               data={sliderData}
               index={2}
               contentContainerStyle={{
-                width: screenWidth,
+                // width: screenWidth,
                 alignItems: 'center',
               }}
               renderItem={({item, i}) => (
@@ -336,12 +341,12 @@ const Dashboard: React.FC<PropType> = props => {
                     styles.textStyle,
                     {
                       color: '#8B8970', //color.white,
-                      fontSize: 18,
-                      ...CommonFontFamily.regular,
+                      fontSize: 15,
+                      ...CommonFontFamily.semibold,
                       fontWeight: '400',
                     },
                   ]}>
-                  Latest Polymer Price
+                  Virgin Polymer Price
                 </Text>
               </View>
             </TouchableOpacity>
@@ -433,14 +438,16 @@ const Dashboard: React.FC<PropType> = props => {
 
             <FlatList
               nestedScrollEnabled={true}
-              showsHorizontalScrollIndicator={false}
+              // showsHorizontalScrollIndicator={false}
               testID="FlatList1"
               contentContainerStyle={{
                 paddingBottom: 16,
               }}
               extraData={RecentPostData}
               data={RecentPostData}
-              horizontal
+              columnWrapperStyle={{justifyContent: 'space-evenly'}}
+              // horizontal
+              numColumns={3}
               initialNumToRender={15}
               keyExtractor={(item, i) => i.toString()}
               renderItem={({item}) => {

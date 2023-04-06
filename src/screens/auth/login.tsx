@@ -23,6 +23,7 @@ import {CommonStyles} from '../../components/common/styles/commonStyles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CommonHeader from '../../components/common/Header/commonHeader';
 import {image} from '../../constants/theme/Image';
+import {removeCountryCode} from '../../utils/functions/getters';
 
 export type PropType = {
   navigation?: any;
@@ -49,7 +50,8 @@ const Login: React.FC<PropType> = props => {
     try {
       const phoneNumber = await SmsRetriever.requestPhoneNumber();
       if (phoneNumber) {
-        setForm({...form, phone: phoneNumber});
+        const num = removeCountryCode(phoneNumber);
+        setForm({...form, phone: num});
       }
     } catch (error) {
       console.log('error--', JSON.stringify(error));

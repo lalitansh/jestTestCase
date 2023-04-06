@@ -44,10 +44,10 @@ const App: React.FC = () => {
       ) : (
         <SafeAreaView
           edges={['top']}
-          style={{backgroundColor: color.primary}}
+          style={{backgroundColor: color.headerColor}}
         />
       )}
-      <View style={{flex: 1, backgroundColor: color.primary}}>
+      <View style={{flex: 1, backgroundColor: color.white}}>
         <Container />
       </View>
       <SafeAreaView

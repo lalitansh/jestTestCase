@@ -54,6 +54,12 @@ const RecentPostData = [
     location: 'Ahmedabad',
     stone: 'PP - GRANULES',
   },
+  {
+    id: 6,
+    image: image.Granules1,
+    location: 'Mumbai',
+    stone: 'PP - GRANULES',
+  },
 ];
 
 const NewsData = [
@@ -106,11 +112,11 @@ const SellerData = [
     Quantity: 500,
     description:
       'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
-  company: 'sharma and sharma',
-  sellerName: 'vivek shashtri',
-  phone: '9412345678',
-  mail: 'abc@abc.com'
-    },
+    company: 'sharma and sharma',
+    sellerName: 'vivek shashtri',
+    phone: '9412345678',
+    mail: 'abc@abc.com',
+  },
   {
     id: 2,
     image: image.Granules2,
@@ -122,11 +128,11 @@ const SellerData = [
     Quantity: 600,
     description:
       'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
-      company: 'ranka materials',
-      sellerName: 'rahul agrawal',
-      phone: '9412345876',
-      mail: 'abc@abc.com'
-    },
+    company: 'ranka materials',
+    sellerName: 'rahul agrawal',
+    phone: '9412345876',
+    mail: 'abc@abc.com',
+  },
   {
     id: 3,
     image: image.Granules1,
@@ -138,11 +144,11 @@ const SellerData = [
     Quantity: 700,
     description:
       'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
-      company: 'manik shah co.',
-      sellerName: 'manik lal shah',
-      phone: '9412347689',
-      mail: 'abc@abc.com'
-    },
+    company: 'manik shah co.',
+    sellerName: 'manik lal shah',
+    phone: '9412347689',
+    mail: 'abc@abc.com',
+  },
   {
     id: 3,
     image: image.splash,
@@ -154,11 +160,11 @@ const SellerData = [
     Quantity: 500,
     description:
       'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
-      company: 'babel ceramic',
-      sellerName: 'rahul babel',
-      phone: '9432145678',
-      mail: 'abc@abc.com'
-    },
+    company: 'babel ceramic',
+    sellerName: 'rahul babel',
+    phone: '9432145678',
+    mail: 'abc@abc.com',
+  },
   {
     id: 5,
     image: image.Granules2,
@@ -170,11 +176,11 @@ const SellerData = [
     Quantity: 400,
     description:
       'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
-      company: 'udaipur plactic',
-      sellerName: 'sanjay gandhi',
-      phone: '9412345678',
-      mail: 'abc@abc.com'
-    },
+    company: 'udaipur plactic',
+    sellerName: 'sanjay gandhi',
+    phone: '9412345678',
+    mail: 'abc@abc.com',
+  },
 ];
 
 export {sliderData, RecentPostData, SellerData, NewsData};
