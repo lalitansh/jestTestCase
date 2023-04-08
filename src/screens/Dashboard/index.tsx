@@ -9,6 +9,7 @@ import {
 import {url} from '../../constants/apiConstant';
 import {callGetApi} from '../../network/api';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import ProgressBarView from '../../components/ProgressBarView';
 import {color} from '../../constants/theme/Color';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -45,6 +46,7 @@ import {getRandomItem} from '../../utils/functions/getters';
 import CardThree from '../../components/common/CardComponent/CardThree';
 import CardFour from '../../components/common/CardComponent/CardFour';
 import {Menu, MenuDivider, MenuItem} from 'react-native-material-menu';
+import {valueConstant} from '../../constants/valueConstants';
 const {height} = Dimensions.get('window');
 
 export type PropType = {
@@ -58,12 +60,11 @@ const SliderBox = ({key, image}) => {
       style={{
         width: screenWidth,
         height: screenHeight / 4.8,
-        borderRadius: 8,
       }}>
       <Image
         key={`title${key}`}
         resizeMode={'stretch'}
-        style={{height: '100%', width: screenWidth, borderRadius: 8}}
+        style={{height: '100%', width: screenWidth}}
         source={image}
       />
     </View>
@@ -138,9 +139,11 @@ const Dashboard: React.FC<PropType> = props => {
       });
   };
 
+  const ItemSeparator = <View style={styles.simpleLine} />;
+
   const LatestNews = (
     <>
-      <View style={{backgroundColor: color.white}}>
+      <View style={{backgroundColor: color.white, paddingTop: 8}}>
         <LabelWithIcon
           // iconComponent={
           //   <Ionicons
@@ -157,7 +160,8 @@ const Dashboard: React.FC<PropType> = props => {
           nestedScrollEnabled={true}
           showsHorizontalScrollIndicator={false}
           testID="FlatList1"
-          horizontal
+          ItemSeparatorComponent={ItemSeparator}
+          // horizontal
           // numColumns={2}
           // columnWrapperStyle={{
           //   justifyContent: 'space-around',
@@ -165,18 +169,18 @@ const Dashboard: React.FC<PropType> = props => {
           // }}
           contentContainerStyle={{
             paddingBottom: 16,
-            paddingLeft: 16,
+            paddingHorizontal: 16,
+            paddingTop: 8,
             backgroundColor: color.white,
           }}
           extraData={sliderData}
           data={sliderData}
           initialNumToRender={15}
           keyExtractor={(item, i) => i.toString()}
-          renderItem={({item}) => {
-            const {id, image} = item || {};
+          renderItem={({item, index}) => {
             return (
-              <View key={id} style={{}}>
-                <CardThree item={image} />
+              <View key={index} style={{}}>
+                <CardThree item={item} />
                 {/* <ListComponent id={id} onPress={() => {}} title={title} /> */}
               </View>
             );
@@ -202,19 +206,28 @@ const Dashboard: React.FC<PropType> = props => {
               justifyContent: 'flex-end',
             }}>
             <FA5
+              name="hand-holding-water"
+              onPress={() => {}}
+              color={color.white}
+              size={18}
+              style={{marginRight: 4}}
+            />
+
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => navigation.navigate('OilImports')}>
+              <Text style={styles.customRightText}>Oil-inr</Text>
+            </TouchableOpacity>
+
+            {/* <FA5
               name="map-marker-alt"
               onPress={() => {}}
               color={color.white}
               size={14}
               style={{marginRight: 8}}
-            />
-            {/* <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => navigation.navigate('OilImports')}>
-              <Text style={styles.customRightText}>Oil-inr</Text>
-            </TouchableOpacity> */}
+            /> */}
 
-            <View
+            {/* <View
               style={{
                 height: '100%',
                 alignItems: 'flex-end',
@@ -246,7 +259,7 @@ const Dashboard: React.FC<PropType> = props => {
                   Kolkata
                 </MenuItem>
               </Menu>
-            </View>
+            </View> */}
           </View>
         }
         titleAlign="left"
@@ -265,7 +278,39 @@ const Dashboard: React.FC<PropType> = props => {
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={[styles.container, {paddingBottom: 42}]}
           testID="KeyboardAwareScrollView2">
-          <View style={{backgroundColor: color.black, paddingVertical: 12}}>
+          <View
+            style={{
+              backgroundColor: color.white,
+              // paddingBottom: 30,
+              alignItems: 'center',
+            }}>
+            <SwiperFlatList
+              autoplay
+              autoplayDelay={2.5}
+              autoplayLoop
+              // showPagination
+              // paginationStyleItem={{
+              //   marginTop: 6,
+              //   width: 8,
+              //   height: 8,
+              //   borderRadius: 4,
+              //   marginHorizontal: 3,
+              // }}
+              autoplayLoopKeepAnimation={true}
+              // paginationActiveColor={color.primary}
+              data={sliderData}
+              index={2}
+              contentContainerStyle={{
+                // width: screenWidth,
+                alignItems: 'center',
+              }}
+              renderItem={({item, i}) => (
+                <SliderBox id={i} image={item.image} />
+              )}
+            />
+          </View>
+          <View
+            style={{backgroundColor: color.headerColor, paddingVertical: 12}}>
             <MarqueeText
               style={{
                 fontSize: 12,
@@ -280,57 +325,13 @@ const Dashboard: React.FC<PropType> = props => {
               industry and typesetting industry.
             </MarqueeText>
           </View>
-          <View
-            style={{
-              backgroundColor: color.white,
-              paddingBottom: 30,
-              alignItems: 'center',
-            }}>
-            <SwiperFlatList
-              autoplay
-              autoplayDelay={2.5}
-              autoplayLoop
-              showPagination
-              paginationStyleItem={{
-                marginTop: 6,
-                width: 8,
-                height: 8,
-                borderRadius: 4,
-                marginHorizontal: 3,
-              }}
-              autoplayLoopKeepAnimation={true}
-              paginationActiveColor={color.primary}
-              data={sliderData}
-              index={2}
-              contentContainerStyle={{
-                // width: screenWidth,
-                alignItems: 'center',
-              }}
-              renderItem={({item, i}) => (
-                <SliderBox id={i} image={item.image} />
-              )}
-            />
-          </View>
-
           <View style={styles.ghostWhiteBg} />
-
           <View
             style={{
               backgroundColor: color.white,
-              paddingBottom: 16,
+              paddingVertical: 16,
             }}>
-            <TouchableOpacity
-              style={{
-                paddingVertical: 12,
-                width: '95%',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: '#E7E6DD',
-                flexDirection: 'row',
-                // marginHorizontal: 50,
-                alignSelf: 'center',
-                borderRadius: 2,
-              }}>
+            <TouchableOpacity style={styles.widthButtonL}>
               <View style={{flex: 0.2, alignItems: 'flex-end'}}>
                 <MCI name="chart-bar-stacked" size={25} color={'grey'} />
               </View>
@@ -350,6 +351,15 @@ const Dashboard: React.FC<PropType> = props => {
                 </Text>
               </View>
             </TouchableOpacity>
+          </View>
+
+          <View style={styles.ghostWhiteBg} />
+
+          <View
+            style={{
+              backgroundColor: color.white,
+              paddingVertical: 8,
+            }}>
             <View style={styles.rowStyle}>
               <CellComponent
                 // isPrimaryBack
@@ -361,7 +371,7 @@ const Dashboard: React.FC<PropType> = props => {
                     name="enter-outline"
                     onPress={() => {}}
                     color={color.themeGrey}
-                    size={30}
+                    size={valueConstant.DashboardSectionIcon}
                   />
                 }
                 customeStyle={{backgroundColor: color.LightPurple}}
@@ -377,17 +387,16 @@ const Dashboard: React.FC<PropType> = props => {
                     name="exit-outline"
                     onPress={() => {}}
                     color={color.themeGrey}
-                    size={30}
+                    size={valueConstant.DashboardSectionIcon}
                   />
                 }
                 customeStyle={{backgroundColor: color.LightPink}}
                 customButtonTextStyle={{color: color.pink1}}
               />
-            </View>
-            <View style={[styles.rowStyle, styles.marginTop12]}>
+
               <CellComponent
                 // isWhiteText
-                title={'Additives'}
+                title={'Recycle marker'}
                 onPress={() => Alert.alert('ok')}
                 // customeStyle={{borderRadius: 5}}
                 iconComponent={
@@ -395,7 +404,7 @@ const Dashboard: React.FC<PropType> = props => {
                     name="bookmark-plus-outline"
                     onPress={() => {}}
                     color={color.themeGrey}
-                    size={30}
+                    size={valueConstant.DashboardSectionIcon}
                   />
                 }
                 customeStyle={{backgroundColor: color.LightGreen}}
@@ -411,7 +420,7 @@ const Dashboard: React.FC<PropType> = props => {
                     name="shopping-outline"
                     onPress={() => {}}
                     color={color.themeGrey}
-                    size={30}
+                    size={valueConstant.DashboardSectionIcon}
                   />
                 }
                 customeStyle={{backgroundColor: color.LightOrange}}
@@ -434,6 +443,7 @@ const Dashboard: React.FC<PropType> = props => {
               // }
               customButtonParentStyle={{marginTop: 16}}
               leftText="Recent Post"
+              rightText="View all"
             />
 
             <FlatList

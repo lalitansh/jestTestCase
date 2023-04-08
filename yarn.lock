@@ -1156,31 +1156,12 @@
   "resolved" "https://registry.npmjs.org/@expo/sdk-runtime-versions/-/sdk-runtime-versions-1.0.0.tgz"
   "version" "1.0.0"
 
-"@firebase/app@0.x":
-  "integrity" "sha512-gE9j59beal/H6cCAxibluUTUqjRRebJQxX39AV7nSt8OYyDmCrC50HyzOYRM7P6YGhIpCt3j719kboexko40cA=="
-  "resolved" "https://registry.npmjs.org/@firebase/app/-/app-0.9.6.tgz"
-  "version" "0.9.6"
-  dependencies:
-    "@firebase/component" "0.6.4"
-    "@firebase/logger" "0.4.0"
-    "@firebase/util" "1.9.3"
-    "idb" "7.0.1"
-    "tslib" "^2.1.0"
-
 "@firebase/component@0.6.3":
   "integrity" "sha512-rnhq5SOsB5nuJphZF50iwqnBiuuyg9kdnlUn1rBrKfu7/cUVJZF5IG1cWrL0rXXyiZW1WBI/J2pmTvVO8dStGQ=="
   "resolved" "https://registry.npmjs.org/@firebase/component/-/component-0.6.3.tgz"
   "version" "0.6.3"
   dependencies:
     "@firebase/util" "1.9.2"
-    "tslib" "^2.1.0"
-
-"@firebase/component@0.6.4":
-  "integrity" "sha512-rLMyrXuO9jcAUCaQXCMjCMUsWrba5fzHlNK24xz5j2W6A/SRmK8mZJ/hn7V0fViLbxC0lPMtrK1eYzk6Fg03jA=="
-  "resolved" "https://registry.npmjs.org/@firebase/component/-/component-0.6.4.tgz"
-  "version" "0.6.4"
-  dependencies:
-    "@firebase/util" "1.9.3"
     "tslib" "^2.1.0"
 
 "@firebase/firestore@^3.8.3":
@@ -1208,13 +1189,6 @@
   "integrity" "sha512-9l0uMGPGw3GsoD5khjMmYCCcMq/OR/OOSViiWMN+s2Q0pxM+fYzrii1H+r8qC/uoMjSVXomjLZt0vZIyryCqtQ=="
   "resolved" "https://registry.npmjs.org/@firebase/util/-/util-1.9.2.tgz"
   "version" "1.9.2"
-  dependencies:
-    "tslib" "^2.1.0"
-
-"@firebase/util@1.9.3":
-  "integrity" "sha512-DY02CRhOZwpzO36fHpuVysz6JZrscPiBXD0fXp6qSrL9oNOx5KWICKdR95C0lSITzxp0TZosVyHqzatE8JbcjA=="
-  "resolved" "https://registry.npmjs.org/@firebase/util/-/util-1.9.3.tgz"
-  "version" "1.9.3"
   dependencies:
     "tslib" "^2.1.0"
 
@@ -4690,11 +4664,6 @@
   dependencies:
     "safer-buffer" ">= 2.1.2 < 3"
 
-"idb@7.0.1":
-  "integrity" "sha512-UUxlE7vGWK5RfB/fDwEGgRf84DY/ieqNha6msMV99UsEMQhJ1RwbCd8AYBj3QMgnE3VZnfQvm4oKVCJTYlqIgg=="
-  "resolved" "https://registry.npmjs.org/idb/-/idb-7.0.1.tgz"
-  "version" "7.0.1"
-
 "ieee754@^1.1.13":
   "integrity" "sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA=="
   "resolved" "https://registry.npmjs.org/ieee754/-/ieee754-1.2.1.tgz"
@@ -6455,6 +6424,11 @@
   dependencies:
     "minimist" "^1.2.6"
 
+"moment@^2.29.4":
+  "integrity" "sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w=="
+  "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.4.tgz"
+  "version" "2.29.4"
+
 "moo@^0.5.0":
   "integrity" "sha512-iSAJLHYKnX41mKcJKjqvnAN9sf0LMDTXDEvFv+ffuRR9a1MIuXLjMNL6EsnDHSkKLTWNqQQ5uo61P4EbU4NU+Q=="
   "resolved" "https://registry.npmjs.org/moo/-/moo-0.5.2.tgz"
@@ -7243,16 +7217,6 @@
   dependencies:
     "shell-quote" "^1.6.1"
     "ws" "^7"
-
-"react-dom@^16.0.0-0":
-  "integrity" "sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw=="
-  "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz"
-  "version" "16.14.0"
-  dependencies:
-    "loose-envify" "^1.1.0"
-    "object-assign" "^4.1.1"
-    "prop-types" "^15.6.2"
-    "scheduler" "^0.19.1"
 
 "react-freeze@^1.0.0":
   "integrity" "sha512-ZnXwLQnGzrDpHBHiC56TXFXvmolPeMjTn1UOm610M4EXGzbEDR7oOIyS2ZiItgbs6eZc4oU/a0hpk8PrcKvv5g=="

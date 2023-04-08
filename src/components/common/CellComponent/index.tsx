@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {screenWidth} from '../../../constants/appConstant';
 import {color} from '../../../constants/theme/Color';
 import {getRandomItem} from '../../../utils/functions/getters';
 import {CommonFontFamily} from '../styles/commonStyles';
@@ -49,18 +50,14 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
           // colors={[color.primaryOff, color.primaryMiddle, color.primary]}
           // start={{x: 0, y: 1}}
           // end={{x: 1, y: 1}}
-          style={[styles.buttonStyle, customeStyle]}>
-          <View
-            style={{
-              flex: 0.3,
-              justifyContent: 'flex-start',
-              paddingTop: 4,
-              // alignItems: 'center',
-            }}>
+          style={{}}>
+          <View style={[styles.buttonStyle, customeStyle]}>
             {iconComponent}
           </View>
-          <View style={{flex: 0.7, paddingTop: 30}}>
+
+          <View style={styles.view2}>
             <Text
+              numberOfLines={2}
               style={[
                 styles.buttonTextStyle,
                 isWhiteText ? styles.iswhiteTextStyle : null,
@@ -77,27 +74,35 @@ const CellComponent: React.FC<propsType> = (props: propsType) => {
 
 const styles = StyleSheet.create({
   buttonParentView: {
-    width: '46%',
-    // paddingHorizontal: 16,
     borderRadius: 4,
-    alignSelf: 'center',
-    // padding: 1.5,
-    //elevation: 5,
-    // justifyContent: 'center',
+    width: screenWidth / 6.5,
   },
   rowStyle: {
     flexDirection: 'row',
   },
-  buttonStyle: {
+  view2: {
+    alignItems: 'center',
     width: '100%',
+    flex: 0.3,
+    height: 50,
+  },
+  buttonStyle: {
+    width: screenWidth / 6.5,
+    borderRadius: 8,
+    flex: 0.6,
+    marginBottom: 8,
     // padding: 10,
     // justifyContent: ,
     // alignItems: 'center',
     backgroundColor: color.white,
     // borderRadius: 50,
     // alignSelf: 'center',
-    paddingVertical: 10,
-    paddingLeft: 8,
+    // paddingVertical: 10,
+    height: screenWidth / 6.5,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
     // elevation: 1,
     // height: '100%',
   },

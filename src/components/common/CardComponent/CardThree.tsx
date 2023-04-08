@@ -16,9 +16,11 @@ import {
 } from 'react-native';
 import {screenWidth} from '../../../constants/appConstant';
 import {image} from '../../../constants/theme/Image';
+import {CommonFontFamily} from '../styles/commonStyles';
 
 const CardThree: React.FC = props => {
   const {item = ''} = props || {};
+  const {image = '', text = ''} = item || {};
   const arr = new Array(30).fill({
     name: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
   });
@@ -29,12 +31,12 @@ const CardThree: React.FC = props => {
   return (
     <View style={styles.scrollContent}>
       <ImageBackground
-        source={image.whiteDesign3}
-        style={{width: screenWidth / 2, padding: 16}}>
-        <Image source={item} style={styles.imgStyles} />
-        <View style={styles.marginTop5}>
-          <Text style={styles.textStyles}>Title</Text>
-          <Text style={styles.textStyles1}>Subtitle</Text>
+        // source={image.whiteDesign3}
+        style={styles.rowStyle}>
+        <Image source={image} style={styles.imgStyles} />
+        <View style={{paddingLeft: 16}}>
+          <Text style={styles.textStyles}>{text}</Text>
+          {/* <Text style={styles.textStyles1}>Subtitle</Text> */}
         </View>
       </ImageBackground>
     </View>
@@ -55,11 +57,12 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   textStyles: {
-    fontSize: 18,
+    fontSize: 13,
     color: 'black',
+    ...CommonFontFamily.medium,
   },
   textStyles1: {
-    fontSize: 12,
+    fontSize: 10,
   },
   rowStyle: {
     flexDirection: 'row',
@@ -69,10 +72,10 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
   imgStyles: {
-    width: screenWidth / 2.4,
-    height: screenWidth / 2.3,
+    width: screenWidth / 6,
+    height: screenWidth / 8,
     alignSelf: 'center',
-    // borderRadius: 8,
+    borderRadius: 8,
   },
   imgStyles1: {
     height: 10,
@@ -104,7 +107,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   scrollContent: {
-    marginVertical: 16,
+    paddingTop: 16,
+    paddingBottom: 8,
     backgroundColor: 'white', //"#F2F1EC",
     paddingHorizontal: 8,
 

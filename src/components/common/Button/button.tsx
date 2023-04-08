@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     color: color.white,
   },
   isPrimaryBackStyle: {
-    backgroundColor: color.primary,
+    backgroundColor: color.headerColor,
   },
   isErrorStyle: {
     backgroundColor: color.red,

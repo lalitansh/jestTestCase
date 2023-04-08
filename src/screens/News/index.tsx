@@ -67,7 +67,7 @@ const News: React.FC<PropType> = props => {
 
 const styles = StyleSheet.create({
   ghostWhiteBg: {
-    backgroundColor: color.GhostWhite,
+    backgroundColor: color.white,
     height: 16,
   },
 });

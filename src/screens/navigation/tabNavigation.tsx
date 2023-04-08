@@ -27,6 +27,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {screenWidth} from '../../constants/appConstant';
 import News from '../News';
+import CommonHeader from '../../components/common/Header/commonHeader';
 
 const TopTabM = createMaterialTopTabNavigator();
 
@@ -106,25 +107,79 @@ function MyTopTabBar({state, descriptors, navigation, position}) {
   );
 }
 
-function ToPTabNav() {
+function PostTopTab(props) {
   return (
     <>
+      <CommonHeader
+        // backIcon
+        title="Post"
+        // titleAlign="left"
+        // titleBottomBack
+        navigation={props.navigation}
+      />
       <TopTabM.Navigator
         screenOptions={{
           tabBarLabelStyle: {color: color.headerColor},
           tabBarItemStyle: {width: screenWidth / 2},
-          tabBarStyle: {
-            marginTop:
-              Platform.OS === 'android' ? getStatusBarHeight() : undefined,
-            justifyContent: 'space-around',
-          },
+          // tabBarStyle: {
+          //   marginTop:
+          //     Platform.OS === 'android' ? getStatusBarHeight() : undefined,
+          //   justifyContent: 'space-around',
+          // },
           tabBarIndicatorStyle: {
             backgroundColor: color.headerColor,
             height: 3,
           },
         }}>
-        <TopTabM.Screen name="Buy Post" component={FormTwo} />
-        <TopTabM.Screen name="Sell Post" component={FormTwo} />
+        <TopTabM.Screen
+          options={{tabBarLabel: 'Buy'}}
+          name="Buy Post"
+          component={FormTwo}
+        />
+        <TopTabM.Screen
+          options={{tabBarLabel: 'Sell'}}
+          name="Sell Post"
+          component={FormTwo}
+        />
+      </TopTabM.Navigator>
+    </>
+  );
+}
+
+function JobTopTab(props) {
+  return (
+    <>
+      <CommonHeader
+        // backIcon
+        title="Job Post"
+        // titleAlign="left"
+        // titleBottomBack
+        navigation={props.navigation}
+      />
+      <TopTabM.Navigator
+        screenOptions={{
+          tabBarLabelStyle: {color: color.headerColor},
+          tabBarItemStyle: {width: screenWidth / 2},
+          // tabBarStyle: {
+          //   marginTop:
+          //     Platform.OS === 'android' ? getStatusBarHeight() : undefined,
+          //   justifyContent: 'space-around',
+          // },
+          tabBarIndicatorStyle: {
+            backgroundColor: color.headerColor,
+            height: 3,
+          },
+        }}>
+        <TopTabM.Screen
+          options={{tabBarLabel: 'Give'}}
+          name="Give Job"
+          component={JobPost}
+        />
+        <TopTabM.Screen
+          options={{tabBarLabel: 'Want'}}
+          name="Want Job"
+          component={JobPost}
+        />
       </TopTabM.Navigator>
     </>
   );
@@ -299,9 +354,9 @@ export default function MyTabs(props) {
       screenOptions={{headerShown: false, tabBarHideOnKeyboard: true}}
       tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen name="Dashboard" component={Dashboard} />
-      <Tab.Screen name="Post" component={ToPTabNav} />
+      <Tab.Screen name="Post" component={PostTopTab} />
       <Tab.Screen name="News" component={News} />
-      <Tab.Screen name="Job Post" component={JobPost} />
+      <Tab.Screen name="Job Post" component={JobTopTab} />
       <Tab.Screen name="Profile" component={UserProfile} />
     </Tab.Navigator>
   );

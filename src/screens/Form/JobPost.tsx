@@ -82,20 +82,13 @@ const JobPost = () => {
 
   return (
     <View style={styles.flex1}>
-      <CommonHeader
-        // backIcon
-        title="Job Post"
-        // titleAlign="left"
-        // titleBottomBack
-        navigation={navigation}
-      />
       <KeyboardAwareScrollView
         nestedScrollEnabled={true}
         enableOnAndroid
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.container}>
         <View style={{paddingHorizontal: 16, paddingTop: 32}}>
-          <SegmentedControlTab
+          {/* <SegmentedControlTab
             values={['Give', 'Take']}
             selectedIndex={selectedIndex}
             onTabPress={handleIndexChange}
@@ -106,7 +99,7 @@ const JobPost = () => {
             }}
             tabTextStyle={{color: color.primary}}
             activeTabStyle={{backgroundColor: color.primary}}
-          />
+          /> */}
 
           <Text style={styles.textStyle}>Searchable1</Text>
           <SearchableDropdown

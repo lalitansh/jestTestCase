@@ -4,22 +4,27 @@ const sliderData = [
   {
     id: 1,
     image: image.Granules3,
+    text: 'Feedstocks closing update',
   },
   {
     id: 2,
     image: image.Granules1,
+    text: 'Custom rate change update',
   },
   {
     id: 3,
     image: image.Granules2,
+    text: 'China polymer future update',
   },
   {
     id: 3,
     image: image.Granules3,
+    text: 'Feedstocks closing update',
   },
   {
     id: 5,
     image: image.splash,
+    text: 'Custom rate change update',
   },
 ];
 
@@ -69,6 +74,7 @@ const NewsData = [
     description:
       'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
     title: 'PP - GRANULES',
+    dateTime: '2019-09-04 11:00:24',
   },
   {
     id: 2,
@@ -76,6 +82,7 @@ const NewsData = [
     description:
       'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
     title: 'PET - SCRAP',
+    dateTime: '2022-09-05 07:30:24',
   },
   {
     id: 3,
@@ -83,6 +90,7 @@ const NewsData = [
     description:
       'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
     title: 'PBT - GRANULES',
+    dateTime: '2023-01-04 20:00:24',
   },
   {
     id: 4,
@@ -90,6 +98,7 @@ const NewsData = [
     description:
       'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
     title: 'PP - GRANULES',
+    dateTime: '2020-03-03 22:00:24',
   },
   {
     id: 5,
@@ -97,6 +106,7 @@ const NewsData = [
     description:
       'Granules India Share Price: Find the latest news on Granules India Stock Price. Get all the information on Granules India with historic price charts for NSE.',
     title: 'PP - GRANULES',
+    dateTime: '2020-03-03 22:00:24',
   },
 ];
 

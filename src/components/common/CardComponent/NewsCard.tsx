@@ -17,6 +17,8 @@ import {color} from '../../../constants/theme/Color';
 import {RecentPostData, SellerData} from '../../../utils/data';
 import CommonHeader from '../Header/commonHeader';
 import {CommonFontFamily} from '../styles/commonStyles';
+import moment from 'moment';
+import {screenWidth} from '../../../constants/appConstant';
 
 const NewsCard: React.FC = props => {
   const {item = {}, navigation = {}} = props || {};
@@ -34,9 +36,18 @@ const NewsCard: React.FC = props => {
           </View>
           <View style={styles.flex05} />
           <View style={styles.flex6}>
-            <Text style={styles.textStyles}>{item.title}</Text>
-            <View style={[styles.rowStyle1, styles.marginTop5]}>
+            <View style={[]}>
               <Text style={styles.textStyles1}>{item.description}</Text>
+            </View>
+            <View style={{justifyContent: 'flex-end', height: 30}}>
+              <Text style={styles.dateTimeT}>
+                {/* {moment
+                  .utc('2019-12-04 12:00:24')
+                  .local()
+                  .startOf('seconds')
+                  .fromNow()} */}
+                {moment(item.dateTime).format('DD/MM/YYYY hh:mm A')}
+              </Text>
             </View>
           </View>
         </View>
@@ -68,19 +79,32 @@ const styles = StyleSheet.create({
     ...CommonFontFamily.regular,
     color: color.headerColor,
   },
+  dateTimeT: {
+    fontSize: 10,
+    ...CommonFontFamily.regular,
+    // color: color.headerColor,
+  },
   rowStyle: {
     flexDirection: 'row',
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
+    borderWidth: 1,
+    paddingTop: 16,
+    paddingBottom: 8,
+    borderColor: color.themeGrey,
+    marginHorizontal: 8,
+    // paddingHorizontal: 16,
+    borderRadius: 10,
+    // justifyContent: 'space-between',
   },
   rowStyle1: {
     flexDirection: 'row',
     paddingTop: 2,
   },
   imgStyles: {
-    height: 100,
-    width: '100%',
+    height: screenWidth / 5.5,
+    width: screenWidth / 3.5,
     // margin: 5,
-    // borderRadius: 4,
+    borderRadius: 10,
   },
   ghostWhiteBg: {
     backgroundColor: color.GhostWhite,
@@ -93,8 +117,10 @@ const styles = StyleSheet.create({
     borderRadius: 1,
   },
   flex3: {
-    flex: 0.3,
+    flex: 0.35,
     alignItems: 'flex-end',
+    // backgroundColor: 'red',
+    // paddingRight: 5,
   },
   flex05: {
     flex: 0.05,
@@ -120,7 +146,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   scrollContent: {
-    marginVertical: 16,
+    // marginVertical: 16,
     backgroundColor: 'white', //"#F2F1EC",
     // paddingHorizontal: 16,
   },

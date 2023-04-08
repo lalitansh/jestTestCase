@@ -9,6 +9,21 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
     backgroundColor: color.white,
   },
+  simpleLine: {
+    height: 0.5,
+    backgroundColor: color.themeGrey,
+  },
+  widthButtonL: {
+    paddingVertical: 12,
+    width: '95%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#E7E6DD',
+    flexDirection: 'row',
+    // marginHorizontal: 50,
+    alignSelf: 'center',
+    borderRadius: 2,
+  },
   mainCard: {
     flexDirection: 'row',
     height: 80,
@@ -50,7 +65,7 @@ const styles = StyleSheet.create({
   rowStyle: {
     flexDirection: 'row',
     marginTop: 16,
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     // alignSelf: 'center',
   },
   marginTop12: {
@@ -159,7 +174,7 @@ const styles = StyleSheet.create({
   },
   ghostWhiteBg: {
     backgroundColor: color.GhostWhite,
-    height: 24,
+    height: 20,
   },
   stoneSubView: {
     height: screenWidth / 5.5,
